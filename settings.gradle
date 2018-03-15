@@ -1,1 +1,1 @@
-include ':sample', ':core', ':picasso', ':lottie', ':glide'
+include ':sample', ':core', ':picasso', ':lottie', ':glide', ':canarinho'

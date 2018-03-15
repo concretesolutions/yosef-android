@@ -35,14 +35,4 @@ class TextFieldComponentTest {
                 .check(ViewAssertions.matches(ViewMatchers.withText("Teste de textfield")))
     }
 
-    @Test
-    fun wheAddTextWithMonetaryMaskThenShowValueFormatted() {
-        onView(allOf(
-                isAssignableFrom(EditText::class.java)))
-                .perform(typeText("123123123"))
-
-        onView(ViewMatchers.withText("R$ 1.231.231,23"))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-    }
-
 }

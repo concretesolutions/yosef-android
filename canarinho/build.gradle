@@ -38,12 +38,12 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(':core')
     implementation "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
-    api "com.squareup.picasso:picasso:$rootProject.ext.picassoVersion"
+    api "br.com.concretesolutions:canarinho:$rootProject.ext.canarinhoVersion"
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }

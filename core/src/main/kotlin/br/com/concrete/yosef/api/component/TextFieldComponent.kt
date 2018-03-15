@@ -10,9 +10,11 @@ import android.widget.LinearLayout
 import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.property.DynamicPropertyCommand
 import br.com.concrete.yosef.api.property.id.IdCommand
+import br.com.concrete.yosef.api.property.size.HeightCommand
+import br.com.concrete.yosef.api.property.size.WidthCommand
+import br.com.concrete.yosef.api.property.size.WidthCommand.Companion.WIDTH_TYPE
+import br.com.concrete.yosef.api.property.size.HeightCommand.Companion.HEIGHT_TYPE
 import br.com.concrete.yosef.api.property.id.IdCommand.Companion.ID
-import br.com.concrete.yosef.api.property.textfield.MaskPropertyCommand
-import br.com.concrete.yosef.api.property.textfield.MaskPropertyCommand.Companion.MASK
 import br.com.concrete.yosef.entity.DynamicProperty
 
 /**
@@ -25,7 +27,8 @@ class TextFieldComponent : Component {
     }
 
     private val commands: Map<String, DynamicPropertyCommand> = mapOf(
-            MASK to MaskPropertyCommand(),
+            WIDTH_TYPE to WidthCommand(),
+            HEIGHT_TYPE to HeightCommand(),
             ID to IdCommand()
     )
 

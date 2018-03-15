@@ -13,7 +13,10 @@ import br.com.concrete.yosef.entity.DynamicComponent
 import br.com.concrete.yosef.fromJson
 import com.google.gson.Gson
 
-
+/**
+ * Converts json to a view
+ * instance or construct your own instance with {@link Builder}.
+ */
 class DynamicViewCreator(private val components: Map<String, Component>, private val gson: Gson) {
 
     fun createViewFromJson(parent: ViewGroup, json: String, listener: OnActionListener? = null) {
