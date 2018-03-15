@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply from: '../tools/quality.gradle'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -44,4 +45,5 @@ dependencies {
     implementation project(':core')
     api "com.airbnb.android:lottie:$rootProject.ext.lottieVersion"
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    ktlint "com.github.shyiko:ktlint:$rootProject.ext.ktlintVersion"
 }

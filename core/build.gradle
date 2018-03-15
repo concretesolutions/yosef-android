@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply from: '../tools/jacoco.gradle'
+apply from: '../tools/quality.gradle'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -55,4 +56,7 @@ dependencies {
 
     //roboeletric
     testImplementation "org.robolectric:robolectric:$rootProject.ext.roboeletricVersion"
+
+    // quality
+    ktlint "com.github.shyiko:ktlint:$rootProject.ext.ktlintVersion"
 }
