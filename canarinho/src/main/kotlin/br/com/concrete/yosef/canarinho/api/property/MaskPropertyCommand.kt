@@ -1,4 +1,4 @@
-package br.com.concrete.yosef.api.property.textfield
+package br.com.concrete.yosef.canarinho.api.property
 
 import android.view.View
 import android.widget.EditText

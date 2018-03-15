@@ -27,7 +27,7 @@
       {
         "name": "action",
         "type": "string",
-        "value": "Sim, quero um empréstimo"
+        "value": "Sim"
       },
       {
         "name": "mask",
