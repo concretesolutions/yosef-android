@@ -7,5 +7,7 @@ task ktlint(type: JavaExec, group: "verification") {
     classpath = configurations.ktlint
     main = "com.github.shyiko.ktlint.Main"
     args "src/**/*.kt"
-    args "--reporter=checkstyle,output=${buildDir}/ktlint.xml"
+    args "--android=true"
+    args "--ruleset=${rootDir}/tools/html-reporter.jar"
+    args "--reporter=html,output=${buildDir}/ktlint.html"
 }
