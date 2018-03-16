@@ -16,12 +16,6 @@ plugins {
     id "io.gitlab.arturbosch.detekt" version "1.0.0.RC6-3"
 }
 
-apply plugin: "jacoco"
-
-jacoco {
-    toolVersion = "0.8.0"
-}
-
 allprojects {
     repositories {
         google()
@@ -33,31 +27,10 @@ subprojects {
     apply from: rootProject.file("tools/jacoco.gradle")
 }
 
-ext {
-    kotlinVersion = kotlin_version
-    minSdkVersion = 18
-    targetSdkVersion = 27
-    compileSdkVersion = 27
-    buildToolsVersion = "27.0.2"
+apply plugin: "jacoco"
 
-    supportVersion = "27.1.0"
-    constraintVersion = "1.0.2"
-    picassoVersion = "2.5.2"
-    glideVersion = "4.6.1"
-    jUnitVersion = "4.12"
-    espressoVersion = "3.0.1"
-    mockitoVersion = "2.12.0"
-    mockitoKotlinVersion = "1.5.0"
-    gsonVersion = "2.8.2"
-    roboeletricVersion = "3.6.1"
-    canarinhoVersion = "1.2.0"
-    lottieVersion = "2.5.0-rc1"
-    ktlintVersion = "0.19.0"
-    detektVersion = "1.0.0.RC6-3"
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
+jacoco {
+    toolVersion = "0.8.0"
 }
 
 task jacocoRootReport(type: JacocoReport) {
@@ -82,6 +55,33 @@ task jacocoRootReport(type: JacocoReport) {
     sourceDirectories = files(sourceSets)
     classDirectories = files(classDirs)
     executionData = files(coverageBinaries)
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    kotlinVersion = kotlin_version
+    minSdkVersion = 18
+    targetSdkVersion = 27
+    compileSdkVersion = 27
+    buildToolsVersion = "27.0.2"
+
+    supportVersion = "27.1.0"
+    constraintVersion = "1.0.2"
+    picassoVersion = "2.5.2"
+    glideVersion = "4.6.1"
+    jUnitVersion = "4.12"
+    espressoVersion = "3.0.1"
+    mockitoVersion = "2.12.0"
+    mockitoKotlinVersion = "1.5.0"
+    gsonVersion = "2.8.2"
+    roboeletricVersion = "3.6.1"
+    canarinhoVersion = "1.2.0"
+    lottieVersion = "2.5.0-rc1"
+    ktlintVersion = "0.19.0"
+    detektVersion = "1.0.0.RC6-3"
 }
 
 
