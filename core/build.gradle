@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply from: '../tools/jacoco.gradle'
 apply from: '../tools/quality.gradle'
 
 android {
@@ -17,6 +16,12 @@ android {
     }
 
     buildTypes {
+
+        debug {
+            debuggable true
+            testCoverageEnabled true
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
