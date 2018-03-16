@@ -5,11 +5,15 @@ import br.com.concrete.yosef.api.property.DynamicPropertyCommand
 import br.com.concrete.yosef.entity.DynamicProperty
 
 /**
- * Command pattern for the width property
+ * Command class that implements the [DynamicPropertyCommand] applying
+ * the width property to the view([View])
  */
 class WidthCommand : DynamicPropertyCommand {
 
     companion object {
+        /**
+         * This constant documents which name is associated with the property
+         */
         const val WIDTH_TYPE = "width"
     }
 

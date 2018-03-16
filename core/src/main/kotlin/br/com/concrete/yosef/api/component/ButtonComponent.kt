@@ -17,11 +17,15 @@ import br.com.concrete.yosef.api.property.text.TextCommand.Companion.TEXT
 import br.com.concrete.yosef.entity.DynamicProperty
 
 /**
- * Command pattern for the Button component
+ * Class that implements the [Component] interface and creates the component
+ * Button([Button]), applying its properties
  */
 class ButtonComponent : Component {
 
     companion object {
+        /**
+         * This constant documents which type is associated with the component
+         */
         const val BUTTON_TYPE = "button"
     }
 

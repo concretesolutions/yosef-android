@@ -11,11 +11,18 @@ import br.com.concrete.yosef.entity.DynamicProperty
 import br.com.concrete.yosef.supportsLollipop
 
 /**
- * Command pattern for the tint color property
+ * Command class that implements the [DynamicPropertyCommand] applying
+ * the ButtonTintColor property to the view([CompoundButton])
+ *
+ * @see [CompoundButton.setButtonTintList]
+ * @see [CompoundButton.setHighlightColor]
  */
 class TintColorCommand : DynamicPropertyCommand {
 
     companion object {
+        /**
+         * This constant documents which name is associated with the property
+         */
         const val TINT_COLOR = "buttonTintColor"
     }
 

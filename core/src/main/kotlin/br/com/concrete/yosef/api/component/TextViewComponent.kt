@@ -19,7 +19,8 @@ import br.com.concrete.yosef.api.property.text.TextStyleCommand.Companion.TEXT_S
 import br.com.concrete.yosef.entity.DynamicProperty
 
 /**
- * Command pattern for the Text component
+ * Class that implements the [Component] interface and creates the component
+ * TextView([TextView]), applying its properties
  */
 class TextViewComponent : Component {
 

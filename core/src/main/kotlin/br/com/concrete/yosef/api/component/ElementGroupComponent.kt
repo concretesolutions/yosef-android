@@ -12,11 +12,15 @@ import br.com.concrete.yosef.api.property.id.IdCommand.Companion.ID
 import br.com.concrete.yosef.entity.DynamicProperty
 
 /**
- * Command pattern for the Element Group
+ * Class that implements the [Component] interface and creates the component
+ * ElementGroup([LinearLayout]), applying its properties
  */
 class ElementGroupComponent : Component {
 
     companion object {
+        /**
+         * This constant documents which type is associated with the component
+         */
         const val ELEMENT_GROUP = "elementGroup"
     }
 
