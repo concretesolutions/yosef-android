@@ -202,8 +202,3 @@ Para os testes foram utilizados 2 frameworks
 
 * Espresso
 * Junit
-
-Compatibilidade
--------------------------------
-* **Minumun Android SDK**: IT está com a versão mínima em 18
-* **Compile Android SDK**: IT requer que seja compilada a versão 27 ou posterior
