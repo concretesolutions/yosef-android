@@ -23,9 +23,9 @@ class DynamicViewCreator(private val components: Map<String, Component>, private
      * This method creates a list of [DynamicComponent] by the passed json and calls
      * [addChildrenRecursively] method to add them to the parent view
      *
-     * @param parent parent [ViewGroup] that will have the components as children
+     * @param parent [ViewGroup] that will have the components as children
      * @param json formatted json according with the library protocol. This json will have
-     * informations about which components will be created and its properties to be applied
+     * information about which components will be created and its properties to be applied
      * @param listener is the responsible for calling events that
      * are related with components actions
      */
@@ -88,9 +88,9 @@ class DynamicViewCreator(private val components: Map<String, Component>, private
         /**
          * Method that lets custom [Component] to be added to the library
          *
-         * @param type type that will be associated with the component in the json
-         * @param component component that will create the views and call the properties
-         * @return Builder with the custons components
+         * @param type that will be associated with the component in the json
+         * @param component that will create the views and call the properties
+         * @return Builder with the custom components
          */
         @SuppressWarnings("unused")
         fun addComponentFor(type: String, component: Component): Builder {
