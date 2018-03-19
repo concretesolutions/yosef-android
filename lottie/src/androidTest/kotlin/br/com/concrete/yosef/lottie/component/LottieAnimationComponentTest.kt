@@ -22,7 +22,6 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class LottieAnimationComponentTest {
 
-
     @Rule
     @JvmField
     val exceptionRule: ExpectedException = ExpectedException.none()
@@ -39,17 +38,17 @@ class LottieAnimationComponentTest {
         }
 
         creator = DynamicViewCreator
-                .Builder()
-                .addComponentFor(LottieAnimationComponent.ANIMATION_TYPE, LottieAnimationComponent())
-                .build()
+            .Builder()
+            .addComponentFor(LottieAnimationComponent.ANIMATION_TYPE, LottieAnimationComponent())
+            .build()
     }
 
     @Test
     fun renderingShouldAssignRightViewId() {
 
         val json = context.assets.open("example_animation.json")
-                .bufferedReader()
-                .use { it.readText() }
+            .bufferedReader()
+            .use { it.readText() }
 
         creator.createViewFromJson(parent, json, null)
 
@@ -64,8 +63,8 @@ class LottieAnimationComponentTest {
     fun renderingShouldPlayAnimationAutomatically() {
 
         val json = context.assets.open("example_animation.json")
-                .bufferedReader()
-                .use { it.readText() }
+            .bufferedReader()
+            .use { it.readText() }
 
         creator.createViewFromJson(parent, json, null)
 
@@ -81,8 +80,8 @@ class LottieAnimationComponentTest {
     fun renderingShouldSetRightRepeatCount() {
 
         val json = context.assets.open("example_animation_with_count.json")
-                .bufferedReader()
-                .use { it.readText() }
+            .bufferedReader()
+            .use { it.readText() }
 
         creator.createViewFromJson(parent, json, null)
 
@@ -91,15 +90,14 @@ class LottieAnimationComponentTest {
         animationView.afterLayout {
             assertEquals(2, animationView.repeatCount)
         }
-
     }
 
     @Test
     fun renderingShouldHaveRightViewSize() {
 
         val json = context.assets.open("example_animation_with_count.json")
-                .bufferedReader()
-                .use { it.readText() }
+            .bufferedReader()
+            .use { it.readText() }
 
         creator.createViewFromJson(parent, json, null)
 
@@ -109,20 +107,19 @@ class LottieAnimationComponentTest {
             assertEquals(300, animationView.width)
             assertEquals(300, animationView.height)
         }
-
     }
 
     @Test
     fun shouldCrashIfCannotHandleProperty() {
 
         val json = context.assets.open("example_unknown_field.json")
-                .bufferedReader()
-                .use { it.readText() }
+            .bufferedReader()
+            .use { it.readText() }
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage(allOf(containsString("Property wrong_width"),
-                containsString("value = 300"),
-                containsString("cannot be applied")))
+            containsString("value = 300"),
+            containsString("cannot be applied")))
 
         creator.createViewFromJson(parent, json, null)
     }
@@ -131,12 +128,12 @@ class LottieAnimationComponentTest {
     fun shouldCrashIfMandatoryFieldIsMissing() {
 
         val json = context.assets.open("example_missing_field.json")
-                .bufferedReader()
-                .use { it.readText() }
+            .bufferedReader()
+            .use { it.readText() }
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage(allOf(containsString("Mandatory field 'animate'"),
-                containsString("not found")))
+            containsString("not found")))
 
         creator.createViewFromJson(parent, json, null)
     }

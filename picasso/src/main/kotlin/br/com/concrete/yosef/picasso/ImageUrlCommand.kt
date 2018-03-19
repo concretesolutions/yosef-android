@@ -20,5 +20,4 @@ class ImageUrlCommand(private val picasso: Picasso) : DynamicPropertyCommand {
             picasso.load(dynamicProperty.value).into(view)
         }
     }
-
 }

@@ -6,6 +6,6 @@ fun checkMandatoryFields(received: List<DynamicProperty>, vararg mandatory: Stri
     mandatory.forEach { mandatoryField ->
         if (received.find { it.name == mandatoryField } == null)
             throw IllegalArgumentException("Mandatory field '$mandatoryField' " +
-                    "was not found in the received properties.")
+                "was not found in the received properties.")
     }
 }

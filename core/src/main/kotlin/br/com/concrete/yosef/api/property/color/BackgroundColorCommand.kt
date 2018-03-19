@@ -29,7 +29,7 @@ class BackgroundColorCommand : DynamicPropertyCommand {
             color = Color.parseColor(dynamicProperty.value)
         } catch (e: IllegalArgumentException) {
             throw IllegalArgumentException("The value (${dynamicProperty.value}) " +
-                    "cannot be parsed as a color")
+                "cannot be parsed as a color")
         }
 
         if (view is CardView) {
@@ -38,5 +38,4 @@ class BackgroundColorCommand : DynamicPropertyCommand {
             view.setBackgroundColor(color)
         }
     }
-
 }

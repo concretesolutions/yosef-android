@@ -50,7 +50,6 @@ class TextCommandTest {
         textView.afterLayout {
             assertEquals(textView.text.toString(), dynamicProperty.value)
         }
-
     }
 
     @Test
@@ -61,9 +60,8 @@ class TextCommandTest {
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The value (${dynamicProperty.value}) for the $TEXT " +
-                "property is not compatible with ${imageView.javaClass.name}")
+            "property is not compatible with ${imageView.javaClass.name}")
 
         textCommand.apply(imageView, dynamicProperty)
     }
-
 }

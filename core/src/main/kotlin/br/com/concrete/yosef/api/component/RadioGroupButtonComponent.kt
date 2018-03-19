@@ -26,11 +26,15 @@ class RadioGroupButtonComponent : Component {
     }
 
     private val commands: Map<String, DynamicPropertyCommand> = mapOf(
-            BACKGROUND_COLOR to BackgroundColorCommand(),
-            ID to IdCommand()
+        BACKGROUND_COLOR to BackgroundColorCommand(),
+        ID to IdCommand()
     )
 
-    override fun applyProperties(view: View, dynamicProperties: List<DynamicProperty>, actionListener: OnActionListener?) {
+    override fun applyProperties(
+        view: View,
+        dynamicProperties: List<DynamicProperty>,
+        actionListener: OnActionListener?
+    ) {
         dynamicProperties.forEach {
             commands[it.name]?.apply(view, it)
         }
@@ -39,8 +43,7 @@ class RadioGroupButtonComponent : Component {
     override fun createView(parent: ViewGroup): View {
         return RadioGroup(parent.context).apply {
             layoutParams = LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         }
     }
-
 }

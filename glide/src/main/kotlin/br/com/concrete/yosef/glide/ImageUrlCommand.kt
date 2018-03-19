@@ -20,5 +20,4 @@ class ImageUrlCommand(private val glide: Glide) : DynamicPropertyCommand {
             glide.requestManagerRetriever.get(glide.context).load(dynamicProperty.value).into(view)
         }
     }
-
 }

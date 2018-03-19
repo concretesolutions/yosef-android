@@ -15,21 +15,26 @@ import br.com.concrete.yosef.glide.ImageUrlCommand.Companion.IMAGE_URL
 import com.bumptech.glide.Glide
 import com.bumptech.glide.GlideBuilder
 
-class GlideImageComponent(glide: Glide =
-                          GlideBuilder().build(DummyContentProvider.appContext)) : Component {
+class GlideImageComponent(
+    glide: Glide = GlideBuilder().build(DummyContentProvider.appContext)
+) : Component {
 
     companion object {
         const val IMAGE_TYPE = "image"
     }
 
     private val commands: Map<String, DynamicPropertyCommand> = mapOf(
-            WidthCommand.WIDTH_TYPE to WidthCommand(),
-            HeightCommand.HEIGHT_TYPE to HeightCommand(),
-            IMAGE_URL to ImageUrlCommand(glide),
-            IdCommand.ID to IdCommand()
+        WidthCommand.WIDTH_TYPE to WidthCommand(),
+        HeightCommand.HEIGHT_TYPE to HeightCommand(),
+        IMAGE_URL to ImageUrlCommand(glide),
+        IdCommand.ID to IdCommand()
     )
 
-    override fun applyProperties(view: View, dynamicProperties: List<DynamicProperty>, actionListener: OnActionListener?) {
+    override fun applyProperties(
+        view: View,
+        dynamicProperties: List<DynamicProperty>,
+        actionListener: OnActionListener?
+    ) {
         dynamicProperties.forEach {
             commands[it.name]?.apply(view, it)
         }
@@ -38,7 +43,7 @@ class GlideImageComponent(glide: Glide =
     override fun createView(parent: ViewGroup): View {
         return ImageView(parent.context).apply {
             layoutParams = LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         }
     }
 }

@@ -31,13 +31,17 @@ class ButtonComponent : Component {
     }
 
     private val commands: Map<String, DynamicPropertyCommand> = mapOf(
-            TEXT to TextCommand(),
-            TEXT_COLOR to TextColorCommand(),
-            BACKGROUND_COLOR to BackgroundColorCommand(),
-            ID to IdCommand()
+        TEXT to TextCommand(),
+        TEXT_COLOR to TextColorCommand(),
+        BACKGROUND_COLOR to BackgroundColorCommand(),
+        ID to IdCommand()
     )
 
-    override fun applyProperties(view: View, dynamicProperties: List<DynamicProperty>, actionListener: OnActionListener?) {
+    override fun applyProperties(
+        view: View,
+        dynamicProperties: List<DynamicProperty>,
+        actionListener: OnActionListener?
+    ) {
         (view as Button).setOnClickListener {
             val dynamicWithAction = dynamicProperties.find { ACTION == it.name }
             dynamicWithAction?.value?.let { actionListener?.callAction(it) }
@@ -51,12 +55,11 @@ class ButtonComponent : Component {
         return Button(parent.context).apply {
             if (parent is LinearLayout && parent.tag == ElementGroupComponent.ELEMENT_GROUP) {
                 this.layoutParams = LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f)
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f)
             } else {
                 this.layoutParams = LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             }
         }
     }
-
 }

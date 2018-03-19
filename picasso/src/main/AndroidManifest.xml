@@ -1,11 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.com.concrete.yosef.picasso">
+          package="br.com.concrete.yosef.picasso">
 
     <application>
         <provider
-            android:name="br.com.concrete.yosef.picasso.DummyContentProvider"
-            android:authorities="br.com.concrete.yosef.yousefpicasso.provider"
-            android:exported="false" />
+                android:name="br.com.concrete.yosef.picasso.DummyContentProvider"
+                android:authorities="br.com.concrete.yosef.yousefpicasso.provider"
+                android:exported="false"/>
     </application>
 
 </manifest>

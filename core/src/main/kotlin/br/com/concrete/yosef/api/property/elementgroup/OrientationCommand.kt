@@ -31,9 +31,9 @@ class OrientationCommand : DynamicPropertyCommand {
     override fun apply(view: View, dynamicProperty: DynamicProperty) {
 
         if (!(dynamicProperty.value == HORIZONTAL ||
-                        dynamicProperty.value == VERTICAL))
+                dynamicProperty.value == VERTICAL))
             throw IllegalArgumentException("The value (${dynamicProperty.value}) " +
-                    "cannot be applied to property $ORIENTATION.")
+                "cannot be applied to property $ORIENTATION.")
 
         if (view is LinearLayout) {
 
@@ -46,6 +46,6 @@ class OrientationCommand : DynamicPropertyCommand {
         }
 
         throw IllegalArgumentException("The $ORIENTATION property cannot be " +
-                "applied to view ${view.javaClass.name}")
+            "applied to view ${view.javaClass.name}")
     }
 }

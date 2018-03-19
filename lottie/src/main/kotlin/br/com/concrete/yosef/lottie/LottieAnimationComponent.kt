@@ -29,21 +29,25 @@ class LottieAnimationComponent : Component {
     }
 
     private val commands: Map<String, DynamicPropertyCommand> = mapOf(
-            ID to IdCommand(),
-            WIDTH_TYPE to WidthCommand(),
-            HEIGHT_TYPE to HeightCommand(),
-            REPEAT_COUNT_PROPERTY to RepeatCountPropertyCommand(),
-            ANIMATE_PROPERTY to AnimatePropertyCommand()
+        ID to IdCommand(),
+        WIDTH_TYPE to WidthCommand(),
+        HEIGHT_TYPE to HeightCommand(),
+        REPEAT_COUNT_PROPERTY to RepeatCountPropertyCommand(),
+        ANIMATE_PROPERTY to AnimatePropertyCommand()
     )
 
-    override fun applyProperties(view: View, dynamicProperties: List<DynamicProperty>, actionListener: OnActionListener?) {
+    override fun applyProperties(
+        view: View,
+        dynamicProperties: List<DynamicProperty>,
+        actionListener: OnActionListener?
+    ) {
         checkMandatoryFields(dynamicProperties, ANIMATE_PROPERTY)
 
         dynamicProperties.forEach {
 
             if (commands[it.name] == null)
-                throw IllegalArgumentException("Property ${it.name} (value = ${it.value}) cannot be" +
-                        " applied to ${view.javaClass.name} ($ANIMATION_TYPE type)")
+                throw IllegalArgumentException("Property ${it.name} (value = ${it.value}) " +
+                    "cannot be applied to ${view.javaClass.name} ($ANIMATION_TYPE type)")
 
             commands[it.name]?.apply(view, it)
         }
@@ -52,9 +56,8 @@ class LottieAnimationComponent : Component {
     override fun createView(parent: ViewGroup): LottieAnimationView {
         return LottieAnimationView(parent.context).apply {
             layoutParams = LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             repeatCount = LottieDrawable.INFINITE
         }
     }
-
 }

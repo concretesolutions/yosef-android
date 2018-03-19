@@ -24,6 +24,6 @@ class AnimatePropertyCommand : DynamicPropertyCommand {
         }
 
         throw IllegalArgumentException("Could not start animation in view " +
-                "${view.javaClass.name}. Valid json: ${dynamicProperty.value.isValidJson()}.")
+            "${view.javaClass.name}. Valid json: ${dynamicProperty.value.isValidJson()}.")
     }
 }

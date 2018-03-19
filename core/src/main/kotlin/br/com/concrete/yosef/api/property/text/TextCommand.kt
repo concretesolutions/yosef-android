@@ -26,6 +26,6 @@ class TextCommand : DynamicPropertyCommand {
             return
         }
         throw IllegalArgumentException("The value (${dynamicProperty.value}) " +
-                "for the $TEXT property is not compatible with ${view.javaClass.name}")
+            "for the $TEXT property is not compatible with ${view.javaClass.name}")
     }
 }

@@ -16,7 +16,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class CanarinhoComponentTextField {
+class CanarinhoTextFieldComponentTest {
 
     @Rule
     @JvmField
@@ -25,11 +25,10 @@ class CanarinhoComponentTextField {
     @Test
     fun wheAddTextWithMonetaryMaskThenShowValueFormatted() {
         onView(allOf(
-                isAssignableFrom(EditText::class.java)))
-                .perform(typeText("123123123"))
+            isAssignableFrom(EditText::class.java)))
+            .perform(typeText("123123123"))
 
         onView(withText("R$ 1.231.231,23"))
-                .check(matches(isDisplayed()))
+            .check(matches(isDisplayed()))
     }
-
 }

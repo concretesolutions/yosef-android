@@ -25,7 +25,6 @@ class PicassoImageComponentTest {
     @Test
     fun whenAddImageThenShowImageFromUrl() {
         onView(Matchers.allOf(ViewMatchers.isAssignableFrom(ImageView::class.java)))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
-
 }

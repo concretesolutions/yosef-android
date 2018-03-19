@@ -21,7 +21,8 @@ class MaskPropertyCommand : DynamicPropertyCommand {
             if (MASK == dynamicProperty.name) {
                 if (MASK_MONETARY == dynamicProperty.value) {
                     view.hint = "R$0,00"
-                    view.addTextChangedListener(ValorMonetarioWatcher.Builder().comSimboloReal().build())
+                    view.addTextChangedListener(
+                        ValorMonetarioWatcher.Builder().comSimboloReal().build())
                 }
             }
         }

@@ -36,7 +36,6 @@ class TextStyleCommandTest {
             orientation = LinearLayout.VERTICAL
         }
         textStyleCommand = TextStyleCommand()
-
     }
 
     @Test
@@ -52,7 +51,6 @@ class TextStyleCommandTest {
         textView.afterLayout {
             assertTrue(textView.typeface.isBold)
         }
-
     }
 
     @Test
@@ -64,10 +62,8 @@ class TextStyleCommandTest {
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The value(${dynamicProperty.value}) " +
-                "for the textStyle property does not exist or is not supported")
+            "for the textStyle property does not exist or is not supported")
 
         textStyleCommand.apply(textView, dynamicProperty)
-
     }
-
 }

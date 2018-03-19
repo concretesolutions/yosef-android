@@ -1,11 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.com.concrete.yosef.glide">
+          package="br.com.concrete.yosef.glide">
 
     <application>
         <provider
-            android:name="br.com.concrete.yosef.glide.DummyContentProvider"
-            android:authorities="br.com.concrete.yosef.yousefglide.provider"
-            android:exported="false" />
+                android:name="br.com.concrete.yosef.glide.DummyContentProvider"
+                android:authorities="br.com.concrete.yosef.yousefglide.provider"
+                android:exported="false"/>
     </application>
 
 </manifest>

@@ -19,10 +19,15 @@ class CanarinhoTextFieldComponent : Component {
     private val textFieldComponent = TextFieldComponent()
 
     private val commands: Map<String, DynamicPropertyCommand> = mapOf(
-            MASK to MaskPropertyCommand()
+        MASK to MaskPropertyCommand()
     )
 
-    override fun applyProperties(view: View, dynamicProperties: List<DynamicProperty>, actionListener: OnActionListener?) {
+    override fun applyProperties(
+        view: View,
+        dynamicProperties: List<DynamicProperty>,
+        actionListener: OnActionListener?
+    ) {
+
         textFieldComponent.applyProperties(view, dynamicProperties, actionListener)
         dynamicProperties.forEach {
             commands[it.name]?.apply(view, it)
@@ -30,6 +35,6 @@ class CanarinhoTextFieldComponent : Component {
     }
 
     override fun createView(parent: ViewGroup): View {
-       return textFieldComponent.createView(parent)
+        return textFieldComponent.createView(parent)
     }
 }
