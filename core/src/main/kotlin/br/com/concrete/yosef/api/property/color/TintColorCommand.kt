@@ -28,14 +28,14 @@ class TintColorCommand : DynamicPropertyCommand {
             color = Color.parseColor(dynamicProperty.value)
         } catch (e: IllegalArgumentException) {
             throw IllegalArgumentException("The value (${dynamicProperty.value}) " +
-                    "cannot be parsed as a color")
+                "cannot be parsed as a color")
         }
 
         if (view is CompoundButton) {
 
             val handled = supportsLollipop {
                 val colorStateList = ColorStateList(arrayOf(intArrayOf(
-                        R.attr.state_enabled)), intArrayOf(color))
+                    R.attr.state_enabled)), intArrayOf(color))
                 view.buttonTintList = colorStateList
             }
 
@@ -46,9 +46,6 @@ class TintColorCommand : DynamicPropertyCommand {
         }
 
         throw IllegalArgumentException("The value (${dynamicProperty.value}) " +
-                "for the $TINT_COLOR property is not compatible with ${view.javaClass.name}")
-
-
+            "for the $TINT_COLOR property is not compatible with ${view.javaClass.name}")
     }
-
 }

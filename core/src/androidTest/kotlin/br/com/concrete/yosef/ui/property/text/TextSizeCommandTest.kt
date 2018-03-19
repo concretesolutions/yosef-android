@@ -32,12 +32,10 @@ class TextSizeCommandTest {
 
     @Before
     fun setUp() {
-
         parent = LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
         }
         textSizeCommand = TextSizeCommand()
-
     }
 
     @Test
@@ -62,9 +60,8 @@ class TextSizeCommandTest {
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The property does not support setting text size" +
-                " for the type ${imageView.javaClass.name}")
+            " for the type ${imageView.javaClass.name}")
 
         textSizeCommand.apply(imageView, dynamicProperty)
     }
-
 }

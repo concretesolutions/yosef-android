@@ -7,6 +7,11 @@ import br.com.concrete.yosef.entity.DynamicProperty
 
 interface Component {
 
-    fun applyProperties(view: View, dynamicProperties: List<DynamicProperty>, actionListener: OnActionListener?)
+    fun applyProperties(
+        view: View,
+        dynamicProperties: List<DynamicProperty>,
+        actionListener: OnActionListener?
+    )
+
     fun createView(parent: ViewGroup): View
 }

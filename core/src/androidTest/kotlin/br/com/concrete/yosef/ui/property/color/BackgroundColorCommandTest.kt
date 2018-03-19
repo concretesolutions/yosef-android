@@ -52,7 +52,6 @@ class BackgroundColorCommandTest {
             val viewBackgroundColor = view.background as ColorDrawable
             assertTrue(viewBackgroundColor.color == Color.parseColor(dynamicProperty.value))
         }
-
     }
 
     fun renderingViewWithWrongBackgroundValueShouldThrow() {
@@ -62,9 +61,8 @@ class BackgroundColorCommandTest {
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The value (${dynamicProperty.value}) " +
-                "cannot be parsed as a color")
+            "cannot be parsed as a color")
 
         backgroundColorCommand.apply(view, dynamicProperty)
     }
-
 }

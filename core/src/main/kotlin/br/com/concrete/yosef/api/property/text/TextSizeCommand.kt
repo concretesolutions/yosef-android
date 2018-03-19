@@ -19,7 +19,7 @@ class TextSizeCommand : DynamicPropertyCommand {
             view.textSize = dynamicProperty.value.toFloat()
             return
         }
-        throw IllegalArgumentException("The property does not support setting text size for the type ${view.javaClass.name}")
+        throw IllegalArgumentException("The property does not support " +
+            "setting text size for the type ${view.javaClass.name}")
     }
-
 }

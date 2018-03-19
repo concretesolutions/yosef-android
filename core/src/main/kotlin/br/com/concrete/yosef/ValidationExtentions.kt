@@ -13,7 +13,6 @@ fun String.isValidJson(): Boolean {
         } catch (ex1: JSONException) {
             return false
         }
-
     }
 
     return true

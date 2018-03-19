@@ -21,11 +21,15 @@ class ElementGroupComponent : Component {
     }
 
     private val components: Map<String, DynamicPropertyCommand> = mapOf(
-            ORIENTATION to OrientationCommand(),
-            ID to IdCommand()
+        ORIENTATION to OrientationCommand(),
+        ID to IdCommand()
     )
 
-    override fun applyProperties(view: View, dynamicProperties: List<DynamicProperty>, actionListener: OnActionListener?) {
+    override fun applyProperties(
+        view: View,
+        dynamicProperties: List<DynamicProperty>,
+        actionListener: OnActionListener?
+    ) {
         dynamicProperties.forEach {
             components[it.name]?.apply(view, it)
         }
@@ -35,8 +39,7 @@ class ElementGroupComponent : Component {
         return LinearLayout(parent.context).apply {
             tag = ELEMENT_GROUP
             layoutParams = LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         }
     }
-
 }

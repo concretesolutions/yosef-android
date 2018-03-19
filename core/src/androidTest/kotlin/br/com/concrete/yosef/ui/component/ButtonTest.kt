@@ -19,11 +19,10 @@ class ButtonTest {
     val activity = ActivityTestRule<MainActivity>(MainActivity::class.java)
 
     @Test
-    fun whenAddButtonThenShowTextView(){
+    fun whenAddButtonThenShowTextView() {
         Espresso.onView(ViewMatchers.withText("Não")).perform(ViewActions.click())
 
         Espresso.onView(ViewMatchers.withText("Button Não"))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
-
 }

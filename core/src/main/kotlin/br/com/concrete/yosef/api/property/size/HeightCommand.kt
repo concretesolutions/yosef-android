@@ -16,5 +16,4 @@ class HeightCommand : DynamicPropertyCommand {
     override fun apply(view: View, dynamicProperty: DynamicProperty) {
         view.layoutParams.height = dynamicProperty.value.toInt()
     }
-
 }

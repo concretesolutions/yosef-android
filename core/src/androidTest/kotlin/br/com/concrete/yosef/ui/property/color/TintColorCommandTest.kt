@@ -50,20 +50,19 @@ class TintColorCommandTest {
 
         radioButton.afterLayout {
             assertTrue(radioButton.buttonTintList.defaultColor ==
-                    Color.parseColor(dynamicProperty.value))
+                Color.parseColor(dynamicProperty.value))
         }
-
     }
 
     @Test
-    fun renderingCompoundButtonWithWrongTintColorValueShouldThrow(){
+    fun renderingCompoundButtonWithWrongTintColorValueShouldThrow() {
         val dynamicProperty = DynamicProperty(TINT_COLOR, "color", "wrong")
 
         val radioButton = RadioButton(parent.context)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The value (${dynamicProperty.value}) " +
-                "cannot be parsed as a color")
+            "cannot be parsed as a color")
 
         tintCommand.apply(radioButton, dynamicProperty)
     }
@@ -75,9 +74,8 @@ class TintColorCommandTest {
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The value (${dynamicProperty.value}) " +
-                "for the $TINT_COLOR property is not compatible with ${imageView.javaClass.name}")
+            "for the $TINT_COLOR property is not compatible with ${imageView.javaClass.name}")
 
         tintCommand.apply(imageView, dynamicProperty)
     }
-
 }

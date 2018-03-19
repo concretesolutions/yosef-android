@@ -22,10 +22,10 @@ class TextStyleCommand : DynamicPropertyCommand {
                 "italic" -> view.setTypeface(view.typeface, Typeface.ITALIC)
                 "boldItalic" -> view.setTypeface(view.typeface, Typeface.BOLD_ITALIC)
                 else -> {
-                    throw IllegalArgumentException("The value(${dynamicProperty.value}) for the $TEXT_STYLE property does not exist or is not supported")
+                    throw IllegalArgumentException("The value(${dynamicProperty.value}) " +
+                        "for the $TEXT_STYLE property does not exist or is not supported")
                 }
             }
-
         }
     }
 }

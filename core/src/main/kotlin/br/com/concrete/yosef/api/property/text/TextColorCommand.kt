@@ -21,12 +21,11 @@ class TextColorCommand : DynamicPropertyCommand {
                 view.setTextColor(Color.parseColor(dynamicProperty.value))
             } catch (e: IllegalArgumentException) {
                 throw IllegalArgumentException("The value (${dynamicProperty.value}) " +
-                        "cannot be parsed as a color")
+                    "cannot be parsed as a color")
             }
             return
         }
         throw IllegalArgumentException("The value (${dynamicProperty.value}) " +
-                "for the $TEXT_COLOR property is not compatible with ${view.javaClass.name}")
+            "for the $TEXT_COLOR property is not compatible with ${view.javaClass.name}")
     }
-
 }

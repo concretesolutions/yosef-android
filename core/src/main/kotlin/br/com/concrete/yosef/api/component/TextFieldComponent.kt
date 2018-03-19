@@ -10,11 +10,11 @@ import android.widget.LinearLayout
 import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.property.DynamicPropertyCommand
 import br.com.concrete.yosef.api.property.id.IdCommand
+import br.com.concrete.yosef.api.property.id.IdCommand.Companion.ID
 import br.com.concrete.yosef.api.property.size.HeightCommand
+import br.com.concrete.yosef.api.property.size.HeightCommand.Companion.HEIGHT_TYPE
 import br.com.concrete.yosef.api.property.size.WidthCommand
 import br.com.concrete.yosef.api.property.size.WidthCommand.Companion.WIDTH_TYPE
-import br.com.concrete.yosef.api.property.size.HeightCommand.Companion.HEIGHT_TYPE
-import br.com.concrete.yosef.api.property.id.IdCommand.Companion.ID
 import br.com.concrete.yosef.entity.DynamicProperty
 
 /**
@@ -27,17 +27,21 @@ class TextFieldComponent : Component {
     }
 
     private val commands: Map<String, DynamicPropertyCommand> = mapOf(
-            WIDTH_TYPE to WidthCommand(),
-            HEIGHT_TYPE to HeightCommand(),
-            ID to IdCommand()
+        WIDTH_TYPE to WidthCommand(),
+        HEIGHT_TYPE to HeightCommand(),
+        ID to IdCommand()
     )
 
-    override fun applyProperties(view: View, dynamicProperties: List<DynamicProperty>, actionListener: OnActionListener?) {
+    override fun applyProperties(
+        view: View,
+        dynamicProperties: List<DynamicProperty>,
+        actionListener: OnActionListener?
+    ) {
         (view as EditText).setOnEditorActionListener { textView, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH
-                    || actionId == EditorInfo.IME_ACTION_DONE
-                    || event.action == KeyEvent.ACTION_DOWN
-                    && event.keyCode == KeyEvent.KEYCODE_ENTER) {
+                || actionId == EditorInfo.IME_ACTION_DONE
+                || event.action == KeyEvent.ACTION_DOWN
+                && event.keyCode == KeyEvent.KEYCODE_ENTER) {
 
                 actionListener?.callAction(textView.text.toString())
                 return@setOnEditorActionListener true
@@ -54,7 +58,7 @@ class TextFieldComponent : Component {
             inputType = InputType.TYPE_CLASS_TEXT
             EditorInfo.IME_ACTION_DONE
             layoutParams = LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         }
     }
 }
