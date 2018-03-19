@@ -6,7 +6,6 @@ import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 
-
 class DummyContentProvider : ContentProvider() {
     companion object {
         lateinit var appContext: Context
@@ -16,7 +15,13 @@ class DummyContentProvider : ContentProvider() {
         return null
     }
 
-    override fun query(p0: Uri?, p1: Array<out String>?, p2: String?, p3: Array<out String>?, p4: String?): Cursor? {
+    override fun query(
+        p0: Uri?,
+        p1: Array<out String>?,
+        p2: String?,
+        p3: Array<out String>?,
+        p4: String?
+    ): Cursor? {
         return null
     }
 
@@ -25,7 +30,12 @@ class DummyContentProvider : ContentProvider() {
         return true
     }
 
-    override fun update(p0: Uri?, p1: ContentValues?, p2: String?, p3: Array<out String>?): Int {
+    override fun update(
+        p0: Uri?,
+        p1: ContentValues?,
+        p2: String?,
+        p3: Array<out String>?
+    ): Int {
         return 0
     }
 
@@ -36,5 +46,4 @@ class DummyContentProvider : ContentProvider() {
     override fun getType(p0: Uri?): String? {
         return null
     }
-
 }
