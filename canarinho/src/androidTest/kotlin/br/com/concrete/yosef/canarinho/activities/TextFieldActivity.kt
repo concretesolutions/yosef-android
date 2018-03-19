@@ -6,6 +6,7 @@ import android.widget.TextView
 import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.DynamicViewCreator
 import br.com.concrete.yosef.canarinho.api.component.CanarinhoTextFieldComponent
+import br.com.concrete.yosef.canarinho.api.component.CanarinhoTextFieldComponent.Companion.TEXT_FIELD
 import br.com.concrete.yosef.canarinho.test.R
 
 class TextFieldActivity : AppCompatActivity(), OnActionListener {
@@ -14,11 +15,12 @@ class TextFieldActivity : AppCompatActivity(), OnActionListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val json = TextFieldActivity::class.java.getResource("/assets/example_textfield.json").readText()
+        val json = TextFieldActivity::class.java
+            .getResource("/assets/example_textfield.json").readText()
 
         val dynamicView = DynamicViewCreator.Builder()
-                .addComponentFor(CanarinhoTextFieldComponent.TEXT_FIELD, CanarinhoTextFieldComponent())
-                .build()
+            .addComponentFor(TEXT_FIELD, CanarinhoTextFieldComponent())
+            .build()
 
         dynamicView.createViewFromJson(findViewById(R.id.parent), json, this)
     }
