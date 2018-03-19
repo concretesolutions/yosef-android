@@ -1,4 +1,4 @@
-package br.com.concrete.yosef.ui.property.text
+package br.com.concrete.yosef.property.color
 
 import android.graphics.Color
 import android.support.test.InstrumentationRegistry
@@ -6,10 +6,10 @@ import android.support.test.runner.AndroidJUnit4
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.RadioButton
 import br.com.concrete.yosef.afterLayout
-import br.com.concrete.yosef.api.property.text.TextColorCommand
-import br.com.concrete.yosef.api.property.text.TextColorCommand.Companion.TEXT_COLOR
+import br.com.concrete.yosef.api.property.color.TintColorCommand
+import br.com.concrete.yosef.api.property.color.TintColorCommand.Companion.TINT_COLOR
 import br.com.concrete.yosef.entity.DynamicProperty
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -19,7 +19,7 @@ import org.junit.rules.ExpectedException
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class TextColorCommandTest {
+class TintColorCommandTest {
 
     @Rule
     @JvmField
@@ -27,7 +27,7 @@ class TextColorCommandTest {
 
     private val context = InstrumentationRegistry.getTargetContext()!!
 
-    private lateinit var textColorCommand: TextColorCommand
+    private lateinit var tintCommand: TintColorCommand
 
     private lateinit var parent: ViewGroup
 
@@ -36,48 +36,48 @@ class TextColorCommandTest {
         parent = LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
         }
-        textColorCommand = TextColorCommand()
+        tintCommand = TintColorCommand()
     }
 
     @Test
-    fun renderingTextViewShouldApplyTextColor() {
-        val dynamicProperty = DynamicProperty(TEXT_COLOR, "color", "#0000FF")
+    fun renderingCompoundButtonShouldApplyButtonTintColor() {
+        val dynamicProperty = DynamicProperty(TINT_COLOR, "color", "#0000FF")
 
-        val textView = TextView(parent.context)
-        textColorCommand.apply(textView, dynamicProperty)
+        val radioButton = RadioButton(parent.context)
+        tintCommand.apply(radioButton, dynamicProperty)
 
-        parent.addView(textView)
+        parent.addView(radioButton)
 
-        textView.afterLayout {
-            assertTrue(textView.currentTextColor == Color.parseColor(dynamicProperty.value))
+        radioButton.afterLayout {
+            assertTrue(radioButton.buttonTintList.defaultColor ==
+                    Color.parseColor(dynamicProperty.value))
         }
+
     }
 
     @Test
-    fun renderingTextViewWithWrongTextColorValueShouldThrow() {
-        val dynamicProperty = DynamicProperty(TEXT_COLOR, "color", "wrong")
+    fun renderingCompoundButtonWithWrongTintColorValueShouldThrow(){
+        val dynamicProperty = DynamicProperty(TINT_COLOR, "color", "wrong")
 
-        val textView = TextView(parent.context)
+        val radioButton = RadioButton(parent.context)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The value (${dynamicProperty.value}) " +
                 "cannot be parsed as a color")
 
-        textColorCommand.apply(textView, dynamicProperty)
-
+        tintCommand.apply(radioButton, dynamicProperty)
     }
 
     @Test
     fun renderingImageViewShouldThrow() {
-        val dynamicProperty = DynamicProperty(TEXT_COLOR, "color", "#0000FF")
-
+        val dynamicProperty = DynamicProperty(TINT_COLOR, "color", "#0000FF")
         val imageView = ImageView(parent.context)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The value (${dynamicProperty.value}) " +
-                "for the $TEXT_COLOR property is not compatible with ${imageView.javaClass.name}")
+                "for the $TINT_COLOR property is not compatible with ${imageView.javaClass.name}")
 
-        textColorCommand.apply(imageView, dynamicProperty)
+        tintCommand.apply(imageView, dynamicProperty)
     }
 
 }

@@ -1,4 +1,4 @@
-package br.com.concrete.yosef.ui.property.elementGroup
+package br.com.concrete.yosef.property.elementGroup
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

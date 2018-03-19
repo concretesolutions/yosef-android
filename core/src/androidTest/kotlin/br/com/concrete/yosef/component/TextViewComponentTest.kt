@@ -1,4 +1,4 @@
-package br.com.concrete.yosef.ui.component
+package br.com.concrete.yosef.component
 
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.assertion.ViewAssertions.matches
@@ -15,7 +15,7 @@ import org.junit.runner.RunWith
  *
  */
 @RunWith(AndroidJUnit4::class)
-class TextViewTest {
+class TextViewComponentTest {
 
     @Rule
     @JvmField

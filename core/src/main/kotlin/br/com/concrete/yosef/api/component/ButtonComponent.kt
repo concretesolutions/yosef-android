@@ -27,9 +27,8 @@ class ButtonComponent : Component {
          * This constant documents which type is associated with the component
          */
         const val BUTTON_TYPE = "button"
+        private const val ACTION = "action"
     }
-
-    private val ACTION = "action"
 
     private val commands: Map<String, DynamicPropertyCommand> = mapOf(
             TEXT to TextCommand(),

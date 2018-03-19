@@ -1,4 +1,4 @@
-package br.com.concrete.yosef.ui.component
+package br.com.concrete.yosef.component
 
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions

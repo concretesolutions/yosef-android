@@ -38,11 +38,7 @@ class TextFieldComponent : Component {
 
     override fun applyProperties(view: View, dynamicProperties: List<DynamicProperty>, actionListener: OnActionListener?) {
         (view as EditText).setOnEditorActionListener { textView, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH
-                    || actionId == EditorInfo.IME_ACTION_DONE
-                    || event.action == KeyEvent.ACTION_DOWN
-                    && event.keyCode == KeyEvent.KEYCODE_ENTER) {
-
+            if (isEnterPressed(actionId, event)) {
                 actionListener?.callAction(textView.text.toString())
                 return@setOnEditorActionListener true
             }
@@ -61,4 +57,12 @@ class TextFieldComponent : Component {
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         }
     }
+
+    private fun isEnterPressed(actionId: Int, event: KeyEvent): Boolean {
+        return actionId == EditorInfo.IME_ACTION_SEARCH
+                || actionId == EditorInfo.IME_ACTION_DONE
+                || event.action == KeyEvent.ACTION_DOWN
+                && event.keyCode == KeyEvent.KEYCODE_ENTER
+    }
+
 }
