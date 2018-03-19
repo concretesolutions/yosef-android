@@ -21,11 +21,15 @@ import br.com.concrete.yosef.api.property.id.IdCommand.Companion.ID
 import br.com.concrete.yosef.entity.DynamicProperty
 
 /**
- *  Command pattern for the RadioButton component
+ *  Class that implements the [Component] interface and creates the component
+ *  RadioButton([RadioButton]), applying its properties
  */
 class RadioButtonComponent : Component {
 
     companion object {
+        /**
+         * This constant documents which type is associated with the component
+         */
         const val RADIO_BUTTON = "radioButton"
     }
 

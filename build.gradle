@@ -1,5 +1,7 @@
 buildscript {
     ext.kotlin_version = "1.2.20"
+    ext.dokka_version = "0.9.16"
+
     repositories {
         google()
         jcenter()
@@ -8,6 +10,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:3.0.1"
         //noinspection DifferentKotlinGradleVersion
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokka_version"
         classpath "org.jacoco:org.jacoco.core:0.8.0"
     }
 }
@@ -15,6 +18,8 @@ buildscript {
 plugins {
     id "io.gitlab.arturbosch.detekt" version "1.0.0.RC6-3"
 }
+
+apply plugin: 'org.jetbrains.dokka'
 
 allprojects {
     repositories {
@@ -25,6 +30,7 @@ allprojects {
 
 subprojects {
     apply from: rootProject.file("tools/jacoco.gradle")
+    apply plugin: 'org.jetbrains.dokka'
 }
 
 apply plugin: "jacoco"
@@ -55,6 +61,11 @@ task jacocoRootReport(type: JacocoReport) {
     sourceDirectories = files(sourceSets)
     classDirectories = files(classDirs)
     executionData = files(coverageBinaries)
+}
+
+dokka {
+    outputFormat = 'html'
+    outputDirectory = "$buildDir/javadoc"
 }
 
 task clean(type: Delete) {

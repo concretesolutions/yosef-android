@@ -14,16 +14,35 @@ import br.com.concrete.yosef.fromJson
 import com.google.gson.Gson
 
 /**
- * Converts json to a view
- * instance or construct your own instance with {@link Builder}.
+ * Main class for the Yosef library. This class has a [Builder] with default
+ * [components] to be created and may receive custom [Component] classes.
  */
 class DynamicViewCreator(private val components: Map<String, Component>, private val gson: Gson) {
 
+    /**
+     * This method creates a list of [DynamicComponent] by the passed json and calls
+     * [addChildrenRecursively] method to add them to the parent view
+     *
+     * @param parent [ViewGroup] that will have the components as children
+     * @param json formatted json according with the library protocol. This json will have
+     * information about which components will be created and its properties to be applied
+     * @param listener is the responsible for calling events that
+     * are related with components actions
+     */
     fun createViewFromJson(parent: ViewGroup, json: String, listener: OnActionListener? = null) {
         val parentComponent = gson.fromJson<List<DynamicComponent>>(json)
         parentComponent.forEach { addChildrenRecursively(parent, it, listener) }
     }
 
+    /**
+     * Method that adds components to the parent, possibly also adding children
+     * of the created components
+     *
+     * @param topLevelViewGroup the parent who will group the components
+     * @param childComponent the component that should be created and added in the parent
+     * @param listener is the responsible for calling events that
+     * are related with components actions
+     */
     private fun addChildrenRecursively(topLevelViewGroup: ViewGroup,
                                        childComponent: DynamicComponent?,
                                        listener: OnActionListener? = null) {
@@ -44,11 +63,18 @@ class DynamicViewCreator(private val components: Map<String, Component>, private
         topLevelViewGroup.addView(view)
     }
 
+
+    /**
+     * A builder class that sets the default structural components for the ViewCreator to use.
+     */
     class Builder {
 
         private val components: MutableMap<String, Component>
         private var gson: Gson = Gson()
 
+        /**
+         * @constructor
+         */
         init {
             components = hashMapOf(TEXT_TYPE to TextViewComponent(),
                     BUTTON_TYPE to ButtonComponent(),
@@ -59,11 +85,24 @@ class DynamicViewCreator(private val components: Map<String, Component>, private
             )
         }
 
+        /**
+         * Method that lets custom [Component] to be added to the library
+         *
+         * @param type that will be associated with the component in the json
+         * @param component that will create the views and call the properties
+         * @return Builder with the custom components
+         */
+        @SuppressWarnings("unused")
         fun addComponentFor(type: String, component: Component): Builder {
             components[type] = component
             return this
         }
 
+        /**
+         * Method that creates a [DynamicViewCreator] according with its components
+         *
+         * @return DynamicViewCreator that will be created
+         */
         fun build(): DynamicViewCreator {
             return DynamicViewCreator(components, gson)
         }

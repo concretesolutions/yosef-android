@@ -7,11 +7,17 @@ import br.com.concrete.yosef.api.property.DynamicPropertyCommand
 import br.com.concrete.yosef.entity.DynamicProperty
 
 /**
- * Command pattern for the text color property
+ * Command class that implements the [DynamicPropertyCommand] applying
+ * the textColor property to the view([TextView])
+ *
+ * @see [TextView.setTextColor]
  */
 class TextColorCommand : DynamicPropertyCommand {
 
     companion object {
+        /**
+         * This constant documents which name is associated with the property
+         */
         const val TEXT_COLOR = "textColor"
     }
 

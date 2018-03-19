@@ -5,11 +5,15 @@ import br.com.concrete.yosef.api.property.DynamicPropertyCommand
 import br.com.concrete.yosef.entity.DynamicProperty
 
 /**
- * Command pattern for the height property
+ * Command class that implements the [DynamicPropertyCommand] applying
+ * the height property to the view([View])
  */
 class HeightCommand : DynamicPropertyCommand {
 
     companion object {
+        /**
+         * This constant documents which name is associated with the property
+         */
         const val HEIGHT_TYPE = "height"
     }
 

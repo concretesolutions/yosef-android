@@ -13,11 +13,15 @@ import br.com.concrete.yosef.api.property.id.IdCommand.Companion.ID
 import br.com.concrete.yosef.entity.DynamicProperty
 
 /**
- * Command pattern for the RadioGroupButtonComponent component
+ * Class that implements the [Component] interface and creates the component
+ * RadioGroup([RadioGroup]), applying its properties
  */
 class RadioGroupButtonComponent : Component {
 
     companion object {
+        /**
+         * This constant documents which type is associated with the component
+         */
         const val RADIO_GROUP_BUTTON = "radioGroupButton"
     }
 

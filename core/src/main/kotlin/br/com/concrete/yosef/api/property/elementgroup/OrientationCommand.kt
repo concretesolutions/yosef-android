@@ -6,13 +6,25 @@ import br.com.concrete.yosef.api.property.DynamicPropertyCommand
 import br.com.concrete.yosef.entity.DynamicProperty
 
 /**
- * Command pattern for the orientation color property
+ * Command class that implements the [DynamicPropertyCommand] applying
+ * the orientation property to the view([LinearLayout])
+ *
+ * @see [LinearLayout.setOrientation]
  */
 class OrientationCommand : DynamicPropertyCommand {
 
     companion object {
+        /**
+         * This constant documents which name is associated with the property
+         */
         const val ORIENTATION = "orientation"
+        /**
+         * This constant represents the possible value horizontal for the orientation property
+         */
         const val HORIZONTAL = "horizontal"
+        /**
+         * This constant represents the possible value vertical for the orientation property
+         */
         const val VERTICAL = "vertical"
     }
 

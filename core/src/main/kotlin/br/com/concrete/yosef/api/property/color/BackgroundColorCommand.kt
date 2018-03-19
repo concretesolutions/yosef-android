@@ -7,11 +7,17 @@ import br.com.concrete.yosef.api.property.DynamicPropertyCommand
 import br.com.concrete.yosef.entity.DynamicProperty
 
 /**
- * Command pattern for the background color property
+ * Command class that implements the [DynamicPropertyCommand] applying
+ * the backgroundColor property to the view([View])
+ *
+ * @see [View.setBackgroundColor]
  */
 class BackgroundColorCommand : DynamicPropertyCommand {
 
     companion object {
+        /**
+         * This constant documents which name is associated with the property
+         */
         const val BACKGROUND_COLOR = "backgroundColor"
     }
 
