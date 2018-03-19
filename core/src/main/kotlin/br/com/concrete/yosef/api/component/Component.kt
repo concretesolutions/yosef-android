@@ -19,7 +19,6 @@ interface Component {
      */
     fun createView(parent: ViewGroup): View
 
-
     /**
      * Method that checks which properties will be applied to the view
      *

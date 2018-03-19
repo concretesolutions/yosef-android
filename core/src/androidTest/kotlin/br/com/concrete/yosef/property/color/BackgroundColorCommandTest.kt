@@ -1,4 +1,4 @@
-package br.com.concrete.yosef.ui.property.color
+package br.com.concrete.yosef.property.color
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable

@@ -1,4 +1,4 @@
-package br.com.concrete.yosef.ui.component
+package br.com.concrete.yosef.component
 
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.matcher.ViewMatchers
@@ -12,7 +12,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class RadioGroupTest {
+class RadioGroupComponentTest {
 
     @Rule
     @JvmField

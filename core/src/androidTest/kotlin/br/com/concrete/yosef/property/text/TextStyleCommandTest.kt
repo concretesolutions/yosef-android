@@ -1,16 +1,15 @@
-package br.com.concrete.yosef.ui.property.text
+package br.com.concrete.yosef.property.text
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import br.com.concrete.yosef.afterLayout
-import br.com.concrete.yosef.api.property.text.TextCommand
-import br.com.concrete.yosef.api.property.text.TextCommand.Companion.TEXT
+import br.com.concrete.yosef.api.property.text.TextStyleCommand
+import br.com.concrete.yosef.api.property.text.TextStyleCommand.Companion.TEXT_STYLE
 import br.com.concrete.yosef.entity.DynamicProperty
-import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -18,7 +17,7 @@ import org.junit.rules.ExpectedException
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class TextCommandTest {
+class TextStyleCommandTest {
 
     @Rule
     @JvmField
@@ -26,44 +25,49 @@ class TextCommandTest {
 
     private val context = InstrumentationRegistry.getTargetContext()!!
 
-    private lateinit var textCommand: TextCommand
+    private lateinit var textStyleCommand: TextStyleCommand
 
     private lateinit var parent: ViewGroup
 
     @Before
     fun setUp() {
+
         parent = LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
         }
-        textCommand = TextCommand()
+        textStyleCommand = TextStyleCommand()
+
     }
 
     @Test
-    fun renderingTextViewShouldApplyText() {
-        val dynamicProperty = DynamicProperty(TEXT, "string", "Teste texto")
+    fun renderingTextShouldApplyTextStyle() {
+
+        val dynamicProperty = DynamicProperty(TextStyleCommand.TEXT_STYLE, "string", "bold")
 
         val textView = TextView(parent.context)
-        textCommand.apply(textView, dynamicProperty)
+        textStyleCommand.apply(textView, dynamicProperty)
 
         parent.addView(textView)
 
         textView.afterLayout {
-            assertEquals(textView.text.toString(), dynamicProperty.value)
+            assertTrue(textView.typeface.isBold)
         }
 
     }
 
     @Test
-    fun renderingImageViewShouldThrow() {
-        val dynamicProperty = DynamicProperty(TEXT, "string", "Teste texto")
+    fun renderingTextViewWithWrongTextStyleValueShouldThrow() {
 
-        val imageView = ImageView(parent.context)
+        val dynamicProperty = DynamicProperty(TEXT_STYLE, "string", "wrong")
+
+        val textView = TextView(parent.context)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
-        exceptionRule.expectMessage("The value (${dynamicProperty.value}) for the $TEXT " +
-                "property is not compatible with ${imageView.javaClass.name}")
+        exceptionRule.expectMessage("The value(${dynamicProperty.value}) " +
+                "for the textStyle property does not exist or is not supported")
 
-        textCommand.apply(imageView, dynamicProperty)
+        textStyleCommand.apply(textView, dynamicProperty)
+
     }
 
 }
