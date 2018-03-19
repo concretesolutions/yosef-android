@@ -12,7 +12,6 @@ import org.junit.Test
 import org.junit.rules.ExpectedException
 import org.junit.runner.RunWith
 
-
 @RunWith(AndroidJUnit4::class)
 class AnimatePropertyCommandTest {
 
@@ -36,7 +35,7 @@ class AnimatePropertyCommandTest {
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage(containsString("Could not start " +
-                "animation in view android.view.View"))
+            "animation in view android.view.View"))
         exceptionRule.expectMessage(containsString("Valid json: true"))
 
         command.apply(view, property)
@@ -52,7 +51,5 @@ class AnimatePropertyCommandTest {
         exceptionRule.expectMessage(containsString("Valid json: false"))
 
         command.apply(view, property)
-
-
     }
 }
