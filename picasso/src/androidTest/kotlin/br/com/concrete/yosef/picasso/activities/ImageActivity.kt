@@ -6,7 +6,6 @@ import android.widget.TextView
 import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.DynamicViewCreator
 import br.com.concrete.yosef.picasso.PicassoImageComponent
-import br.com.concrete.yosef.picasso.test.R
 
 class ImageActivity : AppCompatActivity(), OnActionListener {
 
@@ -17,8 +16,8 @@ class ImageActivity : AppCompatActivity(), OnActionListener {
         val json = ImageActivity::class.java.getResource("/assets/example_image.json").readText()
 
         val dynamicView = DynamicViewCreator.Builder()
-                .addComponentFor(PicassoImageComponent.IMAGE_TYPE, PicassoImageComponent())
-                .build()
+            .addComponentFor(PicassoImageComponent.IMAGE_TYPE, PicassoImageComponent())
+            .build()
 
         dynamicView.createViewFromJson(findViewById(R.id.parent), json, this)
     }
@@ -26,5 +25,4 @@ class ImageActivity : AppCompatActivity(), OnActionListener {
     override fun callAction(value: String) {
         findViewById<TextView>(R.id.textview).text = value
     }
-
 }
