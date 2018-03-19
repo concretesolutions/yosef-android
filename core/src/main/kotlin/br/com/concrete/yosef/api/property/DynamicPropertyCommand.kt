@@ -11,8 +11,8 @@ interface DynamicPropertyCommand {
     /**
      * Method that apply property to view
      *
-     * @param view                  View that should receive the property
-     * @param dynamicProperty       property with the values that should be applied to the view
+     * @param view View that should receive the property
+     * @param dynamicProperty property with the values that should be applied to the view
      */
     fun apply(view: View, dynamicProperty: DynamicProperty)
 }

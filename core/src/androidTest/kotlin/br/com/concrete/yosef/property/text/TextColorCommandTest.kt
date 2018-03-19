@@ -61,10 +61,9 @@ class TextColorCommandTest {
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The value (${dynamicProperty.value}) " +
-                "cannot be parsed as a color")
+            "cannot be parsed as a color")
 
         textColorCommand.apply(textView, dynamicProperty)
-
     }
 
     @Test
@@ -75,9 +74,8 @@ class TextColorCommandTest {
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The value (${dynamicProperty.value}) " +
-                "for the $TEXT_COLOR property is not compatible with ${imageView.javaClass.name}")
+            "for the $TEXT_COLOR property is not compatible with ${imageView.javaClass.name}")
 
         textColorCommand.apply(imageView, dynamicProperty)
     }
-
 }

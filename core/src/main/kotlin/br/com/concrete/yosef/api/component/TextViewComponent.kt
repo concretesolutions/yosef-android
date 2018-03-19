@@ -29,14 +29,18 @@ class TextViewComponent : Component {
     }
 
     private val commands: Map<String, DynamicPropertyCommand> = mapOf(
-            TEXT to TextCommand(),
-            TEXT_COLOR to TextColorCommand(),
-            TEXT_SIZE to TextSizeCommand(),
-            ID to IdCommand(),
-            TEXT_STYLE to TextStyleCommand()
+        TEXT to TextCommand(),
+        TEXT_COLOR to TextColorCommand(),
+        TEXT_SIZE to TextSizeCommand(),
+        ID to IdCommand(),
+        TEXT_STYLE to TextStyleCommand()
     )
 
-    override fun applyProperties(view: View, dynamicProperties: List<DynamicProperty>, actionListener: OnActionListener?) {
+    override fun applyProperties(
+        view: View,
+        dynamicProperties: List<DynamicProperty>,
+        actionListener: OnActionListener?
+    ) {
         dynamicProperties.forEach {
             commands[it.name]?.apply(view, it)
         }
@@ -45,9 +49,7 @@ class TextViewComponent : Component {
     override fun createView(parent: ViewGroup): View {
         return TextView(parent.context).apply {
             layoutParams = LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         }
     }
-
-
 }

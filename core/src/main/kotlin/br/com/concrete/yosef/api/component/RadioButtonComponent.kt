@@ -11,13 +11,13 @@ import br.com.concrete.yosef.api.property.color.BackgroundColorCommand.Companion
 import br.com.concrete.yosef.api.property.color.TintColorCommand
 import br.com.concrete.yosef.api.property.color.TintColorCommand.Companion.TINT_COLOR
 import br.com.concrete.yosef.api.property.id.IdCommand
+import br.com.concrete.yosef.api.property.id.IdCommand.Companion.ID
 import br.com.concrete.yosef.api.property.text.TextColorCommand
 import br.com.concrete.yosef.api.property.text.TextColorCommand.Companion.TEXT_COLOR
 import br.com.concrete.yosef.api.property.text.TextCommand
 import br.com.concrete.yosef.api.property.text.TextCommand.Companion.TEXT
 import br.com.concrete.yosef.api.property.text.TextSizeCommand
 import br.com.concrete.yosef.api.property.text.TextSizeCommand.Companion.TEXT_SIZE
-import br.com.concrete.yosef.api.property.id.IdCommand.Companion.ID
 import br.com.concrete.yosef.entity.DynamicProperty
 
 /**
@@ -34,15 +34,19 @@ class RadioButtonComponent : Component {
     }
 
     private val commands: Map<String, DynamicPropertyCommand> = mapOf(
-            TEXT to TextCommand(),
-            TEXT_COLOR to TextColorCommand(),
-            BACKGROUND_COLOR to BackgroundColorCommand(),
-            TEXT_SIZE to TextSizeCommand(),
-            TINT_COLOR to TintColorCommand(),
-            ID to IdCommand()
+        TEXT to TextCommand(),
+        TEXT_COLOR to TextColorCommand(),
+        BACKGROUND_COLOR to BackgroundColorCommand(),
+        TEXT_SIZE to TextSizeCommand(),
+        TINT_COLOR to TintColorCommand(),
+        ID to IdCommand()
     )
 
-    override fun applyProperties(view: View, dynamicProperties: List<DynamicProperty>, actionListener: OnActionListener?) {
+    override fun applyProperties(
+        view: View,
+        dynamicProperties: List<DynamicProperty>,
+        actionListener: OnActionListener?
+    ) {
         dynamicProperties.forEach {
             commands[it.name]?.apply(view, it)
         }
@@ -51,8 +55,7 @@ class RadioButtonComponent : Component {
     override fun createView(parent: ViewGroup): View {
         return RadioButton(parent.context).apply {
             layoutParams = LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         }
     }
-
 }

@@ -7,7 +7,8 @@ import android.view.ViewTreeObserver
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-inline fun <reified T> Gson.fromJson(json: String) = this.fromJson<T>(json, object : TypeToken<T>() {}.type)!!
+inline fun <reified T> Gson.fromJson(json: String) =
+    this.fromJson<T>(json, object : TypeToken<T>() {}.type)!!
 
 inline fun supportsLollipop(code: () -> Unit): Boolean {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -18,11 +19,11 @@ inline fun supportsLollipop(code: () -> Unit): Boolean {
 }
 
 fun View.afterLayout(callback: (it: ViewTreeObserver.OnGlobalLayoutListener) -> Unit) {
-    viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-        override fun onGlobalLayout() {
-            callback.invoke(this)
-            viewTreeObserver.removeOnGlobalLayoutListener(this)
-        }
-
-    })
+    viewTreeObserver.addOnGlobalLayoutListener(
+        object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                callback.invoke(this)
+                viewTreeObserver.removeOnGlobalLayoutListener(this)
+            }
+        })
 }

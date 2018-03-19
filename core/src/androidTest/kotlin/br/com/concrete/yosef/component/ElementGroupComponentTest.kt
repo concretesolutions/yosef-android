@@ -18,10 +18,10 @@ class ElementGroupComponentTest {
     val activity = ActivityTestRule<MainActivity>(MainActivity::class.java)
 
     @Test
-    fun whenAddElementGroupThenShowViews(){
+    fun whenAddElementGroupThenShowViews() {
         Espresso.onView(ViewMatchers.withText("Button1"))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withText("Button2"))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 }

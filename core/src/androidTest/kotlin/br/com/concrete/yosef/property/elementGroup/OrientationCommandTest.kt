@@ -7,8 +7,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import br.com.concrete.yosef.afterLayout
 import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand
-import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand.Companion.ORIENTATION
 import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand.Companion.HORIZONTAL
+import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand.Companion.ORIENTATION
 import br.com.concrete.yosef.entity.DynamicProperty
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -50,7 +50,6 @@ class OrientationCommandTest {
         linearLayout.afterLayout {
             assertTrue(linearLayout.orientation == LinearLayout.HORIZONTAL)
         }
-
     }
 
     @Test
@@ -61,10 +60,9 @@ class OrientationCommandTest {
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The value (${dynamicProperty.value}) " +
-                "cannot be applied to property $ORIENTATION.")
+            "cannot be applied to property $ORIENTATION.")
 
         orientationCommand.apply(linearLayout, dynamicProperty)
-
     }
 
     @Test
@@ -75,9 +73,8 @@ class OrientationCommandTest {
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The $ORIENTATION property cannot be applied " +
-                "to view ${imageView.javaClass.name}")
+            "to view ${imageView.javaClass.name}")
 
         orientationCommand.apply(imageView, dynamicProperty)
     }
-
 }

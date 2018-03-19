@@ -2,18 +2,19 @@ package br.com.concrete.yosef.api
 
 import android.view.ViewGroup
 import br.com.concrete.yosef.OnActionListener
-import br.com.concrete.yosef.api.component.Component
+import br.com.concrete.yosef.api.DynamicViewCreator.Builder
 import br.com.concrete.yosef.api.component.ButtonComponent
-import br.com.concrete.yosef.api.component.ElementGroupComponent
-import br.com.concrete.yosef.api.component.RadioButtonComponent
-import br.com.concrete.yosef.api.component.RadioGroupButtonComponent
-import br.com.concrete.yosef.api.component.TextFieldComponent
-import br.com.concrete.yosef.api.component.TextViewComponent
 import br.com.concrete.yosef.api.component.ButtonComponent.Companion.BUTTON_TYPE
+import br.com.concrete.yosef.api.component.Component
+import br.com.concrete.yosef.api.component.ElementGroupComponent
 import br.com.concrete.yosef.api.component.ElementGroupComponent.Companion.ELEMENT_GROUP
+import br.com.concrete.yosef.api.component.RadioButtonComponent
 import br.com.concrete.yosef.api.component.RadioButtonComponent.Companion.RADIO_BUTTON
+import br.com.concrete.yosef.api.component.RadioGroupButtonComponent
 import br.com.concrete.yosef.api.component.RadioGroupButtonComponent.Companion.RADIO_GROUP_BUTTON
+import br.com.concrete.yosef.api.component.TextFieldComponent
 import br.com.concrete.yosef.api.component.TextFieldComponent.Companion.TEXT_FIELD
+import br.com.concrete.yosef.api.component.TextViewComponent
 import br.com.concrete.yosef.api.component.TextViewComponent.Companion.TEXT_TYPE
 import br.com.concrete.yosef.entity.DynamicComponent
 import br.com.concrete.yosef.fromJson
@@ -23,7 +24,10 @@ import com.google.gson.Gson
  * Main class for the Yosef library. This class has a [Builder] with default
  * [components] to be created and may receive custom [Component] classes.
  */
-class DynamicViewCreator(private val components: Map<String, Component>, private val gson: Gson) {
+class DynamicViewCreator(
+    private val components: Map<String, Component>,
+    private val gson: Gson
+) {
 
     /**
      * This method creates a list of [DynamicComponent] by the passed json and calls
@@ -35,7 +39,11 @@ class DynamicViewCreator(private val components: Map<String, Component>, private
      * @param listener is the responsible for calling events that
      * are related with components actions
      */
-    fun createViewFromJson(parent: ViewGroup, json: String, listener: OnActionListener? = null) {
+    fun createViewFromJson(
+        parent: ViewGroup,
+        json: String,
+        listener: OnActionListener? = null
+    ) {
         val parentComponent = gson.fromJson<List<DynamicComponent>>(json)
         parentComponent.forEach { addChildrenRecursively(parent, it, listener) }
     }
@@ -49,15 +57,16 @@ class DynamicViewCreator(private val components: Map<String, Component>, private
      * @param listener is the responsible for calling events that
      * are related with components actions
      */
-    private fun addChildrenRecursively(topLevelViewGroup: ViewGroup,
-                                       childComponent: DynamicComponent?,
-                                       listener: OnActionListener? = null) {
-
+    private fun addChildrenRecursively(
+        topLevelViewGroup: ViewGroup,
+        childComponent: DynamicComponent?,
+        listener: OnActionListener? = null
+    ) {
         if (childComponent == null) return
 
         if (components[childComponent.type] == null) {
             throw IllegalStateException("There are no components registered " +
-                    "in this ViewCreator that can render ${childComponent.type}")
+                "in this ViewCreator that can render ${childComponent.type}")
         }
 
         val component = components[childComponent.type]!!
@@ -68,7 +77,6 @@ class DynamicViewCreator(private val components: Map<String, Component>, private
         childComponent.children?.forEach { addChildrenRecursively(view as ViewGroup, it) }
         topLevelViewGroup.addView(view)
     }
-
 
     /**
      * A builder class that sets the default structural components for the ViewCreator to use.
@@ -83,11 +91,11 @@ class DynamicViewCreator(private val components: Map<String, Component>, private
          */
         init {
             components = hashMapOf(TEXT_TYPE to TextViewComponent(),
-                    BUTTON_TYPE to ButtonComponent(),
-                    TEXT_FIELD to TextFieldComponent(),
-                    ELEMENT_GROUP to ElementGroupComponent(),
-                    RADIO_BUTTON to RadioButtonComponent(),
-                    RADIO_GROUP_BUTTON to RadioGroupButtonComponent()
+                BUTTON_TYPE to ButtonComponent(),
+                TEXT_FIELD to TextFieldComponent(),
+                ELEMENT_GROUP to ElementGroupComponent(),
+                RADIO_BUTTON to RadioButtonComponent(),
+                RADIO_GROUP_BUTTON to RadioGroupButtonComponent()
             )
         }
 

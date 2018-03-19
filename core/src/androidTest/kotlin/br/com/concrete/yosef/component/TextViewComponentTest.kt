@@ -22,7 +22,7 @@ class TextViewComponentTest {
     val activity = ActivityTestRule<MainActivity>(MainActivity::class.java)
 
     @Test
-    fun whenAddTextViewthenShowTextView(){
+    fun whenAddTextViewthenShowTextView() {
         onView(withText("Teste text")).check(matches(isDisplayed()))
     }
 }

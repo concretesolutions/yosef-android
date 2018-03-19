@@ -19,9 +19,8 @@ class RadioGroupComponentTest {
     val activity = ActivityTestRule<RadioGroupActivity>(RadioGroupActivity::class.java)
 
     @Test
-    fun whenAddRadioGroupThenClickButtonAndShowTextview(){
+    fun whenAddRadioGroupThenClickButtonAndShowTextView() {
         onView(Matchers.allOf(
-                ViewMatchers.isAssignableFrom(EditText::class.java)))
+            ViewMatchers.isAssignableFrom(EditText::class.java)))
     }
-
 }
