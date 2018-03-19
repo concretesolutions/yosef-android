@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="br.com.concrete.yosef.picasso">
+
+    <application>
+        <activity
+            android:name=".activities.ImageActivity"
+            android:theme="@style/Theme.AppCompat.Light">
+        </activity>
+    </application>
+
+</manifest>

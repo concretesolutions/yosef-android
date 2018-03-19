@@ -1,0 +1,10 @@
+detekt {
+    version = rootProject.ext.detektVersion
+    profile("main") {
+        input = "$projectDir"
+        config = "$projectDir/default-detekt-config.yml"
+        filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
+        output = "$projectDir/build/reports"
+        outputName = "yosef"
+    }
+}
