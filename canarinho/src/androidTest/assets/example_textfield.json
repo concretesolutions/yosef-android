@@ -1,0 +1,17 @@
+[
+  {
+    "type": "textField",
+    "properties": [
+      {
+        "name": "action",
+        "type": "string",
+        "value": "Sim"
+      },
+      {
+        "name": "mask",
+        "type": "string",
+        "value": "monetary"
+      }
+    ]
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "type": "text",
+    "properties": [
+      {
+        "name": "text",
+        "type": "string",
+        "value": "Hello, Android!"
+      },
+      {
+        "name": "textColor",
+        "type": "color",
+        "value": "#4A4A4A"
+      },
+      {
+        "name": "textSize",
+        "type": "dimen",
+        "value": "30"
+      }
+    ],
+    "children": null
+  }
+]
