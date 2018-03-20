@@ -1,7 +1,6 @@
 [
   {
     "type": "textField",
-    "sender": "user",
     "properties": [
       {
         "name": "action",

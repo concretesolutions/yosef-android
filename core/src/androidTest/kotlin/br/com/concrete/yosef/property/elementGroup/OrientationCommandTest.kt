@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import br.com.concrete.yosef.afterLayout
 import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand
 import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand.Companion.HORIZONTAL
+import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand.Companion.VERTICAL
 import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand.Companion.ORIENTATION
 import br.com.concrete.yosef.entity.DynamicProperty
 import org.junit.Assert.assertTrue
@@ -39,7 +40,7 @@ class OrientationCommandTest {
     }
 
     @Test
-    fun renderingLinearLayoutShouldApplyOrientation() {
+    fun renderingLinearLayoutShouldApplyHorizontalOrientation() {
         val dynamicProperty = DynamicProperty(ORIENTATION, "dimen", HORIZONTAL)
 
         val linearLayout = LinearLayout(parent.context)
@@ -49,6 +50,20 @@ class OrientationCommandTest {
 
         linearLayout.afterLayout {
             assertTrue(linearLayout.orientation == LinearLayout.HORIZONTAL)
+        }
+    }
+
+    @Test
+    fun renderingLinearLayoutShouldApplyVerticalOrientation() {
+        val dynamicProperty = DynamicProperty(ORIENTATION, "dimen", VERTICAL)
+
+        val linearLayout = LinearLayout(parent.context)
+        orientationCommand.apply(linearLayout, dynamicProperty)
+
+        parent.addView(linearLayout)
+
+        linearLayout.afterLayout {
+            assertTrue(linearLayout.orientation == LinearLayout.VERTICAL)
         }
     }
 

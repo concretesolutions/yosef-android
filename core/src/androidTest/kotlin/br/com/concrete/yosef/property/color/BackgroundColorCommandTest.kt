@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
+import android.support.v7.widget.CardView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -54,8 +55,9 @@ class BackgroundColorCommandTest {
         }
     }
 
+    @Test
     fun renderingViewWithWrongBackgroundValueShouldThrow() {
-        val dynamicProperty = DynamicProperty(BACKGROUND_COLOR, "color", "#0000FF")
+        val dynamicProperty = DynamicProperty(BACKGROUND_COLOR, "color", "wrong")
 
         val view = View(parent.context)
 
@@ -65,4 +67,20 @@ class BackgroundColorCommandTest {
 
         backgroundColorCommand.apply(view, dynamicProperty)
     }
+
+    @Test
+    fun renderingCardViewShouldApplyBackgroundColor() {
+        val dynamicProperty = DynamicProperty(BACKGROUND_COLOR, "color", "#0000FF")
+
+        val cardView = CardView(parent.context)
+        backgroundColorCommand.apply(cardView, dynamicProperty)
+
+        parent.addView(cardView)
+
+        cardView.afterLayout {
+            val viewBackgroundColor = cardView.background as ColorDrawable
+            assertTrue(viewBackgroundColor.color == Color.parseColor(dynamicProperty.value))
+        }
+    }
+
 }
