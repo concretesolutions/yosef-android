@@ -102,8 +102,8 @@ Android Team
 * Rodrigo Fogaça, rodrigo.fogaca@concrete.com.br
 * Yasmin Bernardo, yasmin.pereira@concrete.com.br
 
-[1]: [picasso]
-[2]: [glide]
-[3]: [canarinho]
-[4]: [lottie]
-[contributing]: [CONTRIBUTING.md]
+[1]: picasso
+[2]: glide
+[3]: canarinho
+[4]: lottie
+[contributing]: CONTRIBUTING.md
