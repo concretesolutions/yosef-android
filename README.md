@@ -103,6 +103,34 @@ val creator = DynamicViewCreator.Builder()
 creator.createViewFromJson(parent, json, this)
 ```
 
+And now you are able to render things like:
+
+```json
+[
+  {
+    "type": "image",
+    "properties": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": "http://example.com/example.jpg"
+      },
+      {
+        "name": "width",
+        "type": "dimen",
+        "value": "300"
+      },
+      {
+        "name": "height",
+        "type": "dimen",
+        "value": "300"
+      }
+    ],
+    "children": null
+  }
+]
+```
+
 Contributing your code
 -------------------------------
 
