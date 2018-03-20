@@ -1,0 +1,48 @@
+[
+  {
+    "type": "frame",
+    "properties": [],
+    "children": [
+      {
+        "type": "text",
+        "properties": [
+          {
+            "name": "text",
+            "type": "string",
+            "value": "BACKGROUND"
+          },
+          {
+            "name": "textColor",
+            "type": "color",
+            "value": "#FF141C51"
+          },
+          {
+            "name": "textSize",
+            "type": "dimen",
+            "value": "60"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "properties": [
+          {
+            "name": "text",
+            "type": "string",
+            "value": "FOREGROUND"
+          },
+          {
+            "name": "textColor",
+            "type": "color",
+            "value": "#FF9DAAF4"
+          },
+          {
+            "name": "textSize",
+            "type": "dimen",
+            "value": "26"
+          }
+        ]
+      }
+    ]
+  }
+]
