@@ -90,6 +90,19 @@ will produce
 ![](art/screenshot_example.png)
 
 
+**Using a custom component**
+
+If you need extra components in your project, you can register this new component and its type (name) when building the `DynamicViewCreator`:
+
+```kotlin
+
+val creator = DynamicViewCreator.Builder()
+    .addComponent("image", PicassoImageComponent())
+    .build()
+
+creator.createViewFromJson(parent, json, this)
+```
+
 Contributing your code
 -------------------------------
 
