@@ -73,21 +73,52 @@ and Kotlin code
 
 ```kotlin
 
+// the parent view group to which the views will be added
 val parent = findViewById<FrameLayout>(R.id.parent)
 
-val json = MainActivity::class.java
-    .getResource("/assets/example_simple.json")
-    .readText()
+// a json string following the specification
+val json = readJson("assets/example.json")
 
 val creator = DynamicViewCreator.Builder()
     .build()
 
-creator.createViewFromJson(parent, json, this)
+// an ActionListener callback
+val actionListener = null
+creator.createViewFromJson(parent, json, actionListener)
 ```
 
 will produce
 
 ![](art/screenshot_example.png)
+
+
+**Adding an action listener**
+
+The action listener works as a callback for actions that can be performed in certain components.
+Sort of like a click listener but it can be broader, depending on the component.
+
+To add actions to your components, you must add a new property named "action" and if the component
+has any actions registered, the `callAction` method is going to be called with the value associated 
+to that property:
+
+```json
+{
+    "type": "button",
+    "properties": [
+      {
+        "name": "action",
+        "type": "string",
+        "value": "tappedButtonNo"
+      },
+      {
+        "name": "text",
+        "type": "string",
+        "value": "Nope"
+      }
+    ],
+    "children": null
+}
+```
 
 
 **Using a custom component**
