@@ -99,6 +99,7 @@ Android Team
 -------------------------------
 
 * Matheus Cassiano, matheus.candido@concrete.com.br
+* Rodrigo Caetano, rodrigo.caetano@concrete.com.br
 * Rodrigo Fogaça, rodrigo.fogaca@concrete.com.br
 * Yasmin Bernardo, yasmin.pereira@concrete.com.br
 
