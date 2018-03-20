@@ -4,6 +4,8 @@ Yosef
 Yosef é uma lib que converte JSON em componentes de tela android de forma dinâmica. 
 Assim é possível a atualização de view no android sem que seja necessário subir uma nova versão de APK
 
+![](art/artboard.png)
+
 Formato do JSON
 -------------------------------
 O json que foi definido para que a lib consiga fazer a conversão a partir de uma estrutura padrão
@@ -202,3 +204,10 @@ Para os testes foram utilizados 2 frameworks
 
 * Espresso
 * Junit
+
+Equipe Android
+-------------------------------
+
+* Matheus Cassiano, matheus.candido@concrete.com.br
+* Rodrigo Fogaça, rodrigo.fogaca@concrete.com.br
+* Yasmin Bernardo, yasmin.pereira@concrete.com.br
