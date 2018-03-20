@@ -6,6 +6,7 @@ import android.widget.TextView
 import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.DynamicViewCreator
 import br.com.concrete.yosef.picasso.PicassoImageComponent
+import br.com.concrete.yosef.picasso.test.R
 
 class ImageActivity : AppCompatActivity(), OnActionListener {
 
