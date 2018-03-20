@@ -11,6 +11,7 @@ import android.support.test.runner.AndroidJUnit4
 import android.view.KeyEvent
 import android.widget.EditText
 import br.com.concrete.yosef.activities.MainActivity
+import br.com.concrete.yosef.test.R
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule
 import org.junit.Test
