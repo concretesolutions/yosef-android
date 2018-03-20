@@ -1,213 +1,109 @@
 Yosef
 ===================
 
-Yosef é uma lib que converte JSON em componentes de tela android de forma dinâmica. 
-Assim é possível a atualização de view no android sem que seja necessário subir uma nova versão de APK
+Yousef is a multi-platform library that generates views from JSON specification.
+It's useful for A/B testing and providing users with dynamic content without shipping updates to the Play Store.
+
 
 ![](art/artboard.png)
 
-Formato do JSON
+JSON Specification
 -------------------------------
-O json que foi definido para que a lib consiga fazer a conversão a partir de uma estrutura padrão
+
+The JSON specification is very simple. We only have two entity models that describe how to represent a view (component) 
+and how to style these components (properties). Our goal was to make the library as extensible as possible,
+so you can create new components or properties as you grow you project (don't forget to contribute some of them 😊).
 
 **DynamicComponent**
 
-O DynamicComponent é referente ao componente que a lib irá criar
+This entity represents what kind of component is going to be created by the `ViewCreator`:
 
-* `type`: Tipo do componente que a lib irá criar
-* `properties`: É composto de uma lista de componentes que devem ser aplicados no componente
-* `children`: Uma lista com os componentes que serão childs do tipo criado
+* `type`: Type (name) used to find the component inside the `ViewCreator`
+* `properties`: A list of `DynamicProperty` elements that should be applied to the component
+* `children`: A list of `DynamicComponent` elements that will be added to this component as children (only supported by `ElementGroup` and `RadioGroupButton` as of now).
 
 **DynamicProperty**
 
-O DynamicProperty é referente à propriedade que irá adicionada no componente
+This entity represents a command that will be used to style and configure a `DynamicComponent` and has the following attributes:
 
-* `name`: Nome da propriedade a ser adicionada no componente
-* `type`: Tipo da propriedade (color, dimen, string)
-* `value`: O valor da propriedade
+* `name`: Name that will be associated to the command to be applied to the component
+* `type`: Property type (e.g color, dimen, string, integer, float)
+* `value`: The value associated to this property
 
-**Exemplos de JSON**
+You can see some example custom components we've built by taking a look at this project's modules,
+specifically:
 
-* Componente de Text (TextView) com texto "Teste componente text", textColor #333839 e textSize de 25 e sem childs
-```
-{
-  "type": "text",
-  "properties": [
-    {
-      "name": "text",
-      "type": "string",
-      "value": "Teste componente text"
-    },
-    {
-      "name": "textColor",
-      "type": "color",
-      "value": "#333839"
-    },
-    {
-      "name": "textSize",
-      "type": "dimen",
-      "value": "25"
-    }
-  ],
-  "children": null
-}
-```
+- [Picasso][1]
+- [Glide][2]
+- [Canarinho][3]
+- [Lottie][4]
 
-* Componente elementGroup(LinearLayout) com orientation horizontal e botões como children do elementGroup assim alinhando um botão do lado do outro
-```
-{
-  "type": "elementGroup",
-  "properties": [
-    {
-      "name": "orientation",
-      "type": "string",
-      "value": "horizontal"
-    }
-  ],
-  "children": [
-    {
-      "type": "button",
-      "properties": [
-        {
-          "name": "text",
-          "type": "string",
-          "value": "Não"
-        }
-      ],
-      "children": null
-    },
-    {
-      "type": "button",
-      "properties": [
-        {
-          "name": "text",
-          "type": "string",
-          "value": "Sim"
-        }
-      ],
-      "children": null
-    }
-  ]
-}
-```
 
-***Exemplo do funcionamento***
+**Example usage**
 
-**JSON**
-```
+The JSON
+
+```json
 [
   {
-    "type": "elementGroup",
+    "type": "text",
     "properties": [
       {
-        "name": "orientation",
+        "name": "text",
         "type": "string",
-        "value": "vertical"
-      }
-    ],
-    "children": [
-      {
-        "type": "text",
-        "properties": [
-          {
-            "name": "text",
-            "type": "string",
-            "value": "Teste componente text"
-          },
-          {
-            "name": "textColor",
-            "type": "color",
-            "value": "#333839"
-          },
-          {
-            "name": "textSize",
-            "type": "dimen",
-            "value": "25"
-          }
-        ],
-        
+        "value": "Hello, Android!"
       },
       {
-        "type": "elementGroup",
-        "properties": [
-          {
-            "name": "orientation",
-            "type": "string",
-            "value": "horizontal"
-          }
-        ],
-        "children": [
-          {
-            "type": "button",
-            "properties": [
-              {
-                "name": "action",
-                "type": "string",
-                "value": "fechar"
-              },
-              {
-                "name": "text",
-                "type": "string",
-                "value": "Não"
-              },
-              {
-                "name": "backgroundColor",
-                "type": "color",
-                "value": "#a4a4a4"
-              },
-              {
-                "name": "textColor",
-                "type": "color",
-                "value": "#515151"
-              }
-            ],
-            "children": null
-          },
-          {
-            "type": "button",
-            "properties": [
-              {
-                "name": "action",
-                "type": "string",
-                "value": "Sim, com certeza"
-              },
-              {
-                "name": "text",
-                "type": "string",
-                "value": "Sim"
-              },
-              {
-                "name": "backgroundColor",
-                "type": "color",
-                "value": "#3F51B5"
-              },
-              {
-                "name": "textColor",
-                "type": "color",
-                "value": "#ffffff"
-              }
-            ],
-            "children": null
-          }
-        ]
+        "name": "textColor",
+        "type": "color",
+        "value": "#4A4A4A"
+      },
+      {
+        "name": "textSize",
+        "type": "dimen",
+        "value": "30"
       }
-    ]
+    ],
+    "children": null
   }
 ]
 ```
 
-Testes
+and Kotlin code
+
+```kotlin
+
+val parent = findViewById<FrameLayout>(R.id.parent)
+
+val json = MainActivity::class.java
+    .getResource("/assets/example_simple.json")
+    .readText()
+
+val creator = DynamicViewCreator.Builder()
+    .build()
+
+creator.createViewFromJson(parent, json, this)
+```
+
+will produce
+
+![](art/screenshot_example.png)
+
+
+Contributing your code
 -------------------------------
-Todos os componentes de tela foram desenvolvidos e testados
 
-Para os testes foram utilizados 2 frameworks
+See [CONTRIBUTING.md][contributing]
 
-* Espresso
-* Junit
-
-Equipe Android
+Android Team
 -------------------------------
 
 * Matheus Cassiano, matheus.candido@concrete.com.br
 * Rodrigo Fogaça, rodrigo.fogaca@concrete.com.br
 * Yasmin Bernardo, yasmin.pereira@concrete.com.br
+
+[1]: [picasso]
+[2]: [glide]
+[3]: [canarinho]
+[4]: [lottie]
+[contributing]: [CONTRIBUTING.md]
