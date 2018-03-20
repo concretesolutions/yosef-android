@@ -12,7 +12,7 @@ JSON Specification
 
 The JSON specification is very simple. We only have two entity models that describe how to represent a view (component) 
 and how to style these components (properties). Our goal was to make the library as extensible as possible,
-so you can create new components or properties as you grow you project (don't forget to contribute some of them 😊).
+so you can create new components or properties as you grow your project (don't forget to contribute some of them 😊).
 
 **DynamicComponent**
 
