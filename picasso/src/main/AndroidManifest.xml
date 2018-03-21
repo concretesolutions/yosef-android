@@ -4,7 +4,7 @@
     <application>
         <provider
                 android:name="br.com.concrete.yosef.picasso.DummyContentProvider"
-                android:authorities="br.com.concrete.yosef.yousefpicasso.provider"
+                android:authorities="${applicationId}.yousefpicasso"
                 android:exported="false"/>
     </application>
 
