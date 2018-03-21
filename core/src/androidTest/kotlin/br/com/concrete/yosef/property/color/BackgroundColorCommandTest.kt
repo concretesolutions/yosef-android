@@ -82,5 +82,4 @@ class BackgroundColorCommandTest {
             assertTrue(viewBackgroundColor.color == Color.parseColor(dynamicProperty.value))
         }
     }
-
 }

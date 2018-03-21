@@ -5,8 +5,6 @@ import android.support.test.runner.AndroidJUnit4
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import br.com.concrete.yosef.api.DynamicViewCreator
-import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand
-import br.com.concrete.yosef.entity.DynamicProperty
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -35,7 +33,7 @@ class DynamicViewCreatorTest {
     }
 
     @Test
-    fun creatingViewWithUnknownTypeShouldThrowException(){
+    fun creatingViewWithUnknownTypeShouldThrowException() {
         val json = context.assets.open("example_unknown_type.json")
                 .bufferedReader()
                 .use { it.readText() }
@@ -46,5 +44,4 @@ class DynamicViewCreatorTest {
 
         dynamicViewCreator.createViewFromJson(parent, json, null)
     }
-
 }
