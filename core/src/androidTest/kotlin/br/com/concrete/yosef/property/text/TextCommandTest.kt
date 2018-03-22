@@ -2,14 +2,12 @@ package br.com.concrete.yosef.property.text
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
-import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
-import br.com.concrete.yosef.afterLayout
 import br.com.concrete.yosef.api.property.text.TextCommand
 import br.com.concrete.yosef.api.property.text.TextCommand.Companion.TEXT
 import br.com.concrete.yosef.entity.DynamicProperty
+import br.com.concrete.yosef.layoutAndAssert
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -28,13 +26,8 @@ class TextCommandTest {
 
     private lateinit var textCommand: TextCommand
 
-    private lateinit var parent: ViewGroup
-
     @Before
     fun setUp() {
-        parent = LinearLayout(context).apply {
-            orientation = LinearLayout.VERTICAL
-        }
         textCommand = TextCommand()
     }
 
@@ -42,12 +35,10 @@ class TextCommandTest {
     fun renderingTextViewShouldApplyText() {
         val dynamicProperty = DynamicProperty(TEXT, "string", "Teste texto")
 
-        val textView = TextView(parent.context)
+        val textView = TextView(context)
         textCommand.apply(textView, dynamicProperty)
 
-        parent.addView(textView)
-
-        textView.afterLayout {
+        textView.layoutAndAssert {
             assertEquals(textView.text.toString(), dynamicProperty.value)
         }
     }
@@ -56,7 +47,7 @@ class TextCommandTest {
     fun renderingImageViewShouldThrow() {
         val dynamicProperty = DynamicProperty(TEXT, "string", "Teste texto")
 
-        val imageView = ImageView(parent.context)
+        val imageView = ImageView(context)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The value (${dynamicProperty.value}) for the $TEXT " +

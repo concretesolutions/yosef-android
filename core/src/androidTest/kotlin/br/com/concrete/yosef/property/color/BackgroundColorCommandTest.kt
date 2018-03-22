@@ -6,12 +6,10 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import android.support.v7.widget.CardView
 import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import br.com.concrete.yosef.afterLayout
 import br.com.concrete.yosef.api.property.color.BackgroundColorCommand
 import br.com.concrete.yosef.api.property.color.BackgroundColorCommand.Companion.BACKGROUND_COLOR
 import br.com.concrete.yosef.entity.DynamicProperty
+import br.com.concrete.yosef.layoutAndAssert
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
@@ -30,13 +28,8 @@ class BackgroundColorCommandTest {
 
     private lateinit var backgroundColorCommand: BackgroundColorCommand
 
-    private lateinit var parent: ViewGroup
-
     @Before
     fun setUp() {
-        parent = LinearLayout(context).apply {
-            orientation = LinearLayout.VERTICAL
-        }
         backgroundColorCommand = BackgroundColorCommand()
     }
 
@@ -44,12 +37,10 @@ class BackgroundColorCommandTest {
     fun renderingViewShouldApplyBackgroundColor() {
         val dynamicProperty = DynamicProperty(BACKGROUND_COLOR, "color", "#0000FF")
 
-        val view = View(parent.context)
+        val view = View(context)
         backgroundColorCommand.apply(view, dynamicProperty)
 
-        parent.addView(view)
-
-        view.afterLayout {
+        view.layoutAndAssert {
             val viewBackgroundColor = view.background as ColorDrawable
             assertTrue(viewBackgroundColor.color == Color.parseColor(dynamicProperty.value))
         }
@@ -59,7 +50,7 @@ class BackgroundColorCommandTest {
     fun renderingViewWithWrongBackgroundValueShouldThrow() {
         val dynamicProperty = DynamicProperty(BACKGROUND_COLOR, "color", "wrong")
 
-        val view = View(parent.context)
+        val view = View(context)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The value (${dynamicProperty.value}) " +
@@ -72,14 +63,12 @@ class BackgroundColorCommandTest {
     fun renderingCardViewShouldApplyBackgroundColor() {
         val dynamicProperty = DynamicProperty(BACKGROUND_COLOR, "color", "#0000FF")
 
-        val cardView = CardView(parent.context)
+        val cardView = CardView(context)
         backgroundColorCommand.apply(cardView, dynamicProperty)
 
-        parent.addView(cardView)
-
-        cardView.afterLayout {
-            val viewBackgroundColor = cardView.background as ColorDrawable
-            assertTrue(viewBackgroundColor.color == Color.parseColor(dynamicProperty.value))
+        cardView.layoutAndAssert {
+            val viewBackgroundColor = cardView.cardBackgroundColor.defaultColor
+            assertTrue(viewBackgroundColor == Color.parseColor(dynamicProperty.value))
         }
     }
 }

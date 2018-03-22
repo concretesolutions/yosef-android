@@ -2,14 +2,13 @@ package br.com.concrete.yosef.property.text
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
-import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
-import br.com.concrete.yosef.afterLayout
 import br.com.concrete.yosef.api.property.text.TextSizeCommand
 import br.com.concrete.yosef.api.property.text.TextSizeCommand.Companion.TEXT_SIZE
+import br.com.concrete.yosef.dp
 import br.com.concrete.yosef.entity.DynamicProperty
+import br.com.concrete.yosef.layoutAndAssert
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -28,13 +27,9 @@ class TextSizeCommandTest {
 
     private lateinit var textSizeCommand: TextSizeCommand
 
-    private lateinit var parent: ViewGroup
 
     @Before
     fun setUp() {
-        parent = LinearLayout(context).apply {
-            orientation = LinearLayout.VERTICAL
-        }
         textSizeCommand = TextSizeCommand()
     }
 
@@ -42,13 +37,11 @@ class TextSizeCommandTest {
     fun renderingTextViewShouldApplyTextSize() {
         val dynamicProperty = DynamicProperty(TEXT_SIZE, "dimen", "25")
 
-        val textView = TextView(parent.context)
+        val textView = TextView(context)
         textSizeCommand.apply(textView, dynamicProperty)
 
-        parent.addView(textView)
-
-        textView.afterLayout {
-            assertEquals(25f, textView.textSize)
+        textView.layoutAndAssert {
+            assertEquals(25f.dp(context), textView.textSize)
         }
     }
 
@@ -56,7 +49,7 @@ class TextSizeCommandTest {
     fun renderingImageViewShouldThrow() {
         val dynamicProperty = DynamicProperty(TEXT_SIZE, "dimen", "25")
 
-        val imageView = ImageView(parent.context)
+        val imageView = ImageView(context)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The property does not support setting text size" +

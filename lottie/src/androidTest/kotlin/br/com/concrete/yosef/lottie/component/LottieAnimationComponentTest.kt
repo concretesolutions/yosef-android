@@ -1,12 +1,13 @@
 package br.com.concrete.yosef.lottie
 
+import android.animation.Animator
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import br.com.concrete.yosef.afterLayout
 import br.com.concrete.yosef.api.DynamicViewCreator
+import br.com.concrete.yosef.layoutAndAssert
 import com.airbnb.lottie.LottieAnimationView
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.CoreMatchers.containsString
@@ -18,6 +19,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException
 import org.junit.runner.RunWith
+import java.util.concurrent.CountDownLatch
 
 @RunWith(AndroidJUnit4::class)
 class LottieAnimationComponentTest {
@@ -54,7 +56,7 @@ class LottieAnimationComponentTest {
 
         val animationView = parent.findViewById<LottieAnimationView>("animationView".hashCode())
 
-        animationView.afterLayout {
+        animationView.layoutAndAssert {
             assertEquals("animationView".hashCode(), animationView.id)
         }
     }
@@ -69,8 +71,26 @@ class LottieAnimationComponentTest {
         creator.createViewFromJson(parent, json, null)
 
         val animationView = parent.findViewById<LottieAnimationView>("animationView".hashCode())
+        val latch = CountDownLatch(1)
+        animationView.addAnimatorListener(object: Animator.AnimatorListener {
+            override fun onAnimationRepeat(p0: Animator?) {
 
-        animationView.afterLayout {
+            }
+
+            override fun onAnimationEnd(p0: Animator?) {
+            }
+
+            override fun onAnimationCancel(p0: Animator?) {
+            }
+
+            override fun onAnimationStart(p0: Animator?) {
+                latch.countDown()
+            }
+        })
+
+        latch.await()
+
+        animationView.layoutAndAssert {
             assertEquals(View.VISIBLE, animationView.visibility)
             assertTrue("animation view is not animating", animationView.isAnimating)
         }
@@ -87,7 +107,7 @@ class LottieAnimationComponentTest {
 
         val animationView = parent.findViewById<LottieAnimationView>("animationView".hashCode())
 
-        animationView.afterLayout {
+        animationView.layoutAndAssert {
             assertEquals(2, animationView.repeatCount)
         }
     }
@@ -103,7 +123,7 @@ class LottieAnimationComponentTest {
 
         val animationView = parent.findViewById<LottieAnimationView>("animationView".hashCode())
 
-        animationView.afterLayout {
+        animationView.layoutAndAssert {
             assertEquals(300, animationView.width)
             assertEquals(300, animationView.height)
         }

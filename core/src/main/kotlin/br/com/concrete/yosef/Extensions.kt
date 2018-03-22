@@ -1,9 +1,11 @@
 package br.com.concrete.yosef
 
+import android.content.Context
 import android.os.Build
+import android.support.annotation.VisibleForTesting
+import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
-import android.view.ViewTreeObserver
-
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -18,12 +20,32 @@ inline fun supportsLollipop(code: () -> Unit): Boolean {
     return false
 }
 
-fun View.afterLayout(callback: (it: ViewTreeObserver.OnGlobalLayoutListener) -> Unit) {
-    viewTreeObserver.addOnGlobalLayoutListener(
-        object : ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                callback.invoke(this)
-                viewTreeObserver.removeOnGlobalLayoutListener(this)
-            }
-        })
+fun Float.dp(context: Context): Float {
+    val resources = context.resources
+    val metrics = resources.displayMetrics
+    return this * (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
+}
+
+@VisibleForTesting
+fun View.layoutAndAssert(action: (view: View) -> Unit) {
+    addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
+        override fun onLayoutChange(
+            view: View,
+            left: Int,
+            top: Int,
+            right: Int,
+            bottom: Int,
+            oldLeft: Int,
+            oldTop: Int,
+            oldRight: Int,
+            oldBottom: Int
+        ) {
+            view.removeOnLayoutChangeListener(this)
+            action(view)
+        }
+    })
+
+    Log.d("sdlkf width", layoutParams.width.toString())
+    Log.d("sdlkf height", layoutParams.height.toString())
+    layout(0, 0, layoutParams.width, layoutParams.height)
 }

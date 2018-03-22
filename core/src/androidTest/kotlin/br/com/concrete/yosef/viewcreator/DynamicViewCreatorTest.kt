@@ -35,12 +35,12 @@ class DynamicViewCreatorTest {
     @Test
     fun creatingViewWithUnknownTypeShouldThrowException() {
         val json = context.assets.open("example_unknown_type.json")
-                .bufferedReader()
-                .use { it.readText() }
+            .bufferedReader()
+            .use { it.readText() }
 
         exceptionRule.expect(IllegalStateException::class.java)
         exceptionRule.expectMessage("There are no components registered " +
-                "in this ViewCreator that can render unknown")
+            "in this ViewCreator that can render unknown")
 
         dynamicViewCreator.createViewFromJson(parent, json, null)
     }

@@ -3,14 +3,12 @@ package br.com.concrete.yosef.property.text
 import android.graphics.Color
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
-import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
-import br.com.concrete.yosef.afterLayout
 import br.com.concrete.yosef.api.property.text.TextColorCommand
 import br.com.concrete.yosef.api.property.text.TextColorCommand.Companion.TEXT_COLOR
 import br.com.concrete.yosef.entity.DynamicProperty
+import br.com.concrete.yosef.layoutAndAssert
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
@@ -29,13 +27,8 @@ class TextColorCommandTest {
 
     private lateinit var textColorCommand: TextColorCommand
 
-    private lateinit var parent: ViewGroup
-
     @Before
     fun setUp() {
-        parent = LinearLayout(context).apply {
-            orientation = LinearLayout.VERTICAL
-        }
         textColorCommand = TextColorCommand()
     }
 
@@ -43,12 +36,10 @@ class TextColorCommandTest {
     fun renderingTextViewShouldApplyTextColor() {
         val dynamicProperty = DynamicProperty(TEXT_COLOR, "color", "#0000FF")
 
-        val textView = TextView(parent.context)
+        val textView = TextView(context)
         textColorCommand.apply(textView, dynamicProperty)
 
-        parent.addView(textView)
-
-        textView.afterLayout {
+        textView.layoutAndAssert {
             assertTrue(textView.currentTextColor == Color.parseColor(dynamicProperty.value))
         }
     }
@@ -57,7 +48,7 @@ class TextColorCommandTest {
     fun renderingTextViewWithWrongTextColorValueShouldThrow() {
         val dynamicProperty = DynamicProperty(TEXT_COLOR, "color", "wrong")
 
-        val textView = TextView(parent.context)
+        val textView = TextView(context)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The value (${dynamicProperty.value}) " +
@@ -70,7 +61,7 @@ class TextColorCommandTest {
     fun renderingImageViewShouldThrow() {
         val dynamicProperty = DynamicProperty(TEXT_COLOR, "color", "#0000FF")
 
-        val imageView = ImageView(parent.context)
+        val imageView = ImageView(context)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The value (${dynamicProperty.value}) " +

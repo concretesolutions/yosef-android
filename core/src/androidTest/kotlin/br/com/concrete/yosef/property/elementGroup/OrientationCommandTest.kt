@@ -2,15 +2,14 @@ package br.com.concrete.yosef.property.elementGroup
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import br.com.concrete.yosef.afterLayout
 import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand
 import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand.Companion.HORIZONTAL
-import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand.Companion.VERTICAL
 import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand.Companion.ORIENTATION
+import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand.Companion.VERTICAL
 import br.com.concrete.yosef.entity.DynamicProperty
+import br.com.concrete.yosef.layoutAndAssert
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
@@ -29,13 +28,8 @@ class OrientationCommandTest {
 
     private lateinit var orientationCommand: OrientationCommand
 
-    private lateinit var parent: ViewGroup
-
     @Before
     fun setUp() {
-        parent = LinearLayout(context).apply {
-            orientation = LinearLayout.VERTICAL
-        }
         orientationCommand = OrientationCommand()
     }
 
@@ -43,12 +37,10 @@ class OrientationCommandTest {
     fun renderingLinearLayoutShouldApplyHorizontalOrientation() {
         val dynamicProperty = DynamicProperty(ORIENTATION, "dimen", HORIZONTAL)
 
-        val linearLayout = LinearLayout(parent.context)
+        val linearLayout = LinearLayout(context)
         orientationCommand.apply(linearLayout, dynamicProperty)
 
-        parent.addView(linearLayout)
-
-        linearLayout.afterLayout {
+        linearLayout.layoutAndAssert {
             assertTrue(linearLayout.orientation == LinearLayout.HORIZONTAL)
         }
     }
@@ -57,12 +49,10 @@ class OrientationCommandTest {
     fun renderingLinearLayoutShouldApplyVerticalOrientation() {
         val dynamicProperty = DynamicProperty(ORIENTATION, "dimen", VERTICAL)
 
-        val linearLayout = LinearLayout(parent.context)
+        val linearLayout = LinearLayout(context)
         orientationCommand.apply(linearLayout, dynamicProperty)
 
-        parent.addView(linearLayout)
-
-        linearLayout.afterLayout {
+        linearLayout.layoutAndAssert {
             assertTrue(linearLayout.orientation == LinearLayout.VERTICAL)
         }
     }
@@ -71,7 +61,7 @@ class OrientationCommandTest {
     fun renderingLinearLayoutWithWrongOrientationValueShouldThrow() {
         val dynamicProperty = DynamicProperty(ORIENTATION, "dimen", "wrong")
 
-        val linearLayout = LinearLayout(parent.context)
+        val linearLayout = LinearLayout(context)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The value (${dynamicProperty.value}) " +
@@ -84,7 +74,7 @@ class OrientationCommandTest {
     fun renderingImageViewShouldThrow() {
         val dynamicProperty = DynamicProperty(ORIENTATION, "dimen", HORIZONTAL)
 
-        val imageView = ImageView(parent.context)
+        val imageView = ImageView(context)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The $ORIENTATION property cannot be applied " +
