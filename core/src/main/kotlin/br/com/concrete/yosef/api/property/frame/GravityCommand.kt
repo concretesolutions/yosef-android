@@ -1,4 +1,4 @@
-package br.com.concrete.yosef.api.property.elementgroup
+package br.com.concrete.yosef.api.property.frame
 
 import android.annotation.SuppressLint
 import android.view.Gravity
@@ -42,7 +42,7 @@ internal class GravityCommand : DynamicPropertyCommand {
                         dynamicProperty.value == BOTTOM ||
                         dynamicProperty.value == CENTER))
             throw IllegalArgumentException("The value (${dynamicProperty.value}) " +
-                    "cannot be applied to property $GRAVITY.")
+                    "cannot be applied to property ${GRAVITY}.")
 
         if (view is LinearLayout) {
             val layoutParams = FrameLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
@@ -56,7 +56,7 @@ internal class GravityCommand : DynamicPropertyCommand {
             return
         }
 
-        throw IllegalArgumentException("The $GRAVITY property cannot be " +
+        throw IllegalArgumentException("The ${GRAVITY} property cannot be " +
                 "applied to view ${view.javaClass.name}")
     }
 }

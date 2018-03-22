@@ -8,8 +8,8 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
 import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.property.DynamicPropertyCommand
-import br.com.concrete.yosef.api.property.elementgroup.GravityCommand
-import br.com.concrete.yosef.api.property.elementgroup.GravityCommand.Companion.GRAVITY
+import br.com.concrete.yosef.api.property.frame.GravityCommand
+import br.com.concrete.yosef.api.property.frame.GravityCommand.Companion.GRAVITY
 import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand
 import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand.Companion.ORIENTATION
 import br.com.concrete.yosef.api.property.id.IdCommand

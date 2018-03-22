@@ -1,18 +1,16 @@
-package br.com.concrete.yosef.property.elementGroup
+package br.com.concrete.yosef.property.frame
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import android.view.Gravity
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
-import br.com.concrete.yosef.api.property.elementgroup.GravityCommand
-import br.com.concrete.yosef.api.property.elementgroup.GravityCommand.Companion.BOTTOM
-import br.com.concrete.yosef.api.property.elementgroup.GravityCommand.Companion.CENTER
-import br.com.concrete.yosef.api.property.elementgroup.GravityCommand.Companion.GRAVITY
-import br.com.concrete.yosef.api.property.elementgroup.GravityCommand.Companion.TOP
-import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand
+import br.com.concrete.yosef.api.property.frame.GravityCommand
+import br.com.concrete.yosef.api.property.frame.GravityCommand.Companion.BOTTOM
+import br.com.concrete.yosef.api.property.frame.GravityCommand.Companion.CENTER
+import br.com.concrete.yosef.api.property.frame.GravityCommand.Companion.GRAVITY
+import br.com.concrete.yosef.api.property.frame.GravityCommand.Companion.TOP
 import br.com.concrete.yosef.entity.DynamicProperty
 import org.junit.After
 import org.junit.Assert.assertTrue
