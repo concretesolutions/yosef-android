@@ -14,7 +14,7 @@ import br.com.concrete.yosef.entity.DynamicProperty
  *
  * @see [FrameLayout.LayoutParams.gravity]
  */
-class GravityCommand : DynamicPropertyCommand {
+internal class GravityCommand : DynamicPropertyCommand {
 
     companion object {
         /**
