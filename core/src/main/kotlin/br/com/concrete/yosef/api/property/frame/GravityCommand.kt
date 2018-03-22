@@ -3,7 +3,10 @@ package br.com.concrete.yosef.api.property.frame
 import android.annotation.SuppressLint
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
+import android.widget.FrameLayout.LayoutParams
 import android.widget.LinearLayout
 import br.com.concrete.yosef.api.property.DynamicPropertyCommand
 import br.com.concrete.yosef.entity.DynamicProperty
@@ -42,10 +45,10 @@ internal class GravityCommand : DynamicPropertyCommand {
                         dynamicProperty.value == BOTTOM ||
                         dynamicProperty.value == CENTER))
             throw IllegalArgumentException("The value (${dynamicProperty.value}) " +
-                    "cannot be applied to property ${GRAVITY}.")
+                    "cannot be applied to property $GRAVITY.")
 
         if (view is LinearLayout) {
-            val layoutParams = FrameLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+            val layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
             when (dynamicProperty.value) {
                 TOP -> layoutParams.gravity = Gravity.TOP
                 BOTTOM -> layoutParams.gravity = Gravity.BOTTOM
