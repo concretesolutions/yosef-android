@@ -1,12 +1,14 @@
 package br.com.concrete.yosef.api.component
 
+import android.content.Context
 import android.text.InputType
 import android.view.KeyEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
-import android.widget.LinearLayout
 import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.property.DynamicPropertyCommand
 import br.com.concrete.yosef.api.property.id.IdCommand
@@ -15,6 +17,8 @@ import br.com.concrete.yosef.api.property.size.HeightCommand
 import br.com.concrete.yosef.api.property.size.HeightCommand.Companion.HEIGHT_TYPE
 import br.com.concrete.yosef.api.property.size.WidthCommand
 import br.com.concrete.yosef.api.property.size.WidthCommand.Companion.WIDTH_TYPE
+import br.com.concrete.yosef.api.property.spacing.PaddingPropertyCommand
+import br.com.concrete.yosef.api.property.spacing.PaddingPropertyCommand.Companion.PADDING
 import br.com.concrete.yosef.entity.DynamicProperty
 
 /**
@@ -33,6 +37,7 @@ class TextFieldComponent : Component {
     private val commands: Map<String, DynamicPropertyCommand> = mapOf(
         WIDTH_TYPE to WidthCommand(),
         HEIGHT_TYPE to HeightCommand(),
+        PADDING to PaddingPropertyCommand(),
         ID to IdCommand()
     )
 
@@ -53,12 +58,11 @@ class TextFieldComponent : Component {
         }
     }
 
-    override fun createView(parent: ViewGroup): View {
-        return EditText(parent.context).apply {
+    override fun createView(context: Context): View {
+        return EditText(context).apply {
             inputType = InputType.TYPE_CLASS_TEXT
             EditorInfo.IME_ACTION_DONE
-            layoutParams = LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
         }
     }
 

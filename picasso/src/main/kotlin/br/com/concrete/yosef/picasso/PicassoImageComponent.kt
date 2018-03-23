@@ -1,10 +1,10 @@
 package br.com.concrete.yosef.picasso
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.ImageView
-import android.widget.LinearLayout
 import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.component.Component
 import br.com.concrete.yosef.api.property.DynamicPropertyCommand
@@ -16,6 +16,7 @@ import br.com.concrete.yosef.api.property.size.WidthCommand
 import br.com.concrete.yosef.api.property.size.WidthCommand.Companion.WIDTH_TYPE
 import br.com.concrete.yosef.entity.DynamicProperty
 import br.com.concrete.yosef.picasso.ImageUrlCommand.Companion.IMAGE_URL
+import br.com.concrete.yosef.picasso.ScaleTypePropertyCommand.Companion.SCALE_TYPE
 import com.squareup.picasso.Picasso
 
 class PicassoImageComponent(
@@ -29,6 +30,7 @@ class PicassoImageComponent(
     private val commands: Map<String, DynamicPropertyCommand> = mapOf(
         WIDTH_TYPE to WidthCommand(),
         HEIGHT_TYPE to HeightCommand(),
+        SCALE_TYPE to ScaleTypePropertyCommand(),
         IMAGE_URL to ImageUrlCommand(picasso),
         ID to IdCommand()
     )
@@ -43,10 +45,9 @@ class PicassoImageComponent(
         }
     }
 
-    override fun createView(parent: ViewGroup): View {
-        return ImageView(parent.context).apply {
-            layoutParams = LinearLayout.LayoutParams(
-                WRAP_CONTENT, WRAP_CONTENT)
+    override fun createView(context: Context): View {
+        return ImageView(context).apply {
+            layoutParams = ViewGroup.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
         }
     }
 }

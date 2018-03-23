@@ -1,8 +1,9 @@
 package br.com.concrete.yosef.api.component
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.RadioButton
 import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.property.DynamicPropertyCommand
@@ -12,6 +13,8 @@ import br.com.concrete.yosef.api.property.color.TintColorCommand
 import br.com.concrete.yosef.api.property.color.TintColorCommand.Companion.TINT_COLOR
 import br.com.concrete.yosef.api.property.id.IdCommand
 import br.com.concrete.yosef.api.property.id.IdCommand.Companion.ID
+import br.com.concrete.yosef.api.property.spacing.PaddingPropertyCommand
+import br.com.concrete.yosef.api.property.spacing.PaddingPropertyCommand.Companion.PADDING
 import br.com.concrete.yosef.api.property.text.TextColorCommand
 import br.com.concrete.yosef.api.property.text.TextColorCommand.Companion.TEXT_COLOR
 import br.com.concrete.yosef.api.property.text.TextCommand
@@ -39,6 +42,7 @@ class RadioButtonComponent : Component {
         BACKGROUND_COLOR to BackgroundColorCommand(),
         TEXT_SIZE to TextSizeCommand(),
         TINT_COLOR to TintColorCommand(),
+        PADDING to PaddingPropertyCommand(),
         ID to IdCommand()
     )
 
@@ -52,10 +56,9 @@ class RadioButtonComponent : Component {
         }
     }
 
-    override fun createView(parent: ViewGroup): View {
-        return RadioButton(parent.context).apply {
-            layoutParams = LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    override fun createView(context: Context): View {
+        return RadioButton(context).apply {
+            layoutParams = ViewGroup.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
         }
     }
 }
