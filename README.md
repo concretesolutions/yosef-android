@@ -44,7 +44,7 @@ specifically:
 The JSON
 
 ```json
-[
+
   {
     "type": "text",
     "properties": [
@@ -66,15 +66,11 @@ The JSON
     ],
     "children": null
   }
-]
 ```
 
 and Kotlin code
 
 ```kotlin
-
-// the parent view group to which the views will be added
-val parent = findViewById<FrameLayout>(R.id.parent)
 
 // a json string following the specification
 val json = readJson("assets/example.json")
@@ -83,8 +79,10 @@ val creator = DynamicViewCreator.Builder()
     .build()
 
 // an ActionListener callback
-val actionListener = null
-creator.createViewFromJson(parent, json, actionListener)
+val actionListener : OnActionListener? = null
+val view = creator.createViewFromJson(context, json, actionListener)
+
+// setContentView or add to a parent
 ```
 
 will produce
@@ -131,13 +129,13 @@ val creator = DynamicViewCreator.Builder()
     .addComponent("image", PicassoImageComponent())
     .build()
 
-creator.createViewFromJson(parent, json, this)
+val view = creator.createViewFromJson(context, json, actionListener)
 ```
 
 And now you are able to render things like:
 
 ```json
-[
+
   {
     "type": "image",
     "properties": [
@@ -159,7 +157,7 @@ And now you are able to render things like:
     ],
     "children": null
   }
-]
+
 ```
 
 Contributing your code
@@ -167,13 +165,6 @@ Contributing your code
 
 See [CONTRIBUTING.md][contributing]
 
-Android Team
--------------------------------
-
-* Matheus Cassiano, matheus.candido@concrete.com.br
-* Rodrigo Caetano, rodrigo.caetano@concrete.com.br
-* Rodrigo Fogaça, rodrigo.fogaca@concrete.com.br
-* Yasmin Bernardo, yasmin.pereira@concrete.com.br
 
 [1]: picasso
 [2]: glide
