@@ -8,10 +8,12 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
 import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.property.DynamicPropertyCommand
-import br.com.concrete.yosef.api.property.elementgroup.GravityCommand
+import br.com.concrete.yosef.api.property.elementgroup.*
 import br.com.concrete.yosef.api.property.elementgroup.GravityCommand.Companion.GRAVITY
-import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand
+import br.com.concrete.yosef.api.property.elementgroup.HorizontalMarginCommand.Companion.HORIZONTAL_MARGIN
 import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand.Companion.ORIENTATION
+import br.com.concrete.yosef.api.property.elementgroup.SpacingCommand.Companion.SPACING
+import br.com.concrete.yosef.api.property.elementgroup.VerticalMarginCommand.Companion.VERTICAL_MARGIN
 import br.com.concrete.yosef.api.property.id.IdCommand
 import br.com.concrete.yosef.api.property.id.IdCommand.Companion.ID
 import br.com.concrete.yosef.api.property.spacing.PaddingPropertyCommand
@@ -34,6 +36,9 @@ class ElementGroupComponent : Component {
     private val components: Map<String, DynamicPropertyCommand> = mapOf(
         ORIENTATION to OrientationCommand(),
         GRAVITY to GravityCommand(),
+        SPACING to SpacingCommand(),
+        VERTICAL_MARGIN to VerticalMarginCommand(),
+        HORIZONTAL_MARGIN to HorizontalMarginCommand(),
         PADDING to PaddingPropertyCommand(),
         ID to IdCommand()
     )
