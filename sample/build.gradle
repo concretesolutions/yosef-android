@@ -39,7 +39,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':core')
     implementation project(':picasso')
-    implementation project(':lottie')
+//    implementation project(':lottie')
     implementation project(':glide')
 
     //kotlin

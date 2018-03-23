@@ -1,0 +1,82 @@
+{
+  "type": "elementGroup",
+  "properties": [
+    {
+      "name": "orientation",
+      "type": "string",
+      "value": "vertical"
+    }
+  ],
+  "children": [
+    {
+      "type": "image",
+      "properties": [
+        {
+          "name": "width",
+          "value": "match",
+          "type": "string"
+        },
+        {
+          "name": "height",
+          "value": "wrap",
+          "type": "string"
+        },
+        {
+          "name": "url",
+          "value": "https://images.unsplash.com/photo-1520631023082-a5fe1cf21c5f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&h=600&fit=crop&s=236f4251027b501a107ef34c4ada545b",
+          "type": "string"
+        },
+        {
+          "name": "scaleType",
+          "value": "scaleAspectFit",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "properties": [
+        {
+          "name": "text",
+          "type": "string",
+          "value": "Super cool text that does not make any sense bla bla bla"
+        },
+        {
+          "name": "textSize",
+          "type": "dimen",
+          "value": "24"
+        },
+        {
+          "name": "textColor",
+          "type": "color",
+          "value": "#000000"
+        },
+        {
+          "name": "padding",
+          "type": "string",
+          "value": "5,10,5,0"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "properties": [
+        {
+          "name": "text",
+          "type": "string",
+          "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mattis sollicitudin tellus sed porttitor. Mauris ut ultrices lectus. Nullam lacinia ultricies tellus a placerat. Nam placerat elit in purus bibendum, sed malesuada leo vehicula. Morbi scelerisque blandit nisi vitae lacinia. Praesent at sem quis turpis lacinia vulputate sed luctus nulla. Nulla vel convallis dolor, a pretium lacus. Etiam blandit, velit ut ultrices interdum, augue mauris sodales libero, a maximus erat mauris cursus nulla. Aliquam non sodales leo, non mattis lorem. Duis risus nibh, vehicula eget dui eu, viverra condimentum nunc. Suspendisse sit amet tortor erat. Praesent ut nisi sit amet est molestie fermentum ac ac nulla. Ut ut consectetur libero. Nulla facilisi."
+        },
+        {
+          "name": "textSize",
+          "type": "dimen",
+          "value": "16"
+        },
+        {
+          "name": "padding",
+          "type": "string",
+          "value": "5,10,5,10"
+        }
+      ]
+    }
+  ]
+}

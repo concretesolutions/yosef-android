@@ -2,26 +2,33 @@ package br.com.concrete.yosefapp
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.FrameLayout
+import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.widget.ScrollView
 import android.widget.Toast
 import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.DynamicViewCreator
+import br.com.concrete.yosef.glide.GlideImageComponent
 
 class MainActivity : AppCompatActivity(), OnActionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val parent = findViewById<FrameLayout>(R.id.parent)
 
         val json = MainActivity::class.java
-            .getResource("/assets/example_simple.json")
+            .getResource("/assets/example_screen.json")
             .readText()
 
-        val creator = DynamicViewCreator.Builder()
+        val creator = DynamicViewCreator
+            .Builder()
+            .addComponentFor("image", GlideImageComponent())
             .build()
 
-        creator.createViewFromJson(parent, json, this)
+        val view = creator.createViewFromJson(this, json, this)
+        setContentView(ScrollView(this).apply {
+            layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+            addView(view)
+        })
     }
 
     override fun callAction(value: String) {

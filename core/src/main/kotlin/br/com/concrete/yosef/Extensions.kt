@@ -26,6 +26,10 @@ fun Float.dp(context: Context): Float {
     return this * (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
 }
 
+fun Int.dp(context: Context): Int {
+    return this.toFloat().dp(context).toInt()
+}
+
 @VisibleForTesting
 fun View.layoutAndAssert(action: (view: View) -> Unit) {
     addOnLayoutChangeListener(object : View.OnLayoutChangeListener {

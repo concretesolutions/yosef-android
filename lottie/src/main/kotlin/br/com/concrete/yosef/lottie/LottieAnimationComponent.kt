@@ -1,8 +1,10 @@
 package br.com.concrete.yosef.lottie
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.component.Component
 import br.com.concrete.yosef.api.property.DynamicPropertyCommand
@@ -53,10 +55,9 @@ class LottieAnimationComponent : Component {
         }
     }
 
-    override fun createView(parent: ViewGroup): LottieAnimationView {
-        return LottieAnimationView(parent.context).apply {
-            layoutParams = LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    override fun createView(context: Context): LottieAnimationView {
+        return LottieAnimationView(context).apply {
+            layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
             repeatCount = LottieDrawable.INFINITE
         }
     }

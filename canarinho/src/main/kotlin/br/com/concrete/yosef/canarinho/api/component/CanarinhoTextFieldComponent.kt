@@ -1,7 +1,7 @@
 package br.com.concrete.yosef.canarinho.api.component
 
+import android.content.Context
 import android.view.View
-import android.view.ViewGroup
 import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.component.Component
 import br.com.concrete.yosef.api.component.TextFieldComponent
@@ -34,7 +34,7 @@ class CanarinhoTextFieldComponent : Component {
         }
     }
 
-    override fun createView(parent: ViewGroup): View {
-        return textFieldComponent.createView(parent)
+    override fun createView(context: Context): View {
+        return textFieldComponent.createView(context)
     }
 }

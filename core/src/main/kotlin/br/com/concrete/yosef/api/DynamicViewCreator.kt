@@ -1,5 +1,7 @@
 package br.com.concrete.yosef.api
 
+import android.content.Context
+import android.view.View
 import android.view.ViewGroup
 import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.DynamicViewCreator.Builder
@@ -33,19 +35,37 @@ class DynamicViewCreator(
      * This method creates a list of [DynamicComponent] by the passed json and calls
      * [addChildrenRecursively] method to add them to the parent view
      *
-     * @param parent [ViewGroup] that will have the components as children
+     * @param context [Context] needed to create views
      * @param json formatted json according with the library protocol. This json will have
      * information about which components will be created and its properties to be applied
      * @param listener is the responsible for calling events that
      * are related with components actions
      */
     fun createViewFromJson(
-        parent: ViewGroup,
+        context: Context,
         json: String,
         listener: OnActionListener? = null
-    ) {
-        val parentComponent = gson.fromJson<List<DynamicComponent>>(json)
-        parentComponent.forEach { addChildrenRecursively(parent, it, listener) }
+    ): View {
+
+        val componentSpec = gson.fromJson<DynamicComponent>(json)
+        val component = components[componentSpec.type] ?: throw IllegalStateException(
+            "Could not find any component with type ${componentSpec.type}")
+
+        val parentView = component.createView(context)
+
+        componentSpec.children?.let {
+            if (parentView !is ViewGroup) {
+                throw IllegalStateException("Can not add children to component " +
+                    "with type ${componentSpec.type}. ${parentView.javaClass.name} is " +
+                    "not a ViewGroup.")
+            }
+
+            it.forEach { addChildrenRecursively(parentView, it, listener) }
+        }
+
+        component.applyProperties(parentView, componentSpec.dynamicProperties, listener)
+
+        return parentView
     }
 
     /**
@@ -70,11 +90,11 @@ class DynamicViewCreator(
         }
 
         val component = components[childComponent.type]!!
-        val view = component.createView(topLevelViewGroup).apply {
-            component.applyProperties(this, childComponent.dynamicProperties, listener)
-        }
+        val view = component.createView(topLevelViewGroup.context)
 
         childComponent.children?.forEach { addChildrenRecursively(view as ViewGroup, it) }
+        component.applyProperties(view, childComponent.dynamicProperties, listener)
+
         topLevelViewGroup.addView(view)
     }
 
