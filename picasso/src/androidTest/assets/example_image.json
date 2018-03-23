@@ -1,28 +1,26 @@
-[
-  {
-    "type": "image",
-    "properties": [
-      {
-        "name": "url",
-        "type": "string",
-        "value": "http://cassiano.me/static/avatar.jpg"
-      },
-      {
-        "name": "width",
-        "type": "dimen",
-        "value": "300"
-      },
-      {
-        "name": "height",
-        "type": "dimen",
-        "value": "300"
-      },
-      {
-        "name": "id",
-        "type": "string",
-        "value": "animationView"
-      }
-    ],
-    "children": null
-  }
-]
+{
+  "type": "image",
+  "properties": [
+    {
+      "name": "url",
+      "type": "string",
+      "value": "http://cassiano.me/static/avatar.jpg"
+    },
+    {
+      "name": "width",
+      "type": "dimen",
+      "value": "300"
+    },
+    {
+      "name": "height",
+      "type": "dimen",
+      "value": "300"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "value": "animationView"
+    }
+  ],
+  "children": null
+}
