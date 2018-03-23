@@ -90,11 +90,11 @@ class DynamicViewCreator(
         }
 
         val component = components[childComponent.type]!!
-        val view = component.createView(topLevelViewGroup.context).apply {
-            component.applyProperties(this, childComponent.dynamicProperties, listener)
-        }
+        val view = component.createView(topLevelViewGroup.context)
 
         childComponent.children?.forEach { addChildrenRecursively(view as ViewGroup, it) }
+        component.applyProperties(view, childComponent.dynamicProperties, listener)
+
         topLevelViewGroup.addView(view)
     }
 
