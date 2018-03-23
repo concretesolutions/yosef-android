@@ -13,7 +13,6 @@ class TextFieldActivity : AppCompatActivity(), OnActionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         val json = TextFieldActivity::class.java
             .getResource("/assets/example_textfield.json").readText()
@@ -22,7 +21,7 @@ class TextFieldActivity : AppCompatActivity(), OnActionListener {
             .addComponentFor(TEXT_FIELD, CanarinhoTextFieldComponent())
             .build()
 
-        dynamicView.createViewFromJson(findViewById(R.id.parent), json, this)
+        setContentView(dynamicView.createViewFromJson(this, json, this))
     }
 
     override fun callAction(value: String) {

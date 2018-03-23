@@ -1,23 +1,21 @@
-[
-  {
-    "type": "image",
-    "properties": [
-      {
-        "name": "url",
-        "type": "string",
-        "value": "https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAidAAAAJDhjNDU5M2YyLWFlNzEtNDgzMi1hZmQ4LTI4ZGQ4ODM2NGNkNQ.jpg"
-      },
-      {
-        "name": "width",
-        "type": "dimen",
-        "value": "25"
-      },
-      {
-        "name": "height",
-        "type": "dimen",
-        "value": "25"
-      }
-    ],
-    "children": null
-  }
-]
+{
+  "type": "image",
+  "properties": [
+    {
+      "name": "url",
+      "type": "string",
+      "value": "https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAidAAAAJDhjNDU5M2YyLWFlNzEtNDgzMi1hZmQ4LTI4ZGQ4ODM2NGNkNQ.jpg"
+    },
+    {
+      "name": "width",
+      "type": "dimen",
+      "value": "25"
+    },
+    {
+      "name": "height",
+      "type": "dimen",
+      "value": "25"
+    }
+  ],
+  "children": null
+}

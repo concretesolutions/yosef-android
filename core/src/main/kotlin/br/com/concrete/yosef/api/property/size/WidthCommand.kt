@@ -25,7 +25,7 @@ class WidthCommand : DynamicPropertyCommand {
     override fun apply(view: View, dynamicProperty: DynamicProperty) {
 
         if (dynamicProperty.type == "string") {
-            when (dynamicProperty.type) {
+            when (dynamicProperty.value) {
                 MATCH -> view.layoutParams.width = MATCH_PARENT
                 WRAP -> view.layoutParams.width = WRAP_CONTENT
                 else -> throw IllegalArgumentException("Can't apply ${dynamicProperty.name}" +
@@ -36,9 +36,7 @@ class WidthCommand : DynamicPropertyCommand {
                 .value
                 .toInt()
                 .dp(view.context)
-        }
-
-        throw IllegalArgumentException("Can't apply ${dynamicProperty.name}" +
+        } else throw IllegalArgumentException("Can't apply ${dynamicProperty.name}" +
             " with type ${dynamicProperty.type} and value ${dynamicProperty.value}.")
     }
 }

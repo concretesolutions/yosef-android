@@ -1,107 +1,128 @@
-[
-  {
-    "type": "text",
-    "properties": [
-      {
-        "name": "text",
-        "type": "string",
-        "value": "Teste text"
-      },
-      {
-        "name": "textColor",
-        "type": "color",
-        "value": "#ff3300"
-      },
-      {
-        "name": "textSize",
-        "type": "dimen",
-        "value": "34"
-      }
-    ]
-  },
-  {
-    "type": "textField",
-    "properties": [
-      {
-        "name": "action",
-        "type": "string",
-        "value": "Sim"
-      },
-      {
-        "name": "mask",
-        "type": "string",
-        "value": "monetary"
-      }
-    ]
-  },
-  {
-    "type": "button",
-    "properties": [
-      {
-        "name": "action",
-        "type": "string",
-        "value": "Button Não"
-      },
-      {
-        "name": "text",
-        "type": "string",
-        "value": "Não"
-      },
-      {
-        "name": "backgroundColor",
-        "type": "color",
-        "value": "#DC951A"
-      },
-      {
-        "name": "textColor",
-        "type": "color",
-        "value": "#ffffff"
-      }
-    ],
-    "children": null
-  },
-  {
-    "type": "elementGroup",
-    "properties": [
-      {
-        "name": "orientation",
-        "type": "string",
-        "value": "horizontal"
-      }
-    ],
-    "children": [
-      {
-        "type": "button",
-        "properties": [
-          {
-            "name": "action",
-            "type": "string",
-            "value": "Sim"
-          },
-          {
-            "name": "text",
-            "type": "string",
-            "value": "Button1"
-          }
-        ],
-        "children": null
-      },
-      {
-        "type": "button",
-        "properties": [
-          {
-            "name": "action",
-            "type": "string",
-            "value": "Não"
-          },
-          {
-            "name": "text",
-            "type": "string",
-            "value": "Button2"
-          }
-        ],
-        "children": null
-      }
-    ]
-  }
-]
+{
+  "type": "elementGroup",
+  "properties": [
+    {
+      "name": "orientation",
+      "type": "string",
+      "value": "vertical"
+    }
+  ],
+  "children": [
+    {
+      "type": "text",
+      "properties": [
+        {
+          "name": "text",
+          "type": "string",
+          "value": "Teste text"
+        },
+        {
+          "name": "textColor",
+          "type": "color",
+          "value": "#ff3300"
+        },
+        {
+          "name": "textSize",
+          "type": "dimen",
+          "value": "34"
+        }
+      ]
+    },
+    {
+      "type": "textField",
+      "properties": [
+        {
+          "name": "action",
+          "type": "string",
+          "value": "Sim"
+        },
+        {
+          "name": "mask",
+          "type": "string",
+          "value": "monetary"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "properties": [
+        {
+          "name": "action",
+          "type": "string",
+          "value": "Button Não"
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "value": "Não"
+        },
+        {
+          "name": "backgroundColor",
+          "type": "color",
+          "value": "#DC951A"
+        },
+        {
+          "name": "textColor",
+          "type": "color",
+          "value": "#ffffff"
+        }
+      ],
+      "children": null
+    },
+    {
+      "type": "elementGroup",
+      "properties": [
+        {
+          "name": "orientation",
+          "type": "string",
+          "value": "horizontal"
+        }
+      ],
+      "children": [
+        {
+          "type": "button",
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "Sim"
+            },
+            {
+              "name": "text",
+              "type": "string",
+              "value": "Button1"
+            }
+          ],
+          "children": null
+        },
+        {
+          "type": "button",
+          "properties": [
+            {
+              "name": "action",
+              "type": "string",
+              "value": "Não"
+            },
+            {
+              "name": "text",
+              "type": "string",
+              "value": "Button2"
+            }
+          ],
+          "children": null
+        },
+        {
+          "type": "text",
+          "properties": [
+            {
+              "name": "id",
+              "type": "string",
+              "value": "textView"
+            }
+          ],
+          "children": null
+        }
+      ]
+    }
+  ]
+}

@@ -4,16 +4,14 @@ import android.animation.Animator
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
 import br.com.concrete.yosef.api.DynamicViewCreator
+import br.com.concrete.yosef.dp
 import br.com.concrete.yosef.layoutAndAssert
 import com.airbnb.lottie.LottieAnimationView
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.CoreMatchers.containsString
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
-
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -29,16 +27,10 @@ class LottieAnimationComponentTest {
     val exceptionRule: ExpectedException = ExpectedException.none()
 
     private val context = InstrumentationRegistry.getTargetContext()!!
-    private lateinit var parent: ViewGroup
     private lateinit var creator: DynamicViewCreator
 
     @Before
     fun setUp() {
-
-        parent = LinearLayout(context).apply {
-            orientation = LinearLayout.VERTICAL
-        }
-
         creator = DynamicViewCreator
             .Builder()
             .addComponentFor(LottieAnimationComponent.ANIMATION_TYPE, LottieAnimationComponent())
@@ -52,9 +44,7 @@ class LottieAnimationComponentTest {
             .bufferedReader()
             .use { it.readText() }
 
-        creator.createViewFromJson(parent, json, null)
-
-        val animationView = parent.findViewById<LottieAnimationView>("animationView".hashCode())
+        val animationView = creator.createViewFromJson(context, json, null)
 
         animationView.layoutAndAssert {
             assertEquals("animationView".hashCode(), animationView.id)
@@ -68,13 +58,10 @@ class LottieAnimationComponentTest {
             .bufferedReader()
             .use { it.readText() }
 
-        creator.createViewFromJson(parent, json, null)
-
-        val animationView = parent.findViewById<LottieAnimationView>("animationView".hashCode())
+        val animationView = creator.createViewFromJson(context, json, null) as LottieAnimationView
         val latch = CountDownLatch(1)
-        animationView.addAnimatorListener(object: Animator.AnimatorListener {
+        animationView.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationRepeat(p0: Animator?) {
-
             }
 
             override fun onAnimationEnd(p0: Animator?) {
@@ -103,9 +90,7 @@ class LottieAnimationComponentTest {
             .bufferedReader()
             .use { it.readText() }
 
-        creator.createViewFromJson(parent, json, null)
-
-        val animationView = parent.findViewById<LottieAnimationView>("animationView".hashCode())
+        val animationView = creator.createViewFromJson(context, json, null) as LottieAnimationView
 
         animationView.layoutAndAssert {
             assertEquals(2, animationView.repeatCount)
@@ -119,13 +104,11 @@ class LottieAnimationComponentTest {
             .bufferedReader()
             .use { it.readText() }
 
-        creator.createViewFromJson(parent, json, null)
-
-        val animationView = parent.findViewById<LottieAnimationView>("animationView".hashCode())
+        val animationView = creator.createViewFromJson(context, json, null) as LottieAnimationView
 
         animationView.layoutAndAssert {
-            assertEquals(300, animationView.width)
-            assertEquals(300, animationView.height)
+            assertEquals(300.dp(context), animationView.width)
+            assertEquals(300.dp(context), animationView.height)
         }
     }
 
@@ -141,7 +124,7 @@ class LottieAnimationComponentTest {
             containsString("value = 300"),
             containsString("cannot be applied")))
 
-        creator.createViewFromJson(parent, json, null)
+        creator.createViewFromJson(context, json, null)
     }
 
     @Test
@@ -155,6 +138,6 @@ class LottieAnimationComponentTest {
         exceptionRule.expectMessage(allOf(containsString("Mandatory field 'animate'"),
             containsString("not found")))
 
-        creator.createViewFromJson(parent, json, null)
+        creator.createViewFromJson(context, json, null)
     }
 }

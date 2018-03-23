@@ -48,8 +48,8 @@ class DynamicViewCreator(
     ): View {
 
         val componentSpec = gson.fromJson<DynamicComponent>(json)
-        val component = components[componentSpec.type] ?: throw IllegalStateException(
-            "Could not find any component with type ${componentSpec.type}")
+        val component = components[componentSpec.type] ?: throw IllegalStateException("There are no components registered " +
+            "in this ViewCreator that can render ${componentSpec.type}")
 
         val parentView = component.createView(context)
 

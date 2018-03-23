@@ -12,7 +12,6 @@ class ImageActivity : AppCompatActivity(), OnActionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         val json = ImageActivity::class.java.getResource(
             "/assets/example_image.json").readText()
@@ -21,7 +20,7 @@ class ImageActivity : AppCompatActivity(), OnActionListener {
             .addComponentFor(GlideImageComponent.IMAGE_TYPE, GlideImageComponent())
             .build()
 
-        dynamicView.createViewFromJson(findViewById(R.id.parent), json, this)
+        setContentView(dynamicView.createViewFromJson(this, json, this))
     }
 
     override fun callAction(value: String) {
