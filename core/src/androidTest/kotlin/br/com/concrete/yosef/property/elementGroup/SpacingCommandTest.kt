@@ -79,8 +79,8 @@ class SpacingCommandTest {
         val imageView = ImageView(context)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
-        exceptionRule.expectMessage("The ${SpacingCommand.SPACING} property cannot be applied " +
-            "to view ${imageView.javaClass.name}")
+        exceptionRule.expectMessage("The property does not support setting " +
+            "${SpacingCommand.SPACING} for the type ${imageView.javaClass.name}")
 
         spacingCommand.apply(imageView, dynamicProperty)
     }
