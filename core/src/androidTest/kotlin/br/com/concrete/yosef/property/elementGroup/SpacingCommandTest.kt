@@ -75,12 +75,12 @@ class SpacingCommandTest {
 
     @Test
     fun renderingImageViewShouldThrow() {
-        val dynamicProperty = DynamicProperty(SpacingCommand.SPACING, "dimen", "16")
+        val dynamicProperty = DynamicProperty(SPACING, "dimen", "16")
         val imageView = ImageView(context)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The property does not support setting " +
-            "${SpacingCommand.SPACING} for the type ${imageView.javaClass.name}")
+            "$SPACING for the type ${imageView.javaClass.name}")
 
         spacingCommand.apply(imageView, dynamicProperty)
     }
