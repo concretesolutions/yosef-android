@@ -4,8 +4,9 @@ import android.content.Context
 import android.os.Build
 import android.support.annotation.VisibleForTesting
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.View
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -48,8 +49,5 @@ fun View.layoutAndAssert(action: (view: View) -> Unit) {
             action(view)
         }
     })
-
-    Log.d("sdlkf width", layoutParams.width.toString())
-    Log.d("sdlkf height", layoutParams.height.toString())
-    layout(0, 0, layoutParams.width, layoutParams.height)
+    layout(0, 0, layoutParams?.width ?: MATCH_PARENT, layoutParams?.height ?: WRAP_CONTENT)
 }
