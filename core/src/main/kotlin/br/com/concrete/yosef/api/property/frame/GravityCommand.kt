@@ -25,9 +25,17 @@ internal class GravityCommand : DynamicPropertyCommand {
          */
         const val GRAVITY = "gravity"
         /**
+         * This constant represents the possible value left for the gravity property
+         */
+        const val LEFT = "left"
+        /**
          * This constant represents the possible value top for the gravity property
          */
         const val TOP = "top"
+        /**
+         * This constant represents the possible value right for the gravity property
+         */
+        const val RIGHT = "right"
         /**
          * This constant represents the possible value bottom for the gravity property
          */
@@ -41,16 +49,20 @@ internal class GravityCommand : DynamicPropertyCommand {
     @SuppressLint("RtlHardcoded")
     override fun apply(view: View, dynamicProperty: DynamicProperty) {
 
-        if (!(dynamicProperty.value == TOP ||
-                        dynamicProperty.value == BOTTOM ||
-                        dynamicProperty.value == CENTER))
+        if (!(dynamicProperty.value == LEFT ||
+                dynamicProperty.value == TOP ||
+                dynamicProperty.value == RIGHT ||
+                dynamicProperty.value == BOTTOM ||
+                dynamicProperty.value == CENTER))
             throw IllegalArgumentException("The value (${dynamicProperty.value}) " +
-                    "cannot be applied to property $GRAVITY.")
+                "cannot be applied to property $GRAVITY.")
 
         if (view is LinearLayout) {
             val layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
             when (dynamicProperty.value) {
+                LEFT -> layoutParams.gravity = Gravity.LEFT
                 TOP -> layoutParams.gravity = Gravity.TOP
+                RIGHT -> layoutParams.gravity = Gravity.RIGHT
                 BOTTOM -> layoutParams.gravity = Gravity.BOTTOM
                 CENTER -> layoutParams.gravity = Gravity.CENTER
             }
@@ -59,7 +71,7 @@ internal class GravityCommand : DynamicPropertyCommand {
             return
         }
 
-        throw IllegalArgumentException("The ${GRAVITY} property cannot be " +
-                "applied to view ${view.javaClass.name}")
+        throw IllegalArgumentException("The $GRAVITY property cannot be " +
+            "applied to view ${view.javaClass.name}")
     }
 }
