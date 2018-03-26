@@ -5,18 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.DynamicViewCreator.Builder
-import br.com.concrete.yosef.api.component.ButtonComponent
+import br.com.concrete.yosef.api.component.*
 import br.com.concrete.yosef.api.component.ButtonComponent.Companion.BUTTON_TYPE
-import br.com.concrete.yosef.api.component.Component
-import br.com.concrete.yosef.api.component.ElementGroupComponent
 import br.com.concrete.yosef.api.component.ElementGroupComponent.Companion.ELEMENT_GROUP
-import br.com.concrete.yosef.api.component.RadioButtonComponent
+import br.com.concrete.yosef.api.component.FrameComponent.Companion.FRAME
 import br.com.concrete.yosef.api.component.RadioButtonComponent.Companion.RADIO_BUTTON
-import br.com.concrete.yosef.api.component.RadioGroupButtonComponent
 import br.com.concrete.yosef.api.component.RadioGroupButtonComponent.Companion.RADIO_GROUP_BUTTON
-import br.com.concrete.yosef.api.component.TextFieldComponent
 import br.com.concrete.yosef.api.component.TextFieldComponent.Companion.TEXT_FIELD
-import br.com.concrete.yosef.api.component.TextViewComponent
 import br.com.concrete.yosef.api.component.TextViewComponent.Companion.TEXT_TYPE
 import br.com.concrete.yosef.entity.DynamicComponent
 import br.com.concrete.yosef.fromJson
@@ -115,7 +110,8 @@ class DynamicViewCreator(
                 TEXT_FIELD to TextFieldComponent(),
                 ELEMENT_GROUP to ElementGroupComponent(),
                 RADIO_BUTTON to RadioButtonComponent(),
-                RADIO_GROUP_BUTTON to RadioGroupButtonComponent()
+                RADIO_GROUP_BUTTON to RadioGroupButtonComponent(),
+                FRAME to FrameComponent()
             )
         }
 
