@@ -12,6 +12,8 @@ import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand
 import br.com.concrete.yosef.api.property.elementgroup.OrientationCommand.Companion.ORIENTATION
 import br.com.concrete.yosef.api.property.id.IdCommand
 import br.com.concrete.yosef.api.property.id.IdCommand.Companion.ID
+import br.com.concrete.yosef.api.property.spacing.MarginPropertyCommand
+import br.com.concrete.yosef.api.property.spacing.MarginPropertyCommand.Companion.MARGIN
 import br.com.concrete.yosef.api.property.spacing.PaddingPropertyCommand
 import br.com.concrete.yosef.api.property.spacing.PaddingPropertyCommand.Companion.PADDING
 import br.com.concrete.yosef.entity.DynamicProperty
@@ -32,6 +34,7 @@ class ElementGroupComponent : Component {
     private val components: Map<String, DynamicPropertyCommand> = mapOf(
         ORIENTATION to OrientationCommand(),
         PADDING to PaddingPropertyCommand(),
+        MARGIN to MarginPropertyCommand(),
         ID to IdCommand()
     )
 

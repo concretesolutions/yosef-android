@@ -9,6 +9,10 @@ import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.property.DynamicPropertyCommand
 import br.com.concrete.yosef.api.property.id.IdCommand
 import br.com.concrete.yosef.api.property.id.IdCommand.Companion.ID
+import br.com.concrete.yosef.api.property.spacing.MarginPropertyCommand
+import br.com.concrete.yosef.api.property.spacing.MarginPropertyCommand.Companion.MARGIN
+import br.com.concrete.yosef.api.property.spacing.PaddingPropertyCommand
+import br.com.concrete.yosef.api.property.spacing.PaddingPropertyCommand.Companion.PADDING
 import br.com.concrete.yosef.entity.DynamicProperty
 
 /**
@@ -25,13 +29,15 @@ class FrameComponent : Component {
     }
 
     private val components: Map<String, DynamicPropertyCommand> = mapOf(
-            ID to IdCommand()
+        MARGIN to MarginPropertyCommand(),
+        PADDING to PaddingPropertyCommand(),
+        ID to IdCommand()
     )
 
     override fun applyProperties(
-            view: View,
-            dynamicProperties: List<DynamicProperty>,
-            actionListener: OnActionListener?
+        view: View,
+        dynamicProperties: List<DynamicProperty>,
+        actionListener: OnActionListener?
     ) {
         dynamicProperties.forEach {
             components[it.name]?.apply(view, it)
@@ -41,7 +47,7 @@ class FrameComponent : Component {
     override fun createView(context: Context): View {
         return FrameLayout(context).apply {
             layoutParams = LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         }
     }
 }

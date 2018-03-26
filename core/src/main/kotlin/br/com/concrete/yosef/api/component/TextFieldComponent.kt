@@ -17,6 +17,8 @@ import br.com.concrete.yosef.api.property.size.HeightCommand
 import br.com.concrete.yosef.api.property.size.HeightCommand.Companion.HEIGHT_TYPE
 import br.com.concrete.yosef.api.property.size.WidthCommand
 import br.com.concrete.yosef.api.property.size.WidthCommand.Companion.WIDTH_TYPE
+import br.com.concrete.yosef.api.property.spacing.MarginPropertyCommand
+import br.com.concrete.yosef.api.property.spacing.MarginPropertyCommand.Companion.MARGIN
 import br.com.concrete.yosef.api.property.spacing.PaddingPropertyCommand
 import br.com.concrete.yosef.api.property.spacing.PaddingPropertyCommand.Companion.PADDING
 import br.com.concrete.yosef.entity.DynamicProperty
@@ -38,6 +40,7 @@ class TextFieldComponent : Component {
         WIDTH_TYPE to WidthCommand(),
         HEIGHT_TYPE to HeightCommand(),
         PADDING to PaddingPropertyCommand(),
+        MARGIN to MarginPropertyCommand(),
         ID to IdCommand()
     )
 
