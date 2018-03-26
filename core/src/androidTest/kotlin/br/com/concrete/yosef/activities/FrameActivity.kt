@@ -11,14 +11,13 @@ class FrameActivity : AppCompatActivity(), OnActionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         val json = FrameActivity::class.java.getResource(
             "/assets/example_frame_component.json").readText()
 
         val dynamicView = DynamicViewCreator.Builder().build()
 
-        dynamicView.createViewFromJson(findViewById(R.id.parent), json, this)
+        setContentView(dynamicView.createViewFromJson(this, json, this))
     }
 
     override fun callAction(value: String) {

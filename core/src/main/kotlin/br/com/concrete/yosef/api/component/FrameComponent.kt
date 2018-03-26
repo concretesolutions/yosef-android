@@ -1,5 +1,6 @@
 package br.com.concrete.yosef.api.component
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -37,8 +38,8 @@ class FrameComponent : Component {
         }
     }
 
-    override fun createView(parent: ViewGroup): View {
-        return FrameLayout(parent.context).apply {
+    override fun createView(context: Context): View {
+        return FrameLayout(context).apply {
             layoutParams = LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         }
