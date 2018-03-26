@@ -1,0 +1,54 @@
+{
+  "type": "radioGroupButton",
+  "properties": [
+    {
+      "name": "backgroundColor",
+      "type": "color",
+      "value": "#e4733b"
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "value": "Teste"
+    }
+  ],
+  "children": [
+    {
+      "type": "radioButton",
+      "properties": [
+        {
+          "name": "textColor",
+          "type": "color",
+          "value": "#000000"
+        },
+        {
+          "name": "tintColor",
+          "type": "color",
+          "value": "#fd5501"
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "value": "RadioButton1"
+        }
+      ],
+      "children": null
+    },
+    {
+      "type": "radioButton",
+      "properties": [
+        {
+          "name": "textColor",
+          "type": "color",
+          "value": "#303F9F"
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "value": "RadioButton2"
+        }
+      ],
+      "children": null
+    }
+  ]
+}

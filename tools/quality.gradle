@@ -1,0 +1,13 @@
+configurations {
+    ktlint
+}
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    main = "com.github.shyiko.ktlint.Main"
+    args "src/**/*.kt"
+    args "--android=true"
+    args "--ruleset=${rootDir}/tools/html-reporter.jar"
+    args "--reporter=html,output=${buildDir}/ktlint.html"
+}

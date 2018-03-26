@@ -1,0 +1,26 @@
+{
+  "type": "animation",
+  "properties": [
+    {
+      "name": "animate",
+      "type": "string",
+      "value": "{}"
+    },
+    {
+      "name": "wrong_width",
+      "type": "dimen",
+      "value": "300"
+    },
+    {
+      "name": "height",
+      "type": "dimen",
+      "value": "300"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "value": "animationView"
+    }
+  ],
+  "children": null
+}
