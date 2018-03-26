@@ -42,7 +42,7 @@ class MarginPropertyCommand : DynamicPropertyCommand {
                     it.trim().toInt().dp(view.context)
                 }
         } else {
-            val value = dynamicProperty.value.toInt().dp(view.context)
+            val value = dynamicProperty.value.trim().toInt().dp(view.context)
             listOf(value, value, value, value)
         }
     }

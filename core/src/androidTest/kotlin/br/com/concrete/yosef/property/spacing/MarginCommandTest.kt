@@ -4,7 +4,6 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import android.widget.LinearLayout
 import android.widget.TextView
-import br.com.concrete.yosef.api.property.elementgroup.GravityCommand
 import br.com.concrete.yosef.api.property.spacing.MarginPropertyCommand
 import br.com.concrete.yosef.api.property.spacing.MarginPropertyCommand.Companion.MARGIN
 import br.com.concrete.yosef.entity.DynamicProperty
