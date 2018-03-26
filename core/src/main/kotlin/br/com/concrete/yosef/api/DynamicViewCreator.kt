@@ -11,6 +11,7 @@ import br.com.concrete.yosef.api.component.ElementGroupComponent.Companion.ELEME
 import br.com.concrete.yosef.api.component.FrameComponent.Companion.FRAME
 import br.com.concrete.yosef.api.component.RadioButtonComponent.Companion.RADIO_BUTTON
 import br.com.concrete.yosef.api.component.RadioGroupButtonComponent.Companion.RADIO_GROUP_BUTTON
+import br.com.concrete.yosef.api.component.SeparatorComponent.Companion.SEPARATOR
 import br.com.concrete.yosef.api.component.TextFieldComponent.Companion.TEXT_FIELD
 import br.com.concrete.yosef.api.component.TextViewComponent.Companion.TEXT_TYPE
 import br.com.concrete.yosef.entity.DynamicComponent
@@ -43,8 +44,9 @@ class DynamicViewCreator(
     ): View {
 
         val componentSpec = gson.fromJson<DynamicComponent>(json)
-        val component = components[componentSpec.type] ?: throw IllegalStateException("There are no components registered " +
-            "in this ViewCreator that can render ${componentSpec.type}")
+        val component = components[componentSpec.type]
+            ?: throw IllegalStateException("There are no components registered " +
+                "in this ViewCreator that can render ${componentSpec.type}")
 
         val parentView = component.createView(context)
 
@@ -111,7 +113,8 @@ class DynamicViewCreator(
                 ELEMENT_GROUP to ElementGroupComponent(),
                 RADIO_BUTTON to RadioButtonComponent(),
                 RADIO_GROUP_BUTTON to RadioGroupButtonComponent(),
-                FRAME to FrameComponent()
+                FRAME to FrameComponent(),
+                SEPARATOR to SeparatorComponent()
             )
         }
 
