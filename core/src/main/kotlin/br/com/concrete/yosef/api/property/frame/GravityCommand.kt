@@ -15,6 +15,8 @@ import br.com.concrete.yosef.entity.DynamicProperty
  * Command class that implements the [DynamicPropertyCommand] applying
  * the gravity property to the view([LinearLayout])
  *
+ * This command is applied if the parent is a [FrameLayout]
+ *
  * @see [FrameLayout.LayoutParams.gravity]
  */
 internal class GravityCommand : DynamicPropertyCommand {
@@ -57,7 +59,7 @@ internal class GravityCommand : DynamicPropertyCommand {
             throw IllegalArgumentException("The value (${dynamicProperty.value}) " +
                 "cannot be applied to property $GRAVITY.")
 
-        if (view is LinearLayout) {
+        if (view.parent is FrameLayout) {
             val layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
             when (dynamicProperty.value) {
                 LEFT -> layoutParams.gravity = Gravity.LEFT
@@ -71,7 +73,7 @@ internal class GravityCommand : DynamicPropertyCommand {
             return
         }
 
-        throw IllegalArgumentException("The $GRAVITY property cannot be " +
+        throw IllegalArgumentException("The $GRAVITY property can be " +
             "applied to view ${view.javaClass.name}")
     }
 }
