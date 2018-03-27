@@ -64,4 +64,18 @@ class MarginCommandTest {
         assertEquals(valueInPx, layoutParams.rightMargin)
         assertEquals(valueInPx, layoutParams.bottomMargin)
     }
+
+    @Test
+    fun whenMarginIsSetPassingInvalidValue_shouldThrowException() {
+        val dynamicProperty = DynamicProperty(MARGIN, "dimen", "WRONG")
+        val parent = LinearLayout(context)
+        val view = TextView(context)
+        parent.addView(view)
+
+        exceptionRule.expect(IllegalArgumentException::class.java)
+        exceptionRule.expectMessage("The value WRONG is not a valid margin" +
+            " value, it need to be a number")
+
+        marginCommand.apply(view, dynamicProperty)
+    }
 }

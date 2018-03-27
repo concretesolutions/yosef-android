@@ -22,12 +22,12 @@ class PaddingPropertyCommand : DynamicPropertyCommand {
 
     override fun apply(view: View, dynamicProperty: DynamicProperty) {
 
-        val (left, top, right, bottom) = generateMarginList(dynamicProperty, view)
+        val (left, top, right, bottom) = generatePaddingList(dynamicProperty, view)
 
         view.setPadding(left, top, right, bottom)
     }
 
-    private fun generateMarginList(dynamicProperty: DynamicProperty, view: View): List<Int> {
+    private fun generatePaddingList(dynamicProperty: DynamicProperty, view: View): List<Int> {
         return if (dynamicProperty.value.contains(",")) {
             dynamicProperty.value
                 .split(",")
@@ -36,7 +36,7 @@ class PaddingPropertyCommand : DynamicPropertyCommand {
                 }
         } else {
             val value = dynamicProperty.value.trim().toInt().dp(view.context)
-            listOf(value, value, value, value)
+            MutableList(4) { value }
         }
     }
 }
