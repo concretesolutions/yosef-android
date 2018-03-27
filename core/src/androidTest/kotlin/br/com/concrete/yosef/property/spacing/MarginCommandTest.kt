@@ -78,4 +78,17 @@ class MarginCommandTest {
 
         marginCommand.apply(view, dynamicProperty)
     }
+
+    @Test
+    fun whenSetInvalidArraySizeOfMargin_shouldThrowException() {
+        val dynamicProperty = DynamicProperty(MARGIN, "dimen", "16, 16, 16")
+        val parent = LinearLayout(context)
+        val view = TextView(context)
+        parent.addView(view)
+
+        exceptionRule.expect(IllegalArgumentException::class.java)
+        exceptionRule.expectMessage("The margin value must be a array of 4 items or one number")
+
+        marginCommand.apply(view, dynamicProperty)
+    }
 }

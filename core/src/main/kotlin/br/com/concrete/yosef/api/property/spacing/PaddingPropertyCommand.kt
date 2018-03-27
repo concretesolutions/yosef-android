@@ -1,5 +1,6 @@
 package br.com.concrete.yosef.api.property.spacing
 
+import android.content.Context
 import android.view.View
 import br.com.concrete.yosef.api.property.DynamicPropertyCommand
 import br.com.concrete.yosef.dp
@@ -29,14 +30,27 @@ class PaddingPropertyCommand : DynamicPropertyCommand {
 
     private fun generatePaddingList(dynamicProperty: DynamicProperty, view: View): List<Int> {
         return if (dynamicProperty.value.contains(",")) {
-            dynamicProperty.value
-                .split(",")
-                .map {
-                    it.trim().toInt().dp(view.context)
-                }
+            val split = dynamicProperty.value.split(",")
+
+            if (split.size != 4) {
+                throw IllegalArgumentException("The padding value must be a array of 4 items or one number")
+            }
+
+            split.map {
+                convertValueToDp(it, view.context)
+            }
         } else {
-            val value = dynamicProperty.value.trim().toInt().dp(view.context)
+            val value = convertValueToDp(dynamicProperty.value, view.context)
             MutableList(4) { value }
+        }
+    }
+
+    private fun convertValueToDp(valueInString: String, context: Context): Int {
+        try {
+            return valueInString.trim().toInt().dp(context)
+        } catch (e: NumberFormatException) {
+            throw IllegalArgumentException("The value $valueInString is not a valid padding" +
+                " value, it need to be a number")
         }
     }
 }

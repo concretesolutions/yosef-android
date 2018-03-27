@@ -2,6 +2,7 @@ package br.com.concrete.yosef.api.property.spacing
 
 import android.content.Context
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import br.com.concrete.yosef.api.property.DynamicPropertyCommand
@@ -28,20 +29,22 @@ class MarginPropertyCommand : DynamicPropertyCommand {
 
         val (left, top, right, bottom) = generateMarginList(dynamicProperty, view)
 
-        if (layoutParams is LinearLayout.LayoutParams) {
-            layoutParams.setMargins(left, top, right, bottom)
-        } else if (layoutParams is FrameLayout.LayoutParams) {
+        if (layoutParams is ViewGroup.MarginLayoutParams) {
             layoutParams.setMargins(left, top, right, bottom)
         }
     }
 
     private fun generateMarginList(dynamicProperty: DynamicProperty, view: View): List<Int> {
         return if (dynamicProperty.value.contains(",")) {
-            dynamicProperty.value
-                .split(",")
-                .map {
-                    convertValueToDp(it, view.context)
-                }
+            val split = dynamicProperty.value.split(",")
+
+            if (split.size != 4) {
+                throw IllegalArgumentException("The margin value must be a array of 4 items or one number")
+            }
+
+            split.map {
+                convertValueToDp(it, view.context)
+            }
         } else {
             val value = convertValueToDp(dynamicProperty.value, view.context)
             MutableList(4) { value }
