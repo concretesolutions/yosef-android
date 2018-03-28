@@ -74,7 +74,7 @@ class MarginCommandTest {
 
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage("The value WRONG is not a valid margin" +
-            " value, it need to be a number")
+            " value, it needs to be a number")
 
         marginCommand.apply(view, dynamicProperty)
     }
@@ -87,7 +87,8 @@ class MarginCommandTest {
         parent.addView(view)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
-        exceptionRule.expectMessage("The margin value must be a array of 4 items or one number")
+        exceptionRule.expectMessage("The margin value must be an array of 4 items or " +
+            "a single number representing the values of all corners")
 
         marginCommand.apply(view, dynamicProperty)
     }

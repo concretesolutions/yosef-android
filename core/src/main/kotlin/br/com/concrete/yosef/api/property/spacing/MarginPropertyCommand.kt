@@ -39,7 +39,8 @@ class MarginPropertyCommand : DynamicPropertyCommand {
             val split = dynamicProperty.value.split(",")
 
             if (split.size != 4) {
-                throw IllegalArgumentException("The margin value must be a array of 4 items or one number")
+                throw IllegalArgumentException("The margin value must be an array of 4 items or " +
+                    "a single number representing the values of all corners")
             }
 
             split.map {
@@ -56,7 +57,7 @@ class MarginPropertyCommand : DynamicPropertyCommand {
             return valueInString.trim().toInt().dp(context)
         } catch (e: NumberFormatException) {
             throw IllegalArgumentException("The value $valueInString is not a valid margin" +
-                " value, it need to be a number")
+                " value, it needs to be a number")
         }
     }
 }
