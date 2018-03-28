@@ -13,6 +13,8 @@ import br.com.concrete.yosef.api.property.color.TintColorCommand
 import br.com.concrete.yosef.api.property.color.TintColorCommand.Companion.TINT_COLOR
 import br.com.concrete.yosef.api.property.id.IdCommand
 import br.com.concrete.yosef.api.property.id.IdCommand.Companion.ID
+import br.com.concrete.yosef.api.property.spacing.MarginPropertyCommand
+import br.com.concrete.yosef.api.property.spacing.MarginPropertyCommand.Companion.MARGIN
 import br.com.concrete.yosef.api.property.spacing.PaddingPropertyCommand
 import br.com.concrete.yosef.api.property.spacing.PaddingPropertyCommand.Companion.PADDING
 import br.com.concrete.yosef.api.property.text.TextColorCommand
@@ -43,6 +45,7 @@ class RadioButtonComponent : Component {
         TEXT_SIZE to TextSizeCommand(),
         TINT_COLOR to TintColorCommand(),
         PADDING to PaddingPropertyCommand(),
+        MARGIN to MarginPropertyCommand(),
         ID to IdCommand()
     )
 
