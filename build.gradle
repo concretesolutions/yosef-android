@@ -1,6 +1,7 @@
 buildscript {
     ext.kotlin_version = "1.2.31"
     ext.dokka_version = "0.9.16"
+    ext.detekt = "1.0.0.RC6-3"
 
     repositories {
         google()
@@ -17,6 +18,8 @@ buildscript {
 
 // Order is important here
 plugins { id "io.gitlab.arturbosch.detekt" version "1.0.0.RC6-3" }
+apply plugin: "jacoco"
+apply from: "$rootDir/tools/detekt.gradle"
 
 allprojects {
     repositories {
@@ -53,50 +56,47 @@ ext {
     ]
 
     lintersVersions = [
-            ktlint: "0.19.0",
-            detekt: "1.0.0.RC6-3"
+            ktlint: "0.20.0"
     ]
 }
 
 subprojects {
     apply plugin: 'org.jetbrains.dokka'
-    apply plugin: "jacoco"
 
     apply from: "$rootDir/tools/quality.gradle"
     apply from: "$rootDir/tools/jacoco.gradle"
-    apply from: "$rootDir/tools/detekt.gradle"
-
-    jacoco.toolVersion = "0.8.0"
-
-    task jacocoRootReport(type: JacocoReport) {
-
-        group "Reporting"
-        description "Generate Jacoco coverage reports."
-
-        reports {
-            xml.enabled = false
-            html.enabled = true
-        }
-
-        def excludeProjects = ["sample"]
-
-        // Collecting all source sets, compiled classes and coverage binaries from sub projects
-        def sourceSets = subprojects.findAll { project -> !excludeProjects.contains(project.name) }
-                .collect { project -> project.jacocoReport.sourceDirectories }.flatten()
-        def classDirs = subprojects.findAll { project -> !excludeProjects.contains(project.name) }
-                .collect { project -> project.jacocoReport.classDirectories }.flatten()
-        def coverageBinaries = subprojects.findAll { project -> !excludeProjects.contains(project.name) }
-                .collect { project -> project.jacocoReport.executionData }.flatten()
-
-        sourceDirectories = files(sourceSets)
-        classDirectories = files(classDirs)
-        executionData = files(coverageBinaries)
-    }
 
     dokka {
         outputFormat = 'html'
         outputDirectory = "$buildDir/javadoc"
     }
+}
+
+jacoco.toolVersion = "0.8.0"
+
+task jacocoRootReport(type: JacocoReport) {
+
+    group "Reporting"
+    description "Generate Jacoco coverage reports."
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+
+    def excludeProjects = ["sample"]
+
+    // Collecting all source sets, compiled classes and coverage binaries from sub projects
+    def sourceSets = subprojects.findAll { project -> !excludeProjects.contains(project.name) }
+            .collect { project -> project.jacocoReport.sourceDirectories }.flatten()
+    def classDirs = subprojects.findAll { project -> !excludeProjects.contains(project.name) }
+            .collect { project -> project.jacocoReport.classDirectories }.flatten()
+    def coverageBinaries = subprojects.findAll { project -> !excludeProjects.contains(project.name) }
+            .collect { project -> project.jacocoReport.executionData }.flatten()
+
+    sourceDirectories = files(sourceSets)
+    classDirectories = files(classDirs)
+    executionData = files(coverageBinaries)
 }
 
 task clean(type: Delete) {
