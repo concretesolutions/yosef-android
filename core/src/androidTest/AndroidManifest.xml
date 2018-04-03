@@ -13,6 +13,9 @@
         <activity
                 android:theme="@style/Theme.AppCompat.Light"
                 android:name=".activities.FrameActivity" />
+        <activity
+            android:theme="@style/Theme.AppCompat.Light"
+            android:name=".activities.ElementListActivity" />
     </application>
 
 </manifest>
