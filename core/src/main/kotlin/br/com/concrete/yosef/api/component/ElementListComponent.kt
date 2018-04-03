@@ -1,6 +1,8 @@
 package br.com.concrete.yosef.api.component
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
@@ -52,6 +54,9 @@ class ElementListComponent : Component {
         return ListView(context).apply {
             tag = ELEMENT_LIST
             layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+            selector = ColorDrawable(Color.TRANSPARENT)
+            divider = null
+            dividerHeight = 0
         }
     }
 }
