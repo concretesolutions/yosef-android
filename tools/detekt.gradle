@@ -1,5 +1,5 @@
 detekt {
-    version = rootProject.ext.detektVersion
+    version = rootProject.ext.detekt
     profile("main") {
         input = "$projectDir"
         config = "$projectDir/default-detekt-config.yml"

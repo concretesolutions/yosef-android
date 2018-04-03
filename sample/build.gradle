@@ -1,20 +1,31 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    final build = rootProject.ext.buildVersions
+
+    compileSdkVersion build.compileSdk
 
     defaultConfig {
         applicationId "br.com.concrete.yosef"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion build.minSdk
+        targetSdkVersion build.targetSdk
+
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        androidTest.java.srcDirs += "src/androidTest/kotlin"
     }
 
     buildTypes {
@@ -23,30 +34,28 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':core')
     implementation project(':picasso')
-//    implementation project(':lottie')
+    implementation project(':lottie')
     implementation project(':glide')
 
-    //kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
-    // support libraries
-    implementation "com.android.support:appcompat-v7:$supportVersion"
-    testImplementation 'junit:junit:4.12'
+    final libs = rootProject.ext.libsVersions
+    implementation "com.android.support:appcompat-v7:$libs.support"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$libs.kotlin"
+
+    // Tests
+    final testLibs = rootProject.ext.testLibsVersions
+    testImplementation "junit:junit:$testLibs.jUnit"
+    testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$testLibs.mockitoKotlin"
+    testImplementation "org.robolectric:robolectric:$testLibs.roboeletric"
+
+    // Instrumented tests
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    // Quality
+    ktlint "com.github.shyiko:ktlint:$rootProject.ext.lintersVersions.ktlint"
 }

@@ -9,6 +9,7 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlin.math.roundToInt
 
 inline fun <reified T> Gson.fromJson(json: String) =
     this.fromJson<T>(json, object : TypeToken<T>() {}.type)!!
@@ -28,7 +29,7 @@ fun Float.dp(context: Context): Float {
 }
 
 fun Int.dp(context: Context): Int {
-    return this.toFloat().dp(context).toInt()
+    return this.toFloat().dp(context).roundToInt()
 }
 
 @VisibleForTesting
