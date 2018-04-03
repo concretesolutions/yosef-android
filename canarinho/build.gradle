@@ -1,19 +1,20 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply from: '../tools/quality.gradle'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    final build = rootProject.ext.buildVersions
+
+    compileSdkVersion build.compileSdk
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion build.minSdk
+        targetSdkVersion build.targetSdk
+
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     compileOptions {
@@ -23,17 +24,11 @@ android {
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
-        androidTest {
-            java.srcDirs = ["src/androidTest/kotlin"]
-            res.srcDirs = ["src/androidTest/res"]
-            assets.srcDirs = ["src/androidTest/assets"]
-        }
+        androidTest.java.srcDirs += "src/androidTest/kotlin"
     }
 
     buildTypes {
-
         debug {
-            debuggable true
             testCoverageEnabled true
         }
 
@@ -42,19 +37,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation project(':core')
-    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
-    api "br.com.concretesolutions:canarinho:$rootProject.ext.canarinhoVersion"
+
+    final libs = rootProject.ext.libsVersions
+    implementation "com.android.support:appcompat-v7:$libs.support"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$libs.kotlin"
+    api "br.com.concretesolutions:canarinho:$libs.canarinho"
+
+    // Instrumented tests
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     // quality
-    ktlint "com.github.shyiko:ktlint:$rootProject.ext.ktlintVersion"
+    ktlint "com.github.shyiko:ktlint:$rootProject.ext.lintersVersions.ktlint"
 }

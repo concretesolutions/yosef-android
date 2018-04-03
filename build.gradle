@@ -1,13 +1,14 @@
 buildscript {
-    ext.kotlin_version = "1.2.20"
+    ext.kotlin_version = "1.2.31"
     ext.dokka_version = "0.9.16"
+    ext.detekt = "1.0.0.RC6-3"
 
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:3.0.1"
+        classpath 'com.android.tools.build:gradle:3.1.0'
         //noinspection DifferentKotlinGradleVersion
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokka_version"
@@ -15,11 +16,10 @@ buildscript {
     }
 }
 
-plugins {
-    id "io.gitlab.arturbosch.detekt" version "1.0.0.RC6-3"
-}
-
-apply plugin: 'org.jetbrains.dokka'
+// Order is important here
+plugins { id "io.gitlab.arturbosch.detekt" version "1.0.0.RC6-3" }
+apply plugin: "jacoco"
+apply from: "$rootDir/tools/detekt.gradle"
 
 allprojects {
     repositories {
@@ -28,18 +28,54 @@ allprojects {
     }
 }
 
+ext {
+    buildVersions = [
+            minSdk    : 16,
+            targetSdk : 27,
+            compileSdk: 27,
+            buildTools: "27.0.2"
+    ]
+
+    libsVersions = [
+            kotlin    : kotlin_version,
+            support   : "27.1.0",
+            constraint: "1.0.2",
+            picasso   : "2.5.2",
+            glide     : "4.6.1",
+            gson      : "2.8.2",
+            canarinho : "1.2.0",
+            lottie    : "2.5.0-rc1"
+    ]
+
+    testLibsVersions = [
+            jUnit        : "4.12",
+            espresso     : "3.0.1",
+            mockito      : "2.12.0",
+            mockitoKotlin: "1.5.0",
+            roboeletric  : "3.6.1"
+    ]
+
+    lintersVersions = [
+            ktlint: "0.20.0"
+    ]
+}
+
 subprojects {
-    apply from: rootProject.file("tools/jacoco.gradle")
     apply plugin: 'org.jetbrains.dokka'
+
+    apply from: "$rootDir/tools/quality.gradle"
+    apply from: "$rootDir/tools/jacoco.gradle"
+
+    dokka {
+        outputFormat = 'html'
+        outputDirectory = "$buildDir/javadoc"
+    }
 }
 
-apply plugin: "jacoco"
-
-jacoco {
-    toolVersion = "0.8.0"
-}
+jacoco.toolVersion = "0.8.0"
 
 task jacocoRootReport(type: JacocoReport) {
+
     group "Reporting"
     description "Generate Jacoco coverage reports."
 
@@ -50,7 +86,7 @@ task jacocoRootReport(type: JacocoReport) {
 
     def excludeProjects = ["sample"]
 
-    // collecting all source sets, compiled classes and coverage binaries from sub projects
+    // Collecting all source sets, compiled classes and coverage binaries from sub projects
     def sourceSets = subprojects.findAll { project -> !excludeProjects.contains(project.name) }
             .collect { project -> project.jacocoReport.sourceDirectories }.flatten()
     def classDirs = subprojects.findAll { project -> !excludeProjects.contains(project.name) }
@@ -63,37 +99,6 @@ task jacocoRootReport(type: JacocoReport) {
     executionData = files(coverageBinaries)
 }
 
-dokka {
-    outputFormat = 'html'
-    outputDirectory = "$buildDir/javadoc"
-}
-
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
-ext {
-    kotlinVersion = kotlin_version
-    minSdkVersion = 16
-    targetSdkVersion = 27
-    compileSdkVersion = 27
-    buildToolsVersion = "27.0.2"
-
-    supportVersion = "27.1.0"
-    constraintVersion = "1.0.2"
-    picassoVersion = "2.5.2"
-    glideVersion = "4.6.1"
-    jUnitVersion = "4.12"
-    espressoVersion = "3.0.1"
-    mockitoVersion = "2.12.0"
-    mockitoKotlinVersion = "1.5.0"
-    gsonVersion = "2.8.2"
-    roboeletricVersion = "3.6.1"
-    canarinhoVersion = "1.2.0"
-    lottieVersion = "2.5.0-rc1"
-    ktlintVersion = "0.20.0"
-    detektVersion = "1.0.0.RC6-3"
-}
-
-
-apply from: "tools/detekt.gradle"
