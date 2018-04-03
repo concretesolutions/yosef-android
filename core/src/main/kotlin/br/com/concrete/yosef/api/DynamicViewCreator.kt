@@ -3,11 +3,14 @@ package br.com.concrete.yosef.api
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.ListView
 import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.DynamicViewCreator.Builder
 import br.com.concrete.yosef.api.component.*
 import br.com.concrete.yosef.api.component.ButtonComponent.Companion.BUTTON_TYPE
 import br.com.concrete.yosef.api.component.ElementGroupComponent.Companion.ELEMENT_GROUP
+import br.com.concrete.yosef.api.component.ElementListComponent.Companion.ELEMENT_LIST
 import br.com.concrete.yosef.api.component.FrameComponent.Companion.FRAME
 import br.com.concrete.yosef.api.component.RadioButtonComponent.Companion.RADIO_BUTTON
 import br.com.concrete.yosef.api.component.RadioGroupButtonComponent.Companion.RADIO_GROUP_BUTTON
@@ -57,12 +60,43 @@ class DynamicViewCreator(
                     "not a ViewGroup.")
             }
 
-            it.forEach { addChildrenRecursively(parentView, it, listener) }
+            if (parentView is ListView) {
+                addChildrenToParentListView(it, parentView, context, listener)
+            } else {
+                it.forEach {
+                    addChildrenRecursively(parentView, it, listener)
+                }
+            }
         }
 
         component.applyProperties(parentView, componentSpec.dynamicProperties, listener)
 
         return parentView
+    }
+
+    private fun addChildrenToParentListView(children: List<DynamicComponent>, listView: ListView, context: Context, listener: OnActionListener?) {
+        val listOfViews: ArrayList<View> = ArrayList()
+        children.forEach {
+            val comp = getComponentByType(it)
+            val view = comp.createView(listView.context)
+            it.children?.forEach { addChildrenRecursively(view as ViewGroup, it) }
+
+            val frameLayout = FrameLayout(context)
+            frameLayout.addView(view)
+            comp.applyProperties(view, it.dynamicProperties, listener)
+            listOfViews.add(frameLayout)
+        }
+
+        listView.adapter = ElementListAdapter(listOfViews)
+    }
+
+    private fun getComponentByType(it: DynamicComponent): Component {
+        if (components[it.type] == null) {
+            throw IllegalStateException("There are no components registered " +
+                "in this ViewCreator that can render ${it.type}")
+        }
+
+        return components[it.type]!!
     }
 
     /**
@@ -81,14 +115,8 @@ class DynamicViewCreator(
     ) {
         if (childComponent == null) return
 
-        if (components[childComponent.type] == null) {
-            throw IllegalStateException("There are no components registered " +
-                "in this ViewCreator that can render ${childComponent.type}")
-        }
-
-        val component = components[childComponent.type]!!
+        val component = getComponentByType(childComponent)
         val view = component.createView(topLevelViewGroup.context)
-
         childComponent.children?.forEach { addChildrenRecursively(view as ViewGroup, it) }
 
         topLevelViewGroup.addView(view)
@@ -114,7 +142,8 @@ class DynamicViewCreator(
                 RADIO_BUTTON to RadioButtonComponent(),
                 RADIO_GROUP_BUTTON to RadioGroupButtonComponent(),
                 FRAME to FrameComponent(),
-                SEPARATOR to SeparatorComponent()
+                SEPARATOR to SeparatorComponent(),
+                ELEMENT_LIST to ElementListComponent()
             )
         }
 
