@@ -13,6 +13,10 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokka_version"
         classpath "org.jacoco:org.jacoco.core:0.8.0"
+
+        // Release
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }
 }
 
@@ -29,6 +33,8 @@ allprojects {
 }
 
 ext {
+    version = '1.0.0'
+
     buildVersions = [
             minSdk    : 16,
             targetSdk : 27,
@@ -67,7 +73,7 @@ subprojects {
     apply from: "$rootDir/tools/jacoco.gradle"
 
     dokka {
-        outputFormat = 'html'
+        outputFormat = 'javadoc'
         outputDirectory = "$buildDir/javadoc"
     }
 }
