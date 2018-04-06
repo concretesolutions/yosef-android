@@ -31,8 +31,7 @@ class DynamicViewCreator(
 ) {
 
     /**
-     * This method creates a list of [DynamicComponent] by the passed json and calls
-     * [addChildrenRecursively] method to add them to the parent view
+     * This method creates a view from a list of [DynamicComponent] based on the [json]
      *
      * @param context [Context] needed to create views
      * @param json formatted json according with the library protocol. This json will have
@@ -54,73 +53,12 @@ class DynamicViewCreator(
         val parentView = component.createView(context)
 
         componentSpec.children?.let {
-            if (parentView !is ViewGroup) {
-                throw IllegalStateException("Can not add children to component " +
-                    "with type ${componentSpec.type}. ${parentView.javaClass.name} is " +
-                    "not a ViewGroup.")
-            }
-
-            if (parentView is ListView) {
-                addChildrenToParentListView(it, parentView, context, listener)
-            } else {
-                it.forEach {
-                    addChildrenRecursively(parentView, it, listener)
-                }
-            }
+            component.addComponentsAsChildren(it, parentView, components, listener)
         }
 
         component.applyProperties(parentView, componentSpec.dynamicProperties, listener)
 
         return parentView
-    }
-
-    private fun addChildrenToParentListView(children: List<DynamicComponent>, listView: ListView, context: Context, listener: OnActionListener?) {
-        val listOfViews: ArrayList<View> = ArrayList()
-        children.forEach {
-            val comp = getComponentByType(it)
-            val view = comp.createView(listView.context)
-            it.children?.forEach { addChildrenRecursively(view as ViewGroup, it) }
-
-            val frameLayout = FrameLayout(context)
-            frameLayout.addView(view)
-            comp.applyProperties(view, it.dynamicProperties, listener)
-            listOfViews.add(frameLayout)
-        }
-
-        listView.adapter = ElementListAdapter(listOfViews)
-    }
-
-    private fun getComponentByType(it: DynamicComponent): Component {
-        if (components[it.type] == null) {
-            throw IllegalStateException("There are no components registered " +
-                "in this ViewCreator that can render ${it.type}")
-        }
-
-        return components[it.type]!!
-    }
-
-    /**
-     * Method that adds components to the parent, possibly also adding children
-     * of the created components
-     *
-     * @param topLevelViewGroup the parent who will group the components
-     * @param childComponent the component that should be created and added in the parent
-     * @param listener is the responsible for calling events that
-     * are related with components actions
-     */
-    private fun addChildrenRecursively(
-        topLevelViewGroup: ViewGroup,
-        childComponent: DynamicComponent?,
-        listener: OnActionListener? = null
-    ) {
-        if (childComponent == null) return
-
-        val component = getComponentByType(childComponent)
-        val view = component.createView(topLevelViewGroup.context)
-        childComponent.children?.forEach { addChildrenRecursively(view as ViewGroup, it) }
-
-        topLevelViewGroup.addView(view)
-        component.applyProperties(view, childComponent.dynamicProperties, listener)
     }
 
     /**
@@ -167,6 +105,17 @@ class DynamicViewCreator(
          */
         fun build(): DynamicViewCreator {
             return DynamicViewCreator(components, gson)
+        }
+    }
+
+    companion object {
+        internal fun getComponentByType(dynamicComponent: DynamicComponent, components: Map<String, Component>): Component {
+            if (components[dynamicComponent.type] == null) {
+                throw IllegalStateException("There are no components registered " +
+                    "in this ViewCreator that can render ${dynamicComponent.type}")
+            }
+
+            return components[dynamicComponent.type]!!
         }
     }
 }

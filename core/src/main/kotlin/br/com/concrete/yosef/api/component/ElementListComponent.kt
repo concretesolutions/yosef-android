@@ -6,9 +6,10 @@ import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.widget.LinearLayout
+import android.widget.FrameLayout
 import android.widget.ListView
 import br.com.concrete.yosef.OnActionListener
+import br.com.concrete.yosef.api.DynamicViewCreator
 import br.com.concrete.yosef.api.property.DynamicPropertyCommand
 import br.com.concrete.yosef.api.property.color.BackgroundColorCommand
 import br.com.concrete.yosef.api.property.color.BackgroundColorCommand.Companion.BACKGROUND_COLOR
@@ -18,6 +19,7 @@ import br.com.concrete.yosef.api.property.spacing.MarginPropertyCommand
 import br.com.concrete.yosef.api.property.spacing.MarginPropertyCommand.Companion.MARGIN
 import br.com.concrete.yosef.api.property.spacing.PaddingPropertyCommand
 import br.com.concrete.yosef.api.property.spacing.PaddingPropertyCommand.Companion.PADDING
+import br.com.concrete.yosef.entity.DynamicComponent
 import br.com.concrete.yosef.entity.DynamicProperty
 
 /**
@@ -58,5 +60,14 @@ class ElementListComponent : Component {
             divider = null
             dividerHeight = 0
         }
+    }
+
+    override fun addComponentsAsChildren(
+        children: List<DynamicComponent>,
+        view: View,
+        components: Map<String, Component>,
+        listener: OnActionListener?
+    ) {
+        (view as ListView).adapter = ElementListAdapter(children, components, listener)
     }
 }
