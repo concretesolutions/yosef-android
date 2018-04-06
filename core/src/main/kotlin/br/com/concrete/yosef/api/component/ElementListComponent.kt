@@ -6,13 +6,13 @@ import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.widget.FrameLayout
 import android.widget.ListView
 import br.com.concrete.yosef.OnActionListener
-import br.com.concrete.yosef.api.DynamicViewCreator
 import br.com.concrete.yosef.api.property.DynamicPropertyCommand
 import br.com.concrete.yosef.api.property.color.BackgroundColorCommand
 import br.com.concrete.yosef.api.property.color.BackgroundColorCommand.Companion.BACKGROUND_COLOR
+import br.com.concrete.yosef.api.property.elementlist.SelectorColorCommand
+import br.com.concrete.yosef.api.property.elementlist.SelectorColorCommand.Companion.SELECTOR_COLOR
 import br.com.concrete.yosef.api.property.id.IdCommand
 import br.com.concrete.yosef.api.property.id.IdCommand.Companion.ID
 import br.com.concrete.yosef.api.property.spacing.MarginPropertyCommand
@@ -39,6 +39,7 @@ class ElementListComponent : Component {
         PADDING to PaddingPropertyCommand(),
         MARGIN to MarginPropertyCommand(),
         BACKGROUND_COLOR to BackgroundColorCommand(),
+        SELECTOR_COLOR to SelectorColorCommand(),
         ID to IdCommand()
     )
 
@@ -56,9 +57,8 @@ class ElementListComponent : Component {
         return ListView(context).apply {
             tag = ELEMENT_LIST
             layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
-            selector = ColorDrawable(Color.TRANSPARENT)
-            divider = null
             dividerHeight = 0
+            selector = ColorDrawable(Color.TRANSPARENT)
         }
     }
 
