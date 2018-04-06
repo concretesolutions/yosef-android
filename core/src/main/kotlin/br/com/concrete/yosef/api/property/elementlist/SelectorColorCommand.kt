@@ -34,6 +34,11 @@ class SelectorColorCommand : DynamicPropertyCommand {
                 "cannot be parsed as a color")
         }
 
-        (view as ListView).selector = ColorDrawable(color)
+        if (view is ListView) {
+            view.selector = ColorDrawable(color)
+        } else {
+            throw UnsupportedOperationException("The $SELECTOR_COLOR property cannot be " +
+                "applied to ${view.javaClass.simpleName}")
+        }
     }
 }
