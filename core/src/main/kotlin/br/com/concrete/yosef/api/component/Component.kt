@@ -34,11 +34,12 @@ interface Component {
     )
 
     /**
-     * Method that checks which properties will be applied to the view
+     * Method that adds [children] to the component
      *
+     * @param children the list of components that will be added to this component
      * @param view in which the properties should be applied to
-     * @param dynamicProperties the list of properties to style the view
-     * @param actionListener Listener that receives actions from the components
+     * @param components the map of the supported components
+     * @param listener that receives actions from the components
      */
     fun addComponentsAsChildren(
         children: List<DynamicComponent>,
