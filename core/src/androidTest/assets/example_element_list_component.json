@@ -1,0 +1,52 @@
+{
+  "type": "elementList",
+  "properties": [
+    {
+      "name": "backgroundColor",
+      "type": "color",
+      "value": "#f6f9fd"
+    }
+  ],
+  "children": [
+    {
+      "type": "text",
+      "properties": [
+        {
+          "name": "text",
+          "type": "string",
+          "value": "FIRST TEXT"
+        },
+        {
+          "name": "textColor",
+          "type": "color",
+          "value": "#3F51B5"
+        },
+        {
+          "name": "textSize",
+          "type": "dimen",
+          "value": "48"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "properties": [
+        {
+          "name": "text",
+          "type": "string",
+          "value": "SECOND TEXT"
+        },
+        {
+          "name": "textColor",
+          "type": "color",
+          "value": "#FF4081"
+        },
+        {
+          "name": "textSize",
+          "type": "dimen",
+          "value": "48"
+        }
+      ]
+    }
+  ]
+}
