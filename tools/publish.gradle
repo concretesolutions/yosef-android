@@ -3,7 +3,7 @@ apply plugin: 'org.jetbrains.dokka'
 
 // Maven Group ID for the artifact
 group = 'br.com.concrete'
-version = rootProject.ext.version
+version = rootProject.version
 
 install {
     repositories.mavenInstaller {
