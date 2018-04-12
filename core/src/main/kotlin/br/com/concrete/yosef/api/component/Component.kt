@@ -3,6 +3,7 @@ package br.com.concrete.yosef.api.component
 import android.content.Context
 import android.view.View
 import br.com.concrete.yosef.OnActionListener
+import br.com.concrete.yosef.entity.DynamicComponent
 import br.com.concrete.yosef.entity.DynamicProperty
 
 /**
@@ -31,4 +32,21 @@ interface Component {
         dynamicProperties: List<DynamicProperty>,
         actionListener: OnActionListener?
     )
+
+    /**
+     * Method that adds [children] to the component
+     *
+     * @param children the list of components that will be added to this component
+     * @param view in which the properties should be applied to
+     * @param components the map of the supported components
+     * @param listener that receives actions from the components
+     */
+    fun addComponentsAsChildren(
+        children: List<DynamicComponent>,
+        view: View,
+        components: Map<String, Component>,
+        listener: OnActionListener?
+    ) {
+        throw UnsupportedOperationException("${this.javaClass.simpleName} doesn't support adding views as children.")
+    }
 }

@@ -1,7 +1,8 @@
 buildscript {
-    ext.kotlin_version = "1.2.31"
-    ext.dokka_version = "0.9.16"
-    ext.detekt = "1.0.0.RC6-3"
+    ext.kotlin_version = '1.2.31'
+    ext.dokka_version = '0.9.16'
+    ext.detekt = '1.0.0.RC6-3'
+    ext.jacoco_version = '0.8.1'
 
     repositories {
         google()
@@ -12,7 +13,11 @@ buildscript {
         //noinspection DifferentKotlinGradleVersion
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokka_version"
-        classpath "org.jacoco:org.jacoco.core:0.8.0"
+        classpath "org.jacoco:org.jacoco.core:$jacoco_version"
+
+        // Release
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }
 }
 
@@ -28,17 +33,19 @@ allprojects {
     }
 }
 
+version = '1.1.0'
+
 ext {
+
     buildVersions = [
             minSdk    : 16,
             targetSdk : 27,
             compileSdk: 27,
-            buildTools: "27.0.2"
     ]
 
     libsVersions = [
             kotlin    : kotlin_version,
-            support   : "27.1.0",
+            support   : "27.1.1",
             constraint: "1.0.2",
             picasso   : "2.5.2",
             glide     : "4.6.1",
@@ -52,7 +59,7 @@ ext {
             espresso     : "3.0.1",
             mockito      : "2.12.0",
             mockitoKotlin: "1.5.0",
-            roboeletric  : "3.6.1"
+            roboeletric  : "3.8"
     ]
 
     lintersVersions = [
@@ -67,12 +74,12 @@ subprojects {
     apply from: "$rootDir/tools/jacoco.gradle"
 
     dokka {
-        outputFormat = 'html'
+        outputFormat = 'javadoc'
         outputDirectory = "$buildDir/javadoc"
     }
 }
 
-jacoco.toolVersion = "0.8.0"
+jacoco.toolVersion jacoco_version
 
 task jacocoRootReport(type: JacocoReport) {
 

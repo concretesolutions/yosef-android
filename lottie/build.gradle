@@ -56,3 +56,22 @@ dependencies {
     // quality
     ktlint "com.github.shyiko:ktlint:$rootProject.ext.lintersVersions.ktlint"
 }
+
+// Set up publication
+ext {
+    artifact = 'yosef-lottie'
+    libraryName = 'Android Yosef Lottie Plugin'
+    libraryDescription = 'Android Yosef plugin for Lottie views'
+}
+
+def localProps = project.rootProject.file('local.properties')
+
+if (localProps.exists()) {
+    final Properties properties = new Properties()
+    properties.load(localProps.newDataInputStream())
+    final user = properties.getProperty('bintray.user')
+    final apikey = properties.getProperty('bintray.apikey')
+
+    if (user && apikey)
+        apply from: "$rootDir/tools/publish.gradle"
+}

@@ -73,7 +73,7 @@ internal class GravityCommand : DynamicPropertyCommand {
             return
         }
 
-        throw IllegalArgumentException("The $GRAVITY property can be " +
+        throw IllegalArgumentException("The $GRAVITY property cannot be " +
             "applied to view ${view.javaClass.name}")
     }
 }

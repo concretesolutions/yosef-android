@@ -59,3 +59,22 @@ dependencies {
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 }
+
+// Set up publication
+ext {
+    artifact = 'yosef-picasso'
+    libraryName = 'Android Yosef Picasso Plugin'
+    libraryDescription = 'Android Yosef plugin for Picasso views'
+}
+
+def localProps = project.rootProject.file('local.properties')
+
+if (localProps.exists()) {
+    final Properties properties = new Properties()
+    properties.load(localProps.newDataInputStream())
+    final user = properties.getProperty('bintray.user')
+    final apikey = properties.getProperty('bintray.apikey')
+
+    if (user && apikey)
+        apply from: "$rootDir/tools/publish.gradle"
+}

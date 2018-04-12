@@ -1,5 +1,6 @@
 Yosef
 ===================
+[![Build](https://circleci.com/gh/concretesolutions/yosef-android.svg?style=shield)](https://circleci.com/gh/concretesolutions/yosef-android)
 
 Yosef is a multi-platform library that generates views from JSON specification.
 It's useful for A/B testing and providing users with dynamic content without shipping updates to the Play Store.
