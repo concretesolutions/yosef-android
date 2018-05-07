@@ -49,6 +49,7 @@ class GlideImageComponent(
     override fun createView(context: Context): View {
         return ImageView(context).apply {
             layoutParams = ViewGroup.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+            adjustViewBounds = true
         }
     }
 }
