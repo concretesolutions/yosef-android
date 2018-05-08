@@ -10,6 +10,8 @@ import br.com.concrete.yosef.api.component.Component
 import br.com.concrete.yosef.api.property.DynamicPropertyCommand
 import br.com.concrete.yosef.api.property.id.IdCommand
 import br.com.concrete.yosef.api.property.id.IdCommand.Companion.ID
+import br.com.concrete.yosef.api.property.size.AspectRatioCommand
+import br.com.concrete.yosef.api.property.size.AspectRatioCommand.Companion.ASPECT_RATIO
 import br.com.concrete.yosef.api.property.size.HeightCommand
 import br.com.concrete.yosef.api.property.size.HeightCommand.Companion.HEIGHT_TYPE
 import br.com.concrete.yosef.api.property.size.WidthCommand
@@ -32,6 +34,7 @@ class PicassoImageComponent(
         HEIGHT_TYPE to HeightCommand(),
         SCALE_TYPE to ScaleTypePropertyCommand(),
         IMAGE_URL to ImageUrlCommand(picasso),
+        ASPECT_RATIO to AspectRatioCommand(),
         ID to IdCommand()
     )
 
