@@ -28,7 +28,7 @@ class AspectRatioCommand : DynamicPropertyCommand {
             } else {
                 throw IllegalArgumentException("Can't apply ${dynamicProperty.name}" +
                     " with value ${dynamicProperty.value}, it does not apply the property " +
-                    "format. (i.e.:'16:9')")
+                    "format('16:9' for example).")
             }
         } else {
             throw IllegalArgumentException("Can't apply ${dynamicProperty.name}" +
