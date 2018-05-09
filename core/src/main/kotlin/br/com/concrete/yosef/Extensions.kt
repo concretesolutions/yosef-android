@@ -3,10 +3,12 @@ package br.com.concrete.yosef
 import android.content.Context
 import android.os.Build
 import android.support.annotation.VisibleForTesting
+import android.support.v4.view.ViewCompat
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import android.view.ViewTreeObserver
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlin.math.roundToInt
@@ -51,4 +53,13 @@ fun View.layoutAndAssert(action: (view: View) -> Unit) {
         }
     })
     layout(0, 0, layoutParams?.width ?: MATCH_PARENT, layoutParams?.height ?: WRAP_CONTENT)
+}
+
+fun String.canBeConvertedToInt(): Boolean {
+    return try {
+        this.toInt()
+        true
+    } catch (e: NumberFormatException) {
+        false
+    }
 }
