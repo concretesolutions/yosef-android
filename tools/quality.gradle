@@ -8,5 +8,5 @@ task ktlint(type: JavaExec, group: "verification") {
     main = "com.github.shyiko.ktlint.Main"
     args "src/**/*.kt"
     args "--android=true"
-    args "--reporter=html,artifact=com.github.mcassiano:ktlint-html-reporter:0.0.1,output=${buildDir}/ktlint.html"
+    args "--reporter=html,artifact=com.github.mcassiano:ktlint-html-reporter:0.1.2,output=${buildDir}/ktlint.html"
 }

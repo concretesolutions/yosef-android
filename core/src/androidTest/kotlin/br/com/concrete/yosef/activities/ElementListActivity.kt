@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
 import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.DynamicViewCreator
-import br.com.concrete.yosef.test.R
 
 class ElementListActivity : AppCompatActivity(), OnActionListener {
 
