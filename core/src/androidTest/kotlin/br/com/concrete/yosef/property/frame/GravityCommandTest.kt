@@ -48,12 +48,13 @@ class GravityCommandTest {
     fun whenSetBottomGravityProperty_shouldApplyItToTheView() {
         val dynamicProperty = DynamicProperty(GRAVITY, "dimen", BOTTOM)
         val linearLayout = LinearLayout(parent.context)
+        val params = linearLayout.layoutParams
 
         parent.addView(linearLayout)
         gravityCommand.apply(linearLayout, dynamicProperty)
 
-        assertTrue(linearLayout.layoutParams is FrameLayout.LayoutParams)
-        assertTrue((linearLayout.layoutParams as FrameLayout.LayoutParams).gravity == Gravity.BOTTOM)
+        assertTrue(params is FrameLayout.LayoutParams)
+        assertTrue((params as FrameLayout.LayoutParams).gravity == Gravity.BOTTOM)
     }
 
     @Test
@@ -72,12 +73,13 @@ class GravityCommandTest {
     fun whenSetCenterGravityProperty_shouldApplyItToTheView() {
         val dynamicProperty = DynamicProperty(GRAVITY, "dimen", CENTER)
         val linearLayout = LinearLayout(parent.context)
+        val params = linearLayout.layoutParams
 
         parent.addView(linearLayout)
         gravityCommand.apply(linearLayout, dynamicProperty)
 
-        assertTrue(linearLayout.layoutParams is FrameLayout.LayoutParams)
-        assertTrue((linearLayout.layoutParams as FrameLayout.LayoutParams).gravity == Gravity.CENTER)
+        assertTrue(params is FrameLayout.LayoutParams)
+        assertTrue((params as FrameLayout.LayoutParams).gravity == Gravity.CENTER)
     }
 
     @Test

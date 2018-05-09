@@ -47,6 +47,8 @@ interface Component {
         components: Map<String, Component>,
         listener: OnActionListener?
     ) {
-        throw UnsupportedOperationException("${this.javaClass.simpleName} doesn't support adding views as children.")
+        throw UnsupportedOperationException(
+                "${this.javaClass.simpleName} doesn't support adding views as children."
+        )
     }
 }

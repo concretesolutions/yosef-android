@@ -26,7 +26,6 @@ class ScaleTypePropertyCommand : DynamicPropertyCommand {
                 view.adjustViewBounds = true
                 view.scaleType = ImageView.ScaleType.CENTER_CROP
             }
-
         }
     }
 }

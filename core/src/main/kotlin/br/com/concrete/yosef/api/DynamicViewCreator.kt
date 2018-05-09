@@ -4,7 +4,8 @@ import android.content.Context
 import android.view.View
 import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.DynamicViewCreator.Builder
-import br.com.concrete.yosef.api.component.*
+import br.com.concrete.yosef.api.component.ButtonComponent
+import br.com.concrete.yosef.api.component.Component
 import br.com.concrete.yosef.api.component.ButtonComponent.Companion.BUTTON_TYPE
 import br.com.concrete.yosef.api.component.ElementGroupComponent.Companion.ELEMENT_GROUP
 import br.com.concrete.yosef.api.component.ElementListComponent.Companion.ELEMENT_LIST
@@ -12,7 +13,15 @@ import br.com.concrete.yosef.api.component.FrameComponent.Companion.FRAME
 import br.com.concrete.yosef.api.component.RadioButtonComponent.Companion.RADIO_BUTTON
 import br.com.concrete.yosef.api.component.RadioGroupButtonComponent.Companion.RADIO_GROUP_BUTTON
 import br.com.concrete.yosef.api.component.SeparatorComponent.Companion.SEPARATOR
+import br.com.concrete.yosef.api.component.TextFieldComponent
 import br.com.concrete.yosef.api.component.TextFieldComponent.Companion.TEXT_FIELD
+import br.com.concrete.yosef.api.component.TextViewComponent
+import br.com.concrete.yosef.api.component.ElementGroupComponent
+import br.com.concrete.yosef.api.component.RadioButtonComponent
+import br.com.concrete.yosef.api.component.RadioGroupButtonComponent
+import br.com.concrete.yosef.api.component.FrameComponent
+import br.com.concrete.yosef.api.component.SeparatorComponent
+import br.com.concrete.yosef.api.component.ElementListComponent
 import br.com.concrete.yosef.api.component.TextViewComponent.Companion.TEXT_TYPE
 import br.com.concrete.yosef.entity.DynamicComponent
 import br.com.concrete.yosef.fromJson
@@ -106,7 +115,10 @@ class DynamicViewCreator(
     }
 
     companion object {
-        internal fun getComponentByType(dynamicComponent: DynamicComponent, components: Map<String, Component>): Component {
+        internal fun getComponentByType(
+            dynamicComponent: DynamicComponent,
+            components: Map<String, Component>
+        ): Component {
             if (components[dynamicComponent.type] == null) {
                 throw IllegalStateException("There are no components registered " +
                     "in this ViewCreator that can render ${dynamicComponent.type}")
