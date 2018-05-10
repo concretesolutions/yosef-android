@@ -22,7 +22,7 @@ class HeightCommand : DynamicPropertyCommand {
     }
 
     override fun apply(view: View, dynamicProperty: DynamicProperty) {
-        if (dynamicProperty.type == "string") {
+        if (dynamicProperty.type == "dimenSpec") {
             when (dynamicProperty.value) {
                 MATCH -> view.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
                 WRAP -> view.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
