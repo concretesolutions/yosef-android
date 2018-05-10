@@ -53,14 +53,14 @@ class AspectRatioCommand : DynamicPropertyCommand {
 
                 view.removeOnLayoutChangeListener(this)
 
-                val layoutParams = view.layoutParams
                 val correctedHeight = aspectRatioHelper.generateHeightGivenAspectRatio(
                     dynamicProperty.value,
                     view.width
                 )
-                layoutParams.height = correctedHeight
-
-                view.layoutParams = layoutParams
+                view.post {
+                    view.layoutParams.height = correctedHeight
+                    view.requestLayout()
+                }
             }
         })
     }
