@@ -41,6 +41,7 @@ dependencies {
     implementation project(':picasso')
     implementation project(':lottie')
     implementation project(':glide')
+    implementation project(':gradient')
 
     final libs = rootProject.ext.libsVersions
     implementation "com.android.support:appcompat-v7:$libs.support"
