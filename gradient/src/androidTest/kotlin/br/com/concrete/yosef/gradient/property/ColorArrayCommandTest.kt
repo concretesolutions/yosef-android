@@ -15,7 +15,6 @@ import org.junit.Test
 import org.junit.rules.ExpectedException
 import org.junit.runner.RunWith
 
-
 @RunWith(AndroidJUnit4::class)
 class ColorArrayCommandTest {
 
@@ -142,8 +141,8 @@ class ColorArrayCommandTest {
         val view = View(context)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
-        exceptionRule.expectMessage("Can't apply colors with value 'F.F.F.F, 0.0.0.0', it does not " +
-            "apply the property format('0.0.0.255, 0.0.0.0' for example).")
+        exceptionRule.expectMessage("Can't apply colors with value 'F.F.F.F, 0.0.0.0', it does " +
+            "not apply the property format('0.0.0.255, 0.0.0.0' for example).")
 
         colorArrayCommand.apply(view, dynamicProperty)
     }
