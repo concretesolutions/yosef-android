@@ -1,6 +1,5 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     final build = rootProject.ext.buildVersions
@@ -8,7 +7,6 @@ android {
     compileSdkVersion build.compileSdk
 
     defaultConfig {
-        applicationId "br.com.concrete.yosef"
         minSdkVersion build.minSdk
         targetSdkVersion build.targetSdk
 
@@ -29,34 +27,53 @@ android {
     }
 
     buildTypes {
+
+        debug {
+            debuggable true
+            testCoverageEnabled true
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
+
     implementation project(':core')
-    implementation project(':picasso')
-    implementation project(':lottie')
-    implementation project(':glide')
-    implementation project(':gradient')
 
     final libs = rootProject.ext.libsVersions
     implementation "com.android.support:appcompat-v7:$libs.support"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$libs.kotlin"
 
-    // Tests
-    final testLibs = rootProject.ext.testLibsVersions
-    testImplementation "junit:junit:$testLibs.jUnit"
-    testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$testLibs.mockitoKotlin"
-    testImplementation "org.robolectric:robolectric:$testLibs.roboeletric"
-
     // Instrumented tests
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    // Quality
+    // quality
     ktlint "com.github.shyiko:ktlint:$rootProject.ext.lintersVersions.ktlint"
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+}
+
+// Set up publication
+ext {
+    artifact = 'yosef-gradient'
+    libraryName = 'Android Yosef Gradient Plugin'
+    libraryDescription = 'Android Yosef plugin for Gradient views'
+}
+
+def localProps = project.rootProject.file('local.properties')
+
+if (localProps.exists()) {
+    final Properties properties = new Properties()
+    properties.load(localProps.newDataInputStream())
+    final user = properties.getProperty('bintray.user')
+    final apikey = properties.getProperty('bintray.apikey')
+
+    if (user && apikey)
+        apply from: "$rootDir/tools/publish.gradle"
 }

@@ -52,3 +52,13 @@ fun View.layoutAndAssert(action: (view: View) -> Unit) {
     })
     layout(0, 0, layoutParams?.width ?: MATCH_PARENT, layoutParams?.height ?: WRAP_CONTENT)
 }
+
+fun String.canBeConvertedToInt(): Boolean {
+    return try {
+        this.toInt()
+        true
+    } catch (e: NumberFormatException) {
+        e.printStackTrace()
+        false
+    }
+}

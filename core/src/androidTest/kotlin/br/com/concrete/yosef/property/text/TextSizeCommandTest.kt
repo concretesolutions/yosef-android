@@ -27,7 +27,6 @@ class TextSizeCommandTest {
 
     private lateinit var textSizeCommand: TextSizeCommand
 
-
     @Before
     fun setUp() {
         textSizeCommand = TextSizeCommand()
