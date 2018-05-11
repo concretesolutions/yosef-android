@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.CompoundButton
 import br.com.concrete.yosef.api.property.DynamicPropertyCommand
 import br.com.concrete.yosef.entity.DynamicProperty
-import br.com.concrete.yosef.isNot
+import br.com.concrete.yosef.orElse
 import br.com.concrete.yosef.supportsLollipop
 
 /**
@@ -52,12 +52,9 @@ class TintColorCommand : DynamicPropertyCommand {
                     ), intArrayOf(color)
                 )
                 view.buttonTintList = colorStateList
-            } isNot {
+            } orElse {
                 view.highlightColor = color
             }
-
-            /*if (!handled)
-                view.highlightColor = color*/
 
             return
         }
