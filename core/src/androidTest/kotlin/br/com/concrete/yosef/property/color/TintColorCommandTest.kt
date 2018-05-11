@@ -42,9 +42,9 @@ class TintColorCommandTest {
 
         if (isLollipopOrGreater()) {
             radioButton.layoutAndAssert {
-                assertTrue(
-                    radioButton.buttonTintList.defaultColor == Color.parseColor(dynamicProperty.value)
-                )
+                val actual = radioButton.buttonTintList.defaultColor
+                val expected = Color.parseColor(dynamicProperty.value)
+                assertTrue(actual == expected)
             }
         }
     }
@@ -56,10 +56,12 @@ class TintColorCommandTest {
         val radioButton = RadioButton(context)
         tintCommand.apply(radioButton, dynamicProperty)
 
-        radioButton.layoutAndAssert {
-            assertTrue(
-                radioButton.highlightColor == Color.parseColor(dynamicProperty.value)
-            )
+        if (isLollipopOrGreater().not()) {
+            radioButton.layoutAndAssert {
+                val actual = radioButton.highlightColor
+                val expected = Color.parseColor(dynamicProperty.value)
+                assertTrue(actual == expected)
+            }
         }
     }
 
@@ -86,7 +88,8 @@ class TintColorCommandTest {
         exceptionRule.expect(IllegalArgumentException::class.java)
         exceptionRule.expectMessage(
             "The value (${dynamicProperty.value}) " +
-                    "for the $TINT_COLOR property is not compatible with ${imageView.javaClass.name}"
+                    "for the $TINT_COLOR property is not compatible " +
+                    "with ${imageView.javaClass.name}"
         )
 
         tintCommand.apply(imageView, dynamicProperty)
