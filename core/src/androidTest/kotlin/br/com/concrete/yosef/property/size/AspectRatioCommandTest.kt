@@ -45,7 +45,8 @@ class AspectRatioCommandTest {
         val view = TextView(context)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
-        exceptionRule.expectMessage("Can't apply aspectRatio with value INVALID, it does not apply the property format('16:9' for example).")
+        exceptionRule.expectMessage("Can't apply aspectRatio with value INVALID, " +
+            "it does not apply the property format('16:9' for example).")
 
         aspectRatioCommand.apply(view, dynamicProperty)
     }

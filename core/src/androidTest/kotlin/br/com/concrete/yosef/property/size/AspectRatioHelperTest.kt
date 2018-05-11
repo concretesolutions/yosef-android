@@ -2,7 +2,9 @@ package br.com.concrete.yosef.property.size
 
 import android.support.test.runner.AndroidJUnit4
 import br.com.concrete.yosef.api.property.size.AspectRatioHelper
-import org.junit.Assert.*
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

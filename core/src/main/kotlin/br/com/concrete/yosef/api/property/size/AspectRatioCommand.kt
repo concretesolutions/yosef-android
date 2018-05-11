@@ -38,14 +38,26 @@ class AspectRatioCommand : DynamicPropertyCommand {
 
     private fun applyAspectRationWhenPossible(dynamicProperty: DynamicProperty, view: View) {
         view.addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
-            override fun onLayoutChange(v: View?, left: Int, top: Int, right: Int, bottom: Int,
-                                        oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int) {
+            override fun onLayoutChange(
+                v: View?,
+                left: Int,
+                top: Int,
+                right: Int,
+                bottom: Int,
+                oldLeft: Int,
+                oldTop: Int,
+                oldRight: Int,
+                oldBottom: Int
+            ) {
                 if (view.width == 0) return
 
                 view.removeOnLayoutChangeListener(this)
 
                 val layoutParams = view.layoutParams
-                val correctedHeight = aspectRatioHelper.generateHeightGivenAspectRatio(dynamicProperty.value, view.width)
+                val correctedHeight = aspectRatioHelper.generateHeightGivenAspectRatio(
+                    dynamicProperty.value,
+                    view.width
+                )
                 layoutParams.height = correctedHeight
 
                 view.layoutParams = layoutParams
