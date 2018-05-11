@@ -18,6 +18,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.math.roundToInt
 
+
 @RunWith(AndroidJUnit4::class)
 class SeparatorComponentTest {
 

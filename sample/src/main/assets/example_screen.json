@@ -14,12 +14,12 @@
         {
           "name": "width",
           "value": "match",
-          "type": "dimenSpec"
+          "type": "string"
         },
         {
           "name": "height",
           "value": "wrap",
-          "type": "dimenSpec"
+          "type": "string"
         },
         {
           "name": "url",

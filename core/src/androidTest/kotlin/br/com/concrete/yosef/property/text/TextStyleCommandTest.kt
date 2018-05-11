@@ -33,7 +33,7 @@ class TextStyleCommandTest {
     @Test
     fun renderingTextShouldApplyTextStyle() {
 
-        val dynamicProperty = DynamicProperty(TextStyleCommand.TEXT_STYLE, "fontStyle", "bold")
+        val dynamicProperty = DynamicProperty(TextStyleCommand.TEXT_STYLE, "string", "bold")
 
         val textView = TextView(context)
         textStyleCommand.apply(textView, dynamicProperty)
@@ -46,7 +46,7 @@ class TextStyleCommandTest {
     @Test
     fun renderingTextViewWithWrongTextStyleValueShouldThrow() {
 
-        val dynamicProperty = DynamicProperty(TEXT_STYLE, "fontStyle", "wrong")
+        val dynamicProperty = DynamicProperty(TEXT_STYLE, "string", "wrong")
 
         val textView = TextView(context)
 
