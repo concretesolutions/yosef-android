@@ -11,9 +11,8 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlin.math.roundToInt
 
-inline fun <reified T> Gson.fromJson(json: String): T {
-    return this.fromJson<T>(json, object: TypeToken<T>(){}.type)
-}
+inline fun <reified T> Gson.fromJson(json: String): T =
+    this.fromJson<T>(json, object: TypeToken<T>(){}.type)!!
 
 inline fun supportsLollipop(code: () -> Unit): Boolean {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
