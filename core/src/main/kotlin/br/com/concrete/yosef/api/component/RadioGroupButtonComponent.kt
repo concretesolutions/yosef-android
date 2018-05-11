@@ -57,12 +57,7 @@ class RadioGroupButtonComponent : Component {
         }
     }
 
-    override fun addComponentsAsChildren(
-        children: List<DynamicComponent>,
-        view: View,
-        components: Map<String, Component>,
-        listener: OnActionListener?
-    ) {
+    override fun addComponentsAsChildren(children: List<DynamicComponent>, view: View, components: Map<String, Component>, listener: OnActionListener?) {
         children.forEach {
             val childComponent = DynamicViewCreator.getComponentByType(it, components)
             val childView = childComponent.createView(view.context)

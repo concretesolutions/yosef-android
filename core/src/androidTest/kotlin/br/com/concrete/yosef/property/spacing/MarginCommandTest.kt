@@ -33,7 +33,7 @@ class MarginCommandTest {
 
     @Test
     fun whenMarginIsSetToView_shouldSetTheCorrectValues() {
-        val dynamicProperty = DynamicProperty(MARGIN, "margin", "16, 0, 16, 0")
+        val dynamicProperty = DynamicProperty(MARGIN, "dimen", "16, 0, 16, 0")
         val parent = LinearLayout(context)
         val view = TextView(context)
         parent.addView(view)
@@ -50,7 +50,7 @@ class MarginCommandTest {
 
     @Test
     fun whenMarginIsSetPassingOneValue_shouldSetTheSameValueToAllMargins() {
-        val dynamicProperty = DynamicProperty(MARGIN, "margin", "16")
+        val dynamicProperty = DynamicProperty(MARGIN, "dimen", "16")
         val parent = LinearLayout(context)
         val view = TextView(context)
         parent.addView(view)
@@ -67,7 +67,7 @@ class MarginCommandTest {
 
     @Test
     fun whenMarginIsSetPassingInvalidValue_shouldThrowException() {
-        val dynamicProperty = DynamicProperty(MARGIN, "margin", "WRONG")
+        val dynamicProperty = DynamicProperty(MARGIN, "dimen", "WRONG")
         val parent = LinearLayout(context)
         val view = TextView(context)
         parent.addView(view)
@@ -81,7 +81,7 @@ class MarginCommandTest {
 
     @Test
     fun whenSetInvalidArraySizeOfMargin_shouldThrowException() {
-        val dynamicProperty = DynamicProperty(MARGIN, "margin", "16, 16, 16")
+        val dynamicProperty = DynamicProperty(MARGIN, "dimen", "16, 16, 16")
         val parent = LinearLayout(context)
         val view = TextView(context)
         parent.addView(view)

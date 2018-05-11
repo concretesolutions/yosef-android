@@ -24,7 +24,7 @@ class WidthCommand : DynamicPropertyCommand {
 
     override fun apply(view: View, dynamicProperty: DynamicProperty) {
 
-        if (dynamicProperty.type == "dimenSpec") {
+        if (dynamicProperty.type == "string") {
             when (dynamicProperty.value) {
                 MATCH -> view.layoutParams.width = MATCH_PARENT
                 WRAP -> view.layoutParams.width = WRAP_CONTENT
