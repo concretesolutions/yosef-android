@@ -52,8 +52,9 @@ class GravityCommandTest {
         parent.addView(linearLayout)
         gravityCommand.apply(linearLayout, dynamicProperty)
 
-        assertTrue(linearLayout.layoutParams is FrameLayout.LayoutParams)
-        assertTrue((linearLayout.layoutParams as FrameLayout.LayoutParams).gravity == Gravity.BOTTOM)
+        val params = linearLayout.layoutParams
+        assertTrue(params is FrameLayout.LayoutParams)
+        assertTrue((params as FrameLayout.LayoutParams).gravity == Gravity.BOTTOM)
     }
 
     @Test
@@ -76,8 +77,9 @@ class GravityCommandTest {
         parent.addView(linearLayout)
         gravityCommand.apply(linearLayout, dynamicProperty)
 
-        assertTrue(linearLayout.layoutParams is FrameLayout.LayoutParams)
-        assertTrue((linearLayout.layoutParams as FrameLayout.LayoutParams).gravity == Gravity.CENTER)
+        val params = linearLayout.layoutParams
+        assertTrue(params is FrameLayout.LayoutParams)
+        assertTrue((params as FrameLayout.LayoutParams).gravity == Gravity.CENTER)
     }
 
     @Test

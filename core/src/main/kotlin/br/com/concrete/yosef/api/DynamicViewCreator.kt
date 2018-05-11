@@ -2,9 +2,6 @@ package br.com.concrete.yosef.api
 
 import android.content.Context
 import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.ListView
 import br.com.concrete.yosef.OnActionListener
 import br.com.concrete.yosef.api.DynamicViewCreator.Builder
 import br.com.concrete.yosef.api.component.*
@@ -109,7 +106,10 @@ class DynamicViewCreator(
     }
 
     companion object {
-        internal fun getComponentByType(dynamicComponent: DynamicComponent, components: Map<String, Component>): Component {
+        internal fun getComponentByType(
+            dynamicComponent: DynamicComponent,
+            components: Map<String, Component>
+        ): Component {
             if (components[dynamicComponent.type] == null) {
                 throw IllegalStateException("There are no components registered " +
                     "in this ViewCreator that can render ${dynamicComponent.type}")

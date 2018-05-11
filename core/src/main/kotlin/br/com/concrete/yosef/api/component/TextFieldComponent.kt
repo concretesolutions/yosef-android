@@ -70,9 +70,9 @@ class TextFieldComponent : Component {
     }
 
     private fun isEnterPressed(actionId: Int, event: KeyEvent): Boolean {
-        return actionId == EditorInfo.IME_ACTION_SEARCH
-            || actionId == EditorInfo.IME_ACTION_DONE
-            || event.action == KeyEvent.ACTION_DOWN
-            && event.keyCode == KeyEvent.KEYCODE_ENTER
+        return actionId == EditorInfo.IME_ACTION_SEARCH ||
+            actionId == EditorInfo.IME_ACTION_DONE ||
+            event.action == KeyEvent.ACTION_DOWN &&
+            event.keyCode == KeyEvent.KEYCODE_ENTER
     }
 }
