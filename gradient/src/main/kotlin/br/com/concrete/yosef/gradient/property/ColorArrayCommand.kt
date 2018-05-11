@@ -23,12 +23,12 @@ class ColorArrayCommand : DynamicPropertyCommand {
                 val parsedColors = ArrayList<Int>()
                 val colors = value.split(",")
                 colors.forEach {
-                    val rgba = it.trim().split(".")
+                    val (red, green, blue, alpha) = it.trim().split(".")
                     val parsedColor = Color.argb(
-                        rgba[3].toInt(),
-                        rgba[0].toInt(),
-                        rgba[1].toInt(),
-                        rgba[2].toInt()
+                        alpha.toInt(),
+                        red.toInt(),
+                        green.toInt(),
+                        blue.toInt()
                     )
                     parsedColors.add(parsedColor)
                 }
