@@ -3,12 +3,10 @@ package br.com.concrete.yosef
 import android.content.Context
 import android.os.Build
 import android.support.annotation.VisibleForTesting
-import android.support.v4.view.ViewCompat
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import android.view.ViewTreeObserver
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlin.math.roundToInt

@@ -5,7 +5,6 @@ import android.graphics.drawable.ColorDrawable
 import android.support.test.InstrumentationRegistry
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
-import android.widget.LinearLayout
 import br.com.concrete.yosef.activities.MainActivity
 import br.com.concrete.yosef.api.component.SeparatorComponent
 import br.com.concrete.yosef.api.property.color.BackgroundColorCommand.Companion.BACKGROUND_COLOR
@@ -18,7 +17,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.math.roundToInt
-
 
 @RunWith(AndroidJUnit4::class)
 class SeparatorComponentTest {
