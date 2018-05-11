@@ -22,6 +22,11 @@ class TextStyleCommand : DynamicPropertyCommand {
     }
 
     override fun apply(view: View, dynamicProperty: DynamicProperty) {
+        if (dynamicProperty.type != "fontStyle") {
+            throw IllegalArgumentException("Can't apply ${dynamicProperty.name}" +
+                " with type ${dynamicProperty.type}, unknown type.")
+        }
+
         if (view is TextView) {
             when (dynamicProperty.value) {
                 "bold" -> view.setTypeface(view.typeface, Typeface.BOLD)
