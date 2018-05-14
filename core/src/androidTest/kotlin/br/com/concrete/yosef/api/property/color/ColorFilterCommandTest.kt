@@ -55,8 +55,10 @@ class ColorFilterCommandTest {
         val imageView = ImageView(context)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
-        exceptionRule.expectMessage("The value (${dynamicProperty.value}) " +
-                "cannot be parsed as a color")
+        exceptionRule.expectMessage(
+            "The value (${dynamicProperty.value}) " +
+                    "cannot be parsed as a color"
+        )
 
         colorFilterCommand.apply(imageView, dynamicProperty)
     }
@@ -67,10 +69,11 @@ class ColorFilterCommandTest {
         val textView = TextView(context)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
-        exceptionRule.expectMessage("The value (${dynamicProperty.value}) " +
-                "for the $COLOR_FILTER property is not compatible with ${textView.javaClass.name}")
+        exceptionRule.expectMessage(
+            "The value (${dynamicProperty.value}) for the $COLOR_FILTER property" +
+                    " is not compatible with ${textView.javaClass.name}"
+        )
 
         colorFilterCommand.apply(textView, dynamicProperty)
     }
-
 }

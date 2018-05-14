@@ -1,10 +1,6 @@
 package br.com.concrete.yosef.api.property.color
 
 import android.graphics.Color
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
-import android.support.v7.widget.CardView
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import br.com.concrete.yosef.api.property.DynamicPropertyCommand
@@ -35,7 +31,6 @@ class ColorFilterCommand : DynamicPropertyCommand {
             throw IllegalArgumentException("The value (${dynamicProperty.value}) " +
                     "cannot be parsed as a color")
         }
-
 
         if (view is ImageView) {
             view.setColorFilter(color)
