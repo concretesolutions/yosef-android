@@ -2,6 +2,8 @@ Yosef
 ===================
 [![Build](https://circleci.com/gh/concretesolutions/yosef-android.svg?style=shield)](https://circleci.com/gh/concretesolutions/yosef-android)
 
+[![Download](https://api.bintray.com/packages/concrete/concrete-maven/yosef-core/images/download.svg)](https://bintray.com/concrete/concrete-maven/yosef-core/_latestVersion)
+
 Yosef is a multi-platform library that generates views from JSON specification.
 It's useful for A/B testing and providing users with dynamic content without shipping updates to the Play Store.
 
@@ -159,6 +161,23 @@ And now you are able to render things like:
     "children": null
   }
 
+```
+
+Download
+-------------------------------
+
+```groovy
+implementation 'br.com.concrete:yosef-core:{latest_version}'
+```
+
+or Maven
+```xml
+<dependency>
+  <groupId>br.com.concrete</groupId>
+  <artifactId>yosef-core</artifactId>
+  <version>latest_version</version>
+  <type>pom</type>
+</dependency>
 ```
 
 Contributing your code
