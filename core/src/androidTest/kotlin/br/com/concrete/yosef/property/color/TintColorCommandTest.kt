@@ -8,6 +8,7 @@ import android.widget.RadioButton
 import br.com.concrete.yosef.api.property.color.TintColorCommand
 import br.com.concrete.yosef.api.property.color.TintColorCommand.Companion.TINT_COLOR
 import br.com.concrete.yosef.entity.DynamicProperty
+import br.com.concrete.yosef.isLollipopOrGreater
 import br.com.concrete.yosef.layoutAndAssert
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -33,15 +34,34 @@ class TintColorCommandTest {
     }
 
     @Test
-    fun renderingCompoundButtonShouldApplyButtonTintColor() {
+    fun renderingCompoundButtonShouldApplyButtonTintColorWhenLollipopOrGreater() {
         val dynamicProperty = DynamicProperty(TINT_COLOR, "color", "#0000FF")
 
         val radioButton = RadioButton(context)
         tintCommand.apply(radioButton, dynamicProperty)
 
-        radioButton.layoutAndAssert {
-            assertTrue(radioButton.buttonTintList.defaultColor ==
-                Color.parseColor(dynamicProperty.value))
+        if (isLollipopOrGreater()) {
+            radioButton.layoutAndAssert {
+                val actual = radioButton.buttonTintList.defaultColor
+                val expected = Color.parseColor(dynamicProperty.value)
+                assertTrue(actual == expected)
+            }
+        }
+    }
+
+    @Test
+    fun renderingCompoundButtonShouldApplyButtonTintColorWhenPreLollipop() {
+        val dynamicProperty = DynamicProperty(TINT_COLOR, "color", "#0000FF")
+
+        val radioButton = RadioButton(context)
+        tintCommand.apply(radioButton, dynamicProperty)
+
+        if (isLollipopOrGreater().not()) {
+            radioButton.layoutAndAssert {
+                val actual = radioButton.highlightColor
+                val expected = Color.parseColor(dynamicProperty.value)
+                assertTrue(actual == expected)
+            }
         }
     }
 
@@ -52,8 +72,10 @@ class TintColorCommandTest {
         val radioButton = RadioButton(context)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
-        exceptionRule.expectMessage("The value (${dynamicProperty.value}) " +
-            "cannot be parsed as a color")
+        exceptionRule.expectMessage(
+            "The value (${dynamicProperty.value}) " +
+                    "cannot be parsed as a color"
+        )
 
         tintCommand.apply(radioButton, dynamicProperty)
     }
@@ -64,8 +86,11 @@ class TintColorCommandTest {
         val imageView = ImageView(context)
 
         exceptionRule.expect(IllegalArgumentException::class.java)
-        exceptionRule.expectMessage("The value (${dynamicProperty.value}) " +
-            "for the $TINT_COLOR property is not compatible with ${imageView.javaClass.name}")
+        exceptionRule.expectMessage(
+            "The value (${dynamicProperty.value}) " +
+                    "for the $TINT_COLOR property is not compatible " +
+                    "with ${imageView.javaClass.name}"
+        )
 
         tintCommand.apply(imageView, dynamicProperty)
     }

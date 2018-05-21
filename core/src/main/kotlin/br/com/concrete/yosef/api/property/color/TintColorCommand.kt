@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.CompoundButton
 import br.com.concrete.yosef.api.property.DynamicPropertyCommand
 import br.com.concrete.yosef.entity.DynamicProperty
+import br.com.concrete.yosef.orElse
 import br.com.concrete.yosef.supportsLollipop
 
 /**
@@ -34,25 +35,33 @@ class TintColorCommand : DynamicPropertyCommand {
         try {
             color = Color.parseColor(dynamicProperty.value)
         } catch (e: IllegalArgumentException) {
-            throw IllegalArgumentException("The value (${dynamicProperty.value}) " +
-                "cannot be parsed as a color")
+            throw IllegalArgumentException(
+                "The value (${dynamicProperty.value}) " +
+                        "cannot be parsed as a color"
+            )
         }
 
         if (view is CompoundButton) {
 
-            val handled = supportsLollipop {
-                val colorStateList = ColorStateList(arrayOf(intArrayOf(
-                    R.attr.state_enabled)), intArrayOf(color))
+            supportsLollipop {
+                val colorStateList = ColorStateList(
+                    arrayOf(
+                        intArrayOf(
+                            R.attr.state_enabled
+                        )
+                    ), intArrayOf(color)
+                )
                 view.buttonTintList = colorStateList
-            }
-
-            if (!handled)
+            } orElse {
                 view.highlightColor = color
+            }
 
             return
         }
 
-        throw IllegalArgumentException("The value (${dynamicProperty.value}) " +
-            "for the $TINT_COLOR property is not compatible with ${view.javaClass.name}")
+        throw IllegalArgumentException(
+            "The value (${dynamicProperty.value}) " +
+                    "for the $TINT_COLOR property is not compatible with ${view.javaClass.name}"
+        )
     }
 }
