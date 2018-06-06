@@ -46,12 +46,12 @@ dependencies {
 
     final libs = rootProject.ext.libsVersions
     implementation "com.android.support:appcompat-v7:$libs.support"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$libs.kotlin"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$libs.kotlin"
     api "com.airbnb.android:lottie:$libs.lottie"
 
     // Instrumented tests
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation "com.android.support.test:runner:$testLibsVersions.runner"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$testLibsVersions.espressocore"
 
     // quality
     ktlint "com.github.shyiko:ktlint:$rootProject.ext.lintersVersions.ktlint"

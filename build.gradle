@@ -48,7 +48,7 @@ ext {
             support   : "27.1.1",
             constraint: "1.0.2",
             picasso   : "2.5.2",
-            glide     : "4.6.1",
+            glide     : "4.7.1",
             gson      : "2.8.2",
             canarinho : "1.2.0",
             lottie    : "2.5.0-rc1"
@@ -59,7 +59,9 @@ ext {
             espresso     : "3.0.1",
             mockito      : "2.12.0",
             mockitoKotlin: "1.5.0",
-            roboeletric  : "3.8"
+            roboeletric  : "3.8",
+            runner       : "1.0.2",
+            espressocore : "3.0.2"
     ]
 
     lintersVersions = [
