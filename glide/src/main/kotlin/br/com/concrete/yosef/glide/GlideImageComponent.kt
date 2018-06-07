@@ -10,6 +10,8 @@ import br.com.concrete.yosef.api.component.Component
 import br.com.concrete.yosef.api.property.DynamicPropertyCommand
 import br.com.concrete.yosef.api.property.color.BackgroundColorCommand
 import br.com.concrete.yosef.api.property.color.BackgroundColorCommand.Companion.BACKGROUND_COLOR
+import br.com.concrete.yosef.api.property.color.ColorFilterCommand
+import br.com.concrete.yosef.api.property.color.ColorFilterCommand.Companion.COLOR_FILTER
 import br.com.concrete.yosef.api.property.id.IdCommand
 import br.com.concrete.yosef.api.property.id.IdCommand.Companion.ID
 import br.com.concrete.yosef.api.property.size.AspectRatioCommand
@@ -39,6 +41,7 @@ class GlideImageComponent(
         IMAGE_URL to ImageUrlCommand(glide),
         ASPECT_RATIO to AspectRatioCommand(),
         BACKGROUND_COLOR to BackgroundColorCommand(),
+        COLOR_FILTER to ColorFilterCommand(),
         ID to IdCommand()
     )
 
