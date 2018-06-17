@@ -43,11 +43,11 @@ android {
 
 dependencies {
 
-    implementation project(':core')
+    compileOnly project(':core')
 
     final libs = rootProject.ext.libsVersions
-    implementation "com.android.support:appcompat-v7:$libs.support"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$libs.kotlin"
+    api "com.android.support:appcompat-v7:$libs.support"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jre7:$libs.kotlin"
 
     // Instrumented tests
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
