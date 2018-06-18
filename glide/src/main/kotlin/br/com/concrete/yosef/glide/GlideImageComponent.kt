@@ -27,7 +27,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.GlideBuilder
 
 class GlideImageComponent(
-    glide: Glide = GlideBuilder().build(DummyContentProvider.appContext)
+    glide: Glide = Glide.get(DummyContentProvider.appContext)
 ) : Component {
 
     companion object {
