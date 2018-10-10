@@ -17,14 +17,12 @@ class WidthCommand : DynamicPropertyCommand, DimenSpec {
          * This constant documents which name is associated with the property
          */
         const val WIDTH_TYPE = "width"
-        const val MATCH = "match"
-        const val WRAP = "wrap"
     }
 
     override fun apply(view: View, dynamicProperty: DynamicProperty) {
         when (dynamicProperty.type) {
-            "dimenSpec" -> applyDimenSpec(view, dynamicProperty)
-            "dimen" -> view.layoutParams.width = dynamicProperty
+            dimenSpec -> applyDimenSpec(view, dynamicProperty)
+            dimen -> view.layoutParams.width = dynamicProperty
                 .value
                 .toInt()
                 .dp(view.context)
@@ -35,8 +33,8 @@ class WidthCommand : DynamicPropertyCommand, DimenSpec {
 
     override fun applyDimenSpec(view: View, dynamicProperty: DynamicProperty) {
         when (dynamicProperty.value) {
-            MATCH -> view.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
-            WRAP -> view.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
+            match -> view.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+            wrap -> view.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
             else -> throw IllegalArgumentException("Can't apply ${dynamicProperty.name}" +
                     " with value ${dynamicProperty.value}.")
         }
